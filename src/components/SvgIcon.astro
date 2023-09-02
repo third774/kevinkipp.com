@@ -1,0 +1,13 @@
+---
+import { twMerge } from 'tailwind-merge';
+const { class: className, ...rest } = Astro.props;
+---
+
+<svg
+	xmlns="http://www.w3.org/2000/svg"
+	fill="currentColor"
+	class={twMerge('h-[1em] inline-block', className)}
+	{...rest}
+>
+	<slot />
+</svg>
