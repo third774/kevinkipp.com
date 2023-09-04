@@ -3,22 +3,20 @@ import BaseHead from '../components/BaseHead.astro';
 import Body from '../components/Body.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import SvgIcon from '../components/SvgIcon.astro';
 import MainCenter from '../components/MainCenter.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import Html from '../layouts/Html.astro';
 ---
 
 <!doctype html>
-<html lang="en" class="h-full">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
+<Html>
+	<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	<Body>
 		<Header title={SITE_TITLE} />
 		<MainCenter class="space-y-4 grid place-items-center">
 			<div>
-				<h1 class="text-3xl font-bold">
-					👋🏻 Heyo! I'm <span class="text-pink-800 dark:text-pink-300"
+				<h1 transition:name="page-header" class="text-3xl font-bold">
+					👨🏻 Heyo! I'm <span class="text-pink-800 dark:text-pink-300"
 						>Kevin Kipp</span
 					>.
 				</h1>
@@ -32,4 +30,4 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		</MainCenter>
 		<Footer />
 	</Body>
-</html>
+</Html>

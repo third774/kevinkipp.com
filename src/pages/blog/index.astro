@@ -7,6 +7,8 @@ import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 import MainCenter from '../../components/MainCenter.astro';
+import Html from '../../layouts/Html.astro';
+import { Image } from 'astro:assets';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
@@ -14,34 +16,41 @@ const posts = (await getCollection('blog')).sort(
 ---
 
 <!doctype html>
-<html lang="en" class="h-full">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
+<Html>
+	<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	<Body>
 		<Header />
 		<MainCenter>
 			<section>
-				<ul class="grid gap-12">
+				<h1 transition:name="page-header" class="text-3xl font-bold">
+					👨🏻 There's not much here yet!
+				</h1>
+				<ul class="grid gap-16 pt-16">
 					{
 						posts.map((post) => (
 							<li>
 								<a href={`/blog/${post.slug}/`}>
-									{post.data.heroImage && (
-										<img
-											width={720}
-											height={360}
-											src={post.data.heroImage}
-											alt=""
+									<div
+										transition:name={`blog-post-card-${post.data.title}`}
+										class="space-y-4"
+									>
+										<h2 class="text-xl font-bold">{post.data.title}</h2>
+										<FormattedDate
+											transition:name="blog-post-date"
+											date={post.data.pubDate}
 										/>
-									)}
-									<p class="text-sm text-gray-400 dark:text-gray-500">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-									<h4 class="text-2xl font-bold">{post.data.title}</h4>
-									<p class="text-gray-500 dark:text-gray-400">
-										{post.data.description}
-									</p>
+
+										<p class="text-gray-500 dark:text-gray-400">
+											{post.data.description}
+										</p>
+										{post.data.heroImage && (
+											<Image
+												src={post.data.heroImage}
+												alt={post.data.heroAlt ?? null}
+												class="mb-4"
+											/>
+										)}
+									</div>
 								</a>
 							</li>
 						))
@@ -51,4 +60,4 @@ const posts = (await getCollection('blog')).sort(
 		</MainCenter>
 		<Footer />
 	</Body>
-</html>
+</Html>
