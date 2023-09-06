@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Body from '../components/Body.astro';
@@ -12,11 +12,22 @@ import Prose from '../components/Prose.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, heroAlt } =
+	Astro.props;
+
+const ogImage = heroImage
+	? (
+			await getImage({
+				src: heroImage,
+				width: 1200,
+				height: 630,
+			})
+	  ).src
+	: undefined;
 ---
 
 <Html>
-	<BaseHead title={title} description={description} />
+	<BaseHead title={title} description={description} image={ogImage} />
 	<Body>
 		<Header />
 		<MainCenter>
@@ -44,7 +55,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 									width={1020}
 									height={510}
 									src={heroImage}
-									alt=""
+									alt={heroAlt ?? ''}
 								/>
 							</div>
 						)
