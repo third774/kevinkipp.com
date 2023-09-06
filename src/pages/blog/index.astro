@@ -17,7 +17,14 @@ const posts = (await getCollection('blog')).sort(
 
 <!doctype html>
 <Html>
-	<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION}>
+		<link
+			rel="alternate"
+			type="application/rss+xml"
+			title="RSS Feed for kevinkipp.com"
+			href="/blog/feed.xml"
+		/>
+	</BaseHead>
 	<Body>
 		<Header />
 		<MainCenter>
