@@ -13,13 +13,13 @@ import Mustache from './Mustache.astro';
 <header>
 	<nav class="flex gap-4 justify-between items-center text-xl">
 		<div class="flex-grow basis-0">
-			<a class="inline-block p-4" href="/">
+			<a class="inline-block m-2 p-2" href="/">
 				<Mustache />
 				<span class="sr-only">{SITE_TITLE}</span>
 			</a>
 		</div>
 
-		<div>
+		<div class="p-4">
 			<HeaderLink transition:name="nav-link-home" href="/">Home</HeaderLink>
 			<HeaderLink transition:name="nav-link-blog" href="/blog">Blog</HeaderLink>
 		</div>

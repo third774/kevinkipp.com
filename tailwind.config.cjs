@@ -13,11 +13,21 @@ module.exports = {
 		},
 		fontFamily: {
 			sans: [
-				// 'Seravek', 'Gill Sans Nova', 'Ubuntu', 'Calibri', 'DejaVu Sans', 'source-sans-pro', 'sans-serif'
-				'-apple-system', 'BlinkMacSystemFont', 'avenir next', 'avenir', 'segoe ui', 'helvetica neue', 'helvetica', 'Cantarell', 'Ubuntu', 'roboto', 'noto', 'arial', 'sans-serif'
-			]
+				'-apple-system',
+				'BlinkMacSystemFont',
+				'avenir next',
+				'avenir',
+				'segoe ui',
+				'helvetica neue',
+				'helvetica',
+				'Cantarell',
+				'Ubuntu',
+				'roboto',
+				'noto',
+				'arial',
+				'sans-serif',
+			],
 		},
-
 		extend: {},
 	},
 	plugins: [require('@tailwindcss/typography')],

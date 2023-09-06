@@ -22,9 +22,15 @@ const posts = (await getCollection('blog')).sort(
 		<Header />
 		<MainCenter>
 			<section>
-				<h1 transition:name="page-header" class="text-3xl font-bold">
-					👨🏻 There's not much here yet!
-				</h1>
+				<div transition:name="page-header">
+					<h1 class="text-3xl font-bold">👨🏻 There's not much here yet...</h1>
+
+					<div class="space-y-2 text-xl">
+						<p class="text-gray-600 dark:text-gray-400">
+							Hoping to fix that soon!
+						</p>
+					</div>
+				</div>
 				<ul class="grid gap-16 pt-16">
 					{
 						posts.map((post) => (

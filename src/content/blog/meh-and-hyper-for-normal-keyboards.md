@@ -1,9 +1,11 @@
 ---
-title: 'A Meh and Hyper key on every Macbook'
-description: "Using Meh and Hyper modifiers on a normal keyboard is difficult, but it doesn't have to be."
-pubDate: '2023-09-01'
-heroImage: '../../assets/laptop.jpg'
-heroAlt: "Hands hovering over a Macbook laptop's keyboard"
+{
+  'title': 'Meh and Hyper for normal keyboards',
+  'description': "Using Meh and Hyper modifiers on a normal keyboard is difficult, but it doesn't have to be.",
+  'pubDate': '2023-09-06T10:42:38-05:00',
+  'heroImage': '../../assets/laptop.jpg',
+  'heroAlt': "Hands hovering over a Macbook laptop's keyboard",
+}
 ---
 
 ## What are Meh and Hyper?
@@ -52,7 +54,7 @@ keyboard. I use the configuration below to achieve the desired result:
 
 ```json
 {
-	"description": "Map Caps Lock to Escape when tapped, Meh when held",
+	"description": "Caps Lock → Esc on tap, Meh on hold",
 	"manipulators": [
 		{
 			"type": "basic",
@@ -79,5 +81,5 @@ If you don't care about using Caps Lock as Escape, then just remove the `to_if_a
 
 ## Go forth and bind keys
 
-I found this pattern to be super useful and helps keep the muscle memory intact and useful
-across keyboards, and I hope you do to! 🫡
+I found this pattern to be super useful and helps keep the muscle memory intact across
+keyboards, and I hope you'll give it a shot! 💪🏻
