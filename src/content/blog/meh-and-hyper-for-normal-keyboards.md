@@ -45,9 +45,9 @@ be problematic, I've found that it's not really a problem for me with the Escape
 don't really use it while typing prose. I just tap it when I need to tap it, and pretty much
 never need to hold it down.
 
-## Karabiner Elements
+## Karabiner-Elements
 
-[Karabiner Elements](https://karabiner-elements.pqrs.org/) is an excellent piece of
+[Karabiner-Elements](https://karabiner-elements.pqrs.org/) is an excellent piece of
 software that lets you re-map keys for any keyboard (including the built-in one) on MacOS by
 installing a virtual keyboard and intercepting real key requests to re-map them to the virtual
 keyboard. I use the configuration below to achieve the desired result:
