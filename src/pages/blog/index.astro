@@ -1,16 +1,16 @@
 ---
-import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import BaseHead from '../../components/BaseHead.astro';
 import Body from '../../components/Body.astro';
 import Footer from '../../components/Footer.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 import MainCenter from '../../components/MainCenter.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { getPublishedBlogPosts } from '../../content/blog/_getPublishedBlogPosts';
 import Html from '../../layouts/Html.astro';
-import { Image } from 'astro:assets';
 
-const posts = (await getCollection('blog')).sort(
+const posts = (await getPublishedBlogPosts()).sort(
 	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
 );
 ---
