@@ -23,7 +23,7 @@ same awkwardness that affords you the ability to use those as global hotkeys to 
 
 ## It's time for Caps Lock to go
 
-The Caps Lock key is _so rarely used_ and located in such prime real-estate on they keyboard.
+The Caps Lock key is _so rarely used_ and located in such prime real-estate on the keyboard.
 If we bind Caps Lock as the Meh (`⌃⌥⇧`), it can be held with the left pinky and unlocks a full
 keyboard of shortcuts. Additionally, it's easy to add ⌘ to the mix with the left thumb to
 make it Hyper (`⌃⌥⇧⌘`) which adds another entire layer on top of that!
