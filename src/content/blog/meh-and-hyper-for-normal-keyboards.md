@@ -31,7 +31,7 @@ make it Hyper (`⌃⌥⇧⌘`) which adds another entire layer on top of that!
 ### The sins of the past
 
 Ever since Apple removed the physical Escape key in favor of the touch bar I've had
-`Caps Lock` bound to `Esc`, and as a Vim user that muscle memory is pretty hard to unlearn now.
+Caps Lock bound to Esc, and as a Vim user that muscle memory is pretty hard to unlearn now.
 
 After having spent some time messing around with [homerow mods](https://precondition.github.io/home-row-mods)
 though when I built my [Chocofi](https://shop.beekeeb.com/product/chocofi-36-keys-kailh-low-profile-choc-v1-mechanical-ergonomic-hotswap-split-keyboard-diy-kit/) keyboard,
