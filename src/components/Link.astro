@@ -6,7 +6,7 @@ interface Props extends HTMLAttributes<'a'> {}
 const { class: className, ...rest } = Astro.props;
 
 export const linkStyles = twMerge(
-	'text-pink-600 hover:text-pink-800 dark:text-pink-400 dark:hover:text-pink-600 underline cursor-pointer',
+	'text-pink-600 hover:text-pink-800 dark:text-pink-400 dark:hover:text-pink-600 underline cursor-pointer underline-offset-2',
 );
 ---
 
