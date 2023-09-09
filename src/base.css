@@ -1,8 +1,26 @@
-/* The integration's default injected base.css file */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@layer tailwind {
+	@tailwind base;
+	@tailwind components;
+	@tailwind utilities;
+}
 
-:where(a) {
-	-webkit-tap-highlight-color: transparent;
+@layer reset {
+	:where(body) {
+		-webkit-font-smoothing: antialiased;
+		text-rendering: optimizeSpeed;
+	}
+
+	:where(a) {
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	:where(p, h1, h2, h3, h4, h5, h6) {
+		overflow-wrap: break-word;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		:where(html:focus-within) {
+			scroll-behavior: smooth;
+		}
+	}
 }
