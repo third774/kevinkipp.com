@@ -42,12 +42,14 @@ const posts = (await getPublishedBlogPosts()).sort(
 					{
 						posts.map((post) => (
 							<li>
-								<a href={`/blog/${post.slug}/`}>
+								<a class="group" href={`/blog/${post.slug}/`}>
 									<div
 										transition:name={`blog-post-card-${post.data.title}`}
 										class="space-y-4"
 									>
-										<h2 class="text-xl font-bold">{post.data.title}</h2>
+										<h2 class="group-hover:underline text-xl font-bold">
+											{post.data.title}
+										</h2>
 										<FormattedDate
 											transition:name="blog-post-date"
 											date={post.data.pubDate}
