@@ -11,7 +11,7 @@ import { getPublishedBlogPosts } from '../../content/blog/_getPublishedBlogPosts
 import Html from '../../layouts/Html.astro';
 
 const posts = (await getPublishedBlogPosts()).sort(
-	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf(),
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 ---
 
