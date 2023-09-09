@@ -23,4 +23,31 @@
 			scroll-behavior: smooth;
 		}
 	}
+
+	:root {
+		--scrollbar-background: theme(colors.gray.300);
+		--scrollbar-foreground: theme(colors.teal.600);
+
+		@media (prefers-color-scheme: dark) {
+			--scrollbar-background: theme(colors.gray.700);
+			--scrollbar-foreground: theme(colors.teal.400);
+		}
+	}
+
+	* {
+		scrollbar-color: var(--scrollbar-foreground) var(--scrollbar-background);
+	}
+
+	*::-webkit-scrollbar {
+		width: 10px; /* Mostly for vertical scrollbars */
+		height: 10px; /* Mostly for horizontal scrollbars */
+	}
+
+	*::-webkit-scrollbar-thumb {
+		background: var(--scrollbar-foreground);
+	}
+
+	*::-webkit-scrollbar-track {
+		background: var(--scrollbar-background);
+	}
 }
