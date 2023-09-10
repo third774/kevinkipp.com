@@ -1,53 +1,49 @@
-@layer tailwind {
-	@tailwind base;
-	@tailwind components;
-	@tailwind utilities;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:where(body) {
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeSpeed;
 }
 
-@layer reset {
-	:where(body) {
-		-webkit-font-smoothing: antialiased;
-		text-rendering: optimizeSpeed;
-	}
+:where(a) {
+	-webkit-tap-highlight-color: transparent;
+}
 
-	:where(a) {
-		-webkit-tap-highlight-color: transparent;
-	}
+:where(p, h1, h2, h3, h4, h5, h6) {
+	overflow-wrap: break-word;
+}
 
-	:where(p, h1, h2, h3, h4, h5, h6) {
-		overflow-wrap: break-word;
+@media (prefers-reduced-motion: no-preference) {
+	:where(html:focus-within) {
+		scroll-behavior: smooth;
 	}
+}
 
-	@media (prefers-reduced-motion: no-preference) {
-		:where(html:focus-within) {
-			scroll-behavior: smooth;
-		}
+:root {
+	--scrollbar-background: theme(colors.gray.300);
+	--scrollbar-foreground: theme(colors.teal.600);
+
+	@media (prefers-color-scheme: dark) {
+		--scrollbar-background: theme(colors.gray.700);
+		--scrollbar-foreground: theme(colors.teal.400);
 	}
+}
 
-	:root {
-		--scrollbar-background: theme(colors.gray.300);
-		--scrollbar-foreground: theme(colors.teal.600);
+* {
+	scrollbar-color: var(--scrollbar-foreground) var(--scrollbar-background);
+}
 
-		@media (prefers-color-scheme: dark) {
-			--scrollbar-background: theme(colors.gray.700);
-			--scrollbar-foreground: theme(colors.teal.400);
-		}
-	}
+*::-webkit-scrollbar {
+	width: 10px; /* Mostly for vertical scrollbars */
+	height: 10px; /* Mostly for horizontal scrollbars */
+}
 
-	* {
-		scrollbar-color: var(--scrollbar-foreground) var(--scrollbar-background);
-	}
+*::-webkit-scrollbar-thumb {
+	background: var(--scrollbar-foreground);
+}
 
-	*::-webkit-scrollbar {
-		width: 10px; /* Mostly for vertical scrollbars */
-		height: 10px; /* Mostly for horizontal scrollbars */
-	}
-
-	*::-webkit-scrollbar-thumb {
-		background: var(--scrollbar-foreground);
-	}
-
-	*::-webkit-scrollbar-track {
-		background: var(--scrollbar-background);
-	}
+*::-webkit-scrollbar-track {
+	background: var(--scrollbar-background);
 }
