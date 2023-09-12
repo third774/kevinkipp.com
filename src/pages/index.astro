@@ -1,11 +1,17 @@
 ---
+import { Image } from 'astro:assets';
 import BaseHead from '../components/BaseHead.astro';
 import Body from '../components/Body.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import MainCenter from '../components/MainCenter.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { getPublishedBlogPosts } from '../content/blog/_getPublishedBlogPosts';
 import Html from '../layouts/Html.astro';
+
+const [firstPost, secondPost] = (await getPublishedBlogPosts()).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 ---
 
 <!doctype html>
@@ -27,6 +33,24 @@ import Html from '../layouts/Html.astro';
 					</p>
 				</div>
 			</div>
+			{
+				firstPost.data.heroImage && (
+					<Image
+						src={firstPost.data.heroImage}
+						alt=""
+						class="absolute opacity-0 pointer-events-none"
+					/>
+				)
+			}
+			{
+				secondPost.data.heroImage && (
+					<Image
+						src={secondPost.data.heroImage}
+						alt=""
+						class="absolute opacity-0 pointer-events-none"
+					/>
+				)
+			}
 		</MainCenter>
 		<Footer />
 	</Body>
