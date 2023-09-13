@@ -1,7 +1,7 @@
 ---
 {
   'title': 'QR code doorbells',
-  'description': 'How to hack together a QR doorbell with Discord, Remix, and Cloudflare Workers',
+  'description': 'How to hack together a QR code doorbell with Discord, Remix, and Cloudflare Workers',
   'heroImage': '../../assets/door-knocker.jpg',
   'pubDate': '2023-09-08T23:55:28-05:00',
   'heroAlt': 'An old door knocker in the shape of a lion holding a ring in its mouth',
@@ -15,6 +15,10 @@ are pretty strict policies requiring that the doors not be held open. This means
 organizers to let people in as they arrive and usher them to the space where we hold the Meetup —
 which is fine except that once the talk starts we need to either stop letting people in, or someone
 needs to hang out by the door for a bit and miss a chunk of the talk.
+
+To solve this, we printed out a piece of paper with instructions and a QR code for people to scan
+letting us know they are outside. When scanned, a message is posted to the AustinJS Discord server,
+and they see a message that lets them know we're on our way to let them in!
 
 ## Whipping up a digital doorbell 👨🏻‍🍳
 
