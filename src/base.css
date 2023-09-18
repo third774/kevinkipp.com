@@ -55,3 +55,9 @@
 *::-webkit-scrollbar-track {
 	background: var(--scrollbar-background);
 }
+
+pre:has(> code) {
+	@media screen(md) {
+		margin-inline: calc(theme(spacing.6) * -1);
+	}
+}
