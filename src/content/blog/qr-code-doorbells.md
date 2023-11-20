@@ -1,10 +1,10 @@
 ---
 {
-  'title': 'QR code doorbells',
-  'description': 'How to hack together a QR code doorbell with Discord, Remix, and Cloudflare Workers',
-  'heroImage': '../../assets/door-knocker.jpg',
-  'published': '2023-09-08T23:55:28-05:00',
-  'heroAlt': 'An old door knocker in the shape of a lion holding a ring in its mouth',
+  "title": "QR code doorbells",
+  "description": "How to hack together a QR code doorbell with Discord, Remix, and Cloudflare Workers",
+  "heroImage": "../../assets/door-knocker.jpg",
+  "published": "2023-09-08T23:55:28-05:00",
+  "heroAlt": "An old door knocker in the shape of a lion holding a ring in its mouth",
 }
 ---
 
@@ -58,19 +58,19 @@ Then we can update `app/routes/_index.tsx` with the loader:
 
 ```tsx
 const webhookUrl =
-	'https://discord.com/api/webhooks/NUMS/RANDOM_NUMS_AND_CHARS';
+	"https://discord.com/api/webhooks/NUMS/RANDOM_NUMS_AND_CHARS";
 
 export const loader = async () => {
-	const time = new Date().toLocaleTimeString('en-US', {
-		timeZone: 'America/Chicago',
+	const time = new Date().toLocaleTimeString("en-US", {
+		timeZone: "America/Chicago",
 	});
 	await fetch(webhookUrl, {
-		method: 'post',
+		method: "post",
 		body: JSON.stringify({
 			content: `Someone is at the door: ${time}`,
 		}),
 		headers: {
-			'Content-Type': 'application/json',
+			"Content-Type": "application/json",
 		},
 	});
 	return null;

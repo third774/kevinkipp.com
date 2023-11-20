@@ -1,10 +1,10 @@
 ---
 {
-  'title': 'Meh and Hyper for normal keyboards',
-  'description': "Using Meh and Hyper modifiers on a normal keyboard is difficult, but it doesn't have to be.",
-  'published': '2023-09-06T10:42:38-05:00',
-  'heroImage': '../../assets/laptop.jpg',
-  'heroAlt': "Hands hovering over a Macbook laptop's keyboard",
+  "title": "Meh and Hyper for normal keyboards",
+  "description": "Using Meh and Hyper modifiers on a normal keyboard is difficult, but it doesn't have to be.",
+  "published": "2023-09-06T10:42:38-05:00",
+  "heroImage": "../../assets/laptop.jpg",
+  "heroAlt": "Hands hovering over a Macbook laptop's keyboard",
 }
 ---
 

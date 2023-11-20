@@ -1,7 +1,7 @@
-import rss from '@astrojs/rss';
-import type { AstroUserConfig } from 'astro/config';
-import invariant from 'tiny-invariant';
-import { getPublishedBlogPosts } from '../../content/blog/_getPublishedBlogPosts';
+import rss from "@astrojs/rss";
+import type { AstroUserConfig } from "astro/config";
+import invariant from "tiny-invariant";
+import { getPublishedBlogPosts } from "../../content/blog/_getPublishedBlogPosts";
 
 export async function GET(context: AstroUserConfig) {
 	invariant(
