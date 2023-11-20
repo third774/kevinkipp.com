@@ -15,7 +15,7 @@ export async function GET(context: AstroUserConfig) {
 		site: context.site,
 		items: blog.map((post) => ({
 			title: post.data.title,
-			published: post.data.published,
+			pubDate: post.data.published,
 			description: post.data.description,
 			// Compute RSS link from post `slug`
 			// This example assumes all posts are rendered as `/blog/[slug]` routes
