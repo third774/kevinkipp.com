@@ -1,4 +1,4 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z } from "astro:content";
 
 const blog = defineCollection({
 	// Type-check frontmatter using a schema
@@ -8,7 +8,7 @@ const blog = defineCollection({
 				title: z.string().max(60),
 				description: z.string().max(120),
 				// Transform string to Date object
-				pubDate: z
+				published: z
 					.string()
 					.optional()
 					.or(z.date())

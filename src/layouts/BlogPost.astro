@@ -12,7 +12,7 @@ import Html from './Html.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage, heroAlt } =
+const { title, description, published, updatedDate, heroImage, heroAlt } =
 	Astro.props;
 
 const ogImage = heroImage
@@ -36,7 +36,7 @@ const ogImage = heroImage
 					<h1 class="text-3xl font-bold">
 						{title}
 					</h1>
-					<FormattedDate date={pubDate} />
+					<FormattedDate date={published} />
 					{
 						updatedDate && (
 							<div>

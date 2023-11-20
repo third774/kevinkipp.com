@@ -11,7 +11,7 @@ import { getPublishedBlogPosts } from '../../content/blog/_getPublishedBlogPosts
 import Html from '../../layouts/Html.astro';
 
 const posts = (await getPublishedBlogPosts()).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+	(a, b) => b.data.published.valueOf() - a.data.published.valueOf(),
 );
 ---
 
@@ -45,7 +45,7 @@ const posts = (await getPublishedBlogPosts()).sort(
 										</h2>
 										<FormattedDate
 											transition:name="blog-post-date"
-											date={post.data.pubDate}
+											date={post.data.published}
 										/>
 
 										<p class="text-gray-500 dark:text-gray-400">

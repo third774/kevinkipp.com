@@ -3,7 +3,7 @@
   'title': 'QR code doorbells',
   'description': 'How to hack together a QR code doorbell with Discord, Remix, and Cloudflare Workers',
   'heroImage': '../../assets/door-knocker.jpg',
-  'pubDate': '2023-09-08T23:55:28-05:00',
+  'published': '2023-09-08T23:55:28-05:00',
   'heroAlt': 'An old door knocker in the shape of a lion holding a ring in its mouth',
 }
 ---
