@@ -1,25 +1,25 @@
 ---
-import HeaderLink from './HeaderLink.astro';
+import HeaderLink from "./HeaderLink.astro";
 import {
 	SITE_TITLE,
 	MASTADON_PROFILE,
 	TWITTER_PROFILE,
 	GITHUB_PROFILE,
-} from '../consts';
-import SocialLink from './SocialLink.astro';
-import Mustache from './Mustache.astro';
+} from "../consts";
+import SocialLink from "./SocialLink.astro";
+import Mustache from "./Mustache.astro";
 ---
 
-<header>
+<header class="mb-12">
 	<nav class="flex gap-4 justify-between items-center text-xl">
-		<div class="flex-grow basis-0">
-			<a class="inline-block m-2 p-2" href="/">
+		<div class="flex-grow basis-0 flex items-center ml-1">
+			<a class="inline-block px-3" href="/">
 				<Mustache />
 				<span class="sr-only">{SITE_TITLE}</span>
 			</a>
 		</div>
 
-		<div class="p-4">
+		<div class="px-4">
 			<HeaderLink transition:name="nav-link-home" href="/">Home</HeaderLink>
 			<HeaderLink transition:name="nav-link-blog" href="/blog">Blog</HeaderLink>
 		</div>

@@ -1,11 +1,11 @@
 ---
-import { twMerge } from 'tailwind-merge';
+import { twMerge } from "tailwind-merge";
 const { class: className, ...rest } = Astro.props;
 ---
 
 <a class="absolute" id="skip-target"></a>
 <main
-	class={twMerge('mx-auto max-w-[min(100%,70ch)] flex-auto px-4', className)}
+	class={twMerge("mx-auto max-w-[min(100%,70ch)] flex-auto px-4", className)}
 	{...rest}
 >
 	<slot />
