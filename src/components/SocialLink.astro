@@ -1,9 +1,11 @@
 ---
-import { twMerge } from 'tailwind-merge'
-const {class: className, ...rest} = Astro.props
+import { twMerge } from "tailwind-merge";
+const { class: className, ...rest } = Astro.props;
 ---
 
-
-<a class={twMerge("hover:text-pink-600 transition-colors", className)} {...rest}>
-  <slot />
+<a
+	class={twMerge("hover:text-pink-600 transition-colors", className)}
+	{...rest}
+>
+	<slot />
 </a>
