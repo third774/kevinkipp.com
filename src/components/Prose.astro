@@ -1,5 +1,5 @@
 ---
-import { twMerge } from 'tailwind-merge';
+import { twMerge } from "tailwind-merge";
 
 interface Props {
 	class?: string;
@@ -10,11 +10,11 @@ const { class: className } = Astro.props;
 
 <div
 	class:list={twMerge(
-		'prose prose-lg prose-gray dark:prose-invert',
-		'prose-a:underline prose-a:underline-offset-4 hover:prose-a:underline-offset-0 prose-a:transition-all',
-		'prose-a:decoration-pink-500 hover:prose-a:text-pink-700 hover:prose-a:decoration-pink-500/0',
-		'prose-a:dark:decoration-pink-500 hover:dark:prose-a:text-pink-500',
-		'prose-code:before:content-none prose-code:after:content-none',
+		"prose prose-gray dark:prose-invert",
+		"prose-a:underline prose-a:underline-offset-4 hover:prose-a:underline-offset-0 prose-a:transition-all",
+		"prose-a:decoration-pink-500 hover:prose-a:text-pink-700 hover:prose-a:decoration-pink-500/0",
+		"prose-a:dark:decoration-pink-500 hover:dark:prose-a:text-pink-500",
+		"prose-code:before:content-none prose-code:after:content-none",
 		className,
 	)}
 >

@@ -1,7 +1,7 @@
 ---
 {
   "title": "Your URL is a defacto API",
-  "description": "Why carefully considering your URL structure is important",
+  "description": "The importance of carefully considering your URL structure",
   "published": "2023-11-20T13:32:10-06:00",
 }
 ---

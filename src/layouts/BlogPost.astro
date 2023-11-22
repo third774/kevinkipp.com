@@ -1,16 +1,16 @@
 ---
-import { Image, getImage } from 'astro:assets';
-import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Body from '../components/Body.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
-import MainCenter from '../components/MainCenter.astro';
-import Prose from '../components/Prose.astro';
-import Html from './Html.astro';
+import { Image, getImage } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Body from "../components/Body.astro";
+import Footer from "../components/Footer.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import Header from "../components/Header.astro";
+import MainCenter from "../components/MainCenter.astro";
+import Prose from "../components/Prose.astro";
+import Html from "./Html.astro";
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<"blog">["data"];
 
 const { title, description, published, updatedDate, heroImage, heroAlt } =
 	Astro.props;
@@ -32,7 +32,7 @@ const ogImage = heroImage
 		<Header />
 		<MainCenter>
 			<article class="space-y-14" transition:name={`blog-post-card-${title}`}>
-				<div class="space-y-4">
+				<div class="space-y-3">
 					<h1 class="text-3xl font-bold">
 						{title}
 					</h1>
@@ -55,13 +55,12 @@ const ogImage = heroImage
 									width={1020}
 									height={510}
 									src={heroImage}
-									alt={heroAlt ?? ''}
+									alt={heroAlt ?? ""}
 								/>
 							</div>
 						)
 					}
 				</div>
-				<hr />
 				<Prose>
 					<slot />
 				</Prose>

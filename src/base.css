@@ -13,13 +13,6 @@
 
 :where(p, h1, h2, h3, h4, h5, h6) {
 	overflow-wrap: break-word;
-}
-
-:where(h1, h2, h3, h4, h5, h6) {
-	text-wrap: balance;
-}
-
-:where(p) {
 	text-wrap: pretty;
 }
 
@@ -58,6 +51,6 @@
 
 .prose pre:has(> code) {
 	@media screen(md) {
-		margin-inline: calc(theme(spacing.6) * -1);
+		margin-inline: calc(theme(spacing.4) * -1);
 	}
 }
