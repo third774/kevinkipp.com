@@ -23,24 +23,30 @@ const posts = (await getPublishedBlogPosts()).sort(
 		<Header />
 		<MainCenter>
 			<section>
-				<ul class="grid gap-12">
+				<ul class="grid gap-16">
 					{
 						posts.map((post) => (
 							<li>
 								<a class="group" href={`/blog/${post.slug}/`}>
 									<div
 										transition:name={`blog-post-card-${post.data.title}`}
-										class="space-y-3"
+										class="space-y-2"
 									>
-										<h2 class={"text-xl font-bold " + groupLinkStyles}>
-											{post.data.title}
-										</h2>
-										<FormattedDate
-											transition:name="blog-post-date"
-											date={post.data.published}
-										/>
+										<div>
+											<h2
+												class={
+													"text-xl leading-none font-bold " + groupLinkStyles
+												}
+											>
+												{post.data.title}
+											</h2>
+											<FormattedDate
+												transition:name="blog-post-date"
+												date={post.data.published}
+											/>
+										</div>
 
-										<p class="text-gray-600 dark:text-gray-400">
+										<p class="text-gray-800 dark:text-gray-400">
 											{post.data.description}
 										</p>
 										{post.data.heroImage && (
