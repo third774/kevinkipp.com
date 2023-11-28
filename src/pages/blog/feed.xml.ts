@@ -14,6 +14,7 @@ export async function GET(context: AstroUserConfig) {
 	return rss({
 		title: "Kevin Kipp's blog",
 		description: "Kevin's blog — not his first, probably not his last.",
+		stylesheet: "../pretty-feed-v3.xsl",
 		site: context.site,
 		items: blog.map((post) => ({
 			title: post.data.title,
