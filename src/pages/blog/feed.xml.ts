@@ -1,10 +1,9 @@
 import rss from "@astrojs/rss";
 import type { AstroUserConfig } from "astro/config";
-import MarkdownIt from "markdown-it";
+import { marked } from "marked";
 import sanitizeHtml from "sanitize-html";
 import invariant from "tiny-invariant";
 import { getPublishedBlogPosts } from "../../content/blog/_getPublishedBlogPosts";
-const parser = new MarkdownIt();
 
 export async function GET(context: AstroUserConfig) {
 	invariant(
@@ -23,7 +22,7 @@ export async function GET(context: AstroUserConfig) {
 			// Compute RSS link from post `slug`
 			// This example assumes all posts are rendered as `/blog/[slug]` routes
 			link: `/blog/${post.slug}/`,
-			content: sanitizeHtml(parser.render(post.body)),
+			content: sanitizeHtml(marked.parse(post.body)),
 		})),
 	});
 }
