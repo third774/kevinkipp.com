@@ -9,11 +9,13 @@ import Header from "../components/Header.astro";
 import MainCenter from "../components/MainCenter.astro";
 import Prose from "../components/Prose.astro";
 import Html from "./Html.astro";
+import Share from "../components/Share.astro";
 
-type Props = CollectionEntry<"blog">["data"];
+type Props = CollectionEntry<"blog">;
 
-const { title, description, published, updatedDate, heroImage, heroAlt } =
-	Astro.props;
+const { data, slug } = Astro.props;
+
+const { title, description, published, updatedDate, heroImage, heroAlt } = data;
 
 const ogImage = heroImage
 	? (
@@ -64,6 +66,14 @@ const ogImage = heroImage
 				<Prose>
 					<slot />
 				</Prose>
+				{
+					Astro.site && (
+						<Share
+							title={title}
+							url={`${Astro.site.toString()}/blog/${slug}`}
+						/>
+					)
+				}
 			</article>
 		</MainCenter>
 		<Footer />

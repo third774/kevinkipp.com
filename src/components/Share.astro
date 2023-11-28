@@ -1,0 +1,14 @@
+---
+type Props = { title: string; url: string };
+
+const { title, url } = Astro.props;
+
+const formattedTitle = `Kevin Kipp's post: ${title}`;
+---
+
+<div class="space-y-4">
+	<h2 class="text-lg font-bold">Share this post</h2>
+	<div class="flex">
+		<a href={`mailto:?subject=${formattedTitle}&body=${url}`}>Email</a>
+	</div>
+</div>
