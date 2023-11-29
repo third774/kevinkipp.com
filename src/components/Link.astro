@@ -11,11 +11,6 @@ export const linkStyles = twMerge(
 	"dark:decoration-pink-500 hover:dark:text-pink-500",
 );
 
-export const groupLinkStyles = twMerge(
-	"underline underline-offset-4 group-hover:underline-offset-0 transition-all font-medium",
-	"decoration-pink-500 group-hover:text-pink-700 group-hover:decoration-pink-500/0",
-	"dark:decoration-pink-500 group-hover:dark:text-pink-500",
-);
 ---
 
 <a class={twMerge(linkStyles, className)} {...rest}>

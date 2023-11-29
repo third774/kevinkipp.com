@@ -5,7 +5,7 @@ import Body from "../../components/Body.astro";
 import Footer from "../../components/Footer.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
 import Header from "../../components/Header.astro";
-import { groupLinkStyles } from "../../components/Link.astro";
+import Link from "../../components/Link.astro";
 import MainCenter from "../../components/MainCenter.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
 import { getPublishedBlogPosts } from "../../content/blog/_getPublishedBlogPosts";
@@ -25,21 +25,19 @@ const posts = await getPublishedBlogPosts();
 					{
 						posts.map((post) => (
 							<li>
-								<a class="group" href={`/blog/${post.slug}/`}>
-									<div
-										transition:name={`blog-post-card-${post.data.title}`}
-										class="space-y-2"
-									>
+									<div class="space-y-2">
 										<div>
 											<h2
 												class={
-													"text-xl leading-none font-bold " + groupLinkStyles
+													"text-xl leading-none font-bold "
 												}
 											>
-												{post.data.title}
+												<Link href={`/blog/${post.slug}/`} transition:name={`blog-post-card-${post.data.title}`}>
+													{post.data.title}
+												</Link>
 											</h2>
 											<FormattedDate
-												transition:name="blog-post-date"
+											transition:name="blog-post-date"
 												date={post.data.published}
 											/>
 										</div>
@@ -55,7 +53,6 @@ const posts = await getPublishedBlogPosts();
 											/>
 										)}
 									</div>
-								</a>
 							</li>
 						))
 					}
