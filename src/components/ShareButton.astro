@@ -5,10 +5,10 @@ const { title, url } = Astro.props;
 ---
 
 <button data-url={url} data-title={title}>
-	<div class="idle">
+	<span class="idle">
 		<slot />
-	</div>
-	<div hidden class="shared">Thanks!</div>
+	</span>
+	<span hidden class="shared">Thanks!</span>
 </button>
 
 <script is:inline>
@@ -24,11 +24,12 @@ const { title, url } = Astro.props;
 					clearTimeout(timeout);
 					await navigator.share(button.dataset);
 					timeout = window.setTimeout(() => {
-						idleContent.hidden = false;
-						sharedContent.hidden = true;
+						idleContent.style.display = "inline";
+						sharedContent.style.display = "none";
 					}, 1500);
-					idleContent.hidden = true;
-					sharedContent.hidden = false;
+					console.log("Shared:", button.dataset);
+					idleContent.style.display = "none";
+					sharedContent.style.display = "inline";
 					sharedContent.removeAttribute("hidden");
 				} catch (err) {
 					console.error("Error sharing:", err.message);

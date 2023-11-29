@@ -23,11 +23,11 @@ const { text } = Astro.props;
 			navigator.clipboard.writeText(button.dataset.text);
 			clearTimeout(timeout);
 			timeout = window.setTimeout(() => {
-				idleContent.hidden = false;
-				copiedContent.hidden = true;
+				idleContent.style.display = "inline";
+				copiedContent.style.display = "none";
 			}, 1500);
-			idleContent.hidden = true;
-			copiedContent.hidden = false;
+			idleContent.style.display = "none";
+			copiedContent.style.display = "inline";
 		});
 	})();
 </script>
