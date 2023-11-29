@@ -10,9 +10,12 @@ const { title, url } = Astro.props;
 	<h2 class="text-lg font-bold">Share this post</h2>
 	<div class="flex gap-4">
 		<ShareButton title={title} url={url}>📣 Share</ShareButton>
+		<!-- https://developers.cloudflare.com/support/more-dashboard-apps/cloudflare-scrape-shield/what-is-email-address-obfuscation/#troubleshoot-email-obfuscation -->
+		<!--email_off-->
 		<a href={`mailto:?subject=Kevin Kipp's post: ${title}&body=${url}`}
 			>📧 Email</a
 		>
+		<!--/email_off-->
 		<CopyButton text={url}>🔗 Copy Link</CopyButton>
 	</div>
 </div>
