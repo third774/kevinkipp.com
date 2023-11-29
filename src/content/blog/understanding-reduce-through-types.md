@@ -1,0 +1,445 @@
+---
+{
+  "title": "Understanding Reduce Through Types",
+  "published": "2019-09-25T01:24:13-06:00",
+}
+---
+
+I feel like I didn't fully understand
+`Array.prototype.reduce` until I started getting into
+functional programming and learning about types and
+function type signatures. Once I understood the types, I
+feel like it unlocked a powerful tool that I naturally
+reach for any time I need to turn an array of things
+into something of a different type.
+
+## Starting with `map`'s type signature
+
+Before we dig into `reduce` though, let's take a look at
+the type signature for `map`. In Haskell, it looks like
+this:
+
+```hs
+map :: (a -> b) -> [a] -> [b]
+```
+
+This can be understood as `map` being a function that
+accepts two arguments:
+
+1. An `(a -> b)` function
+2. A list of `a`s
+
+And it returns a list of `b`s.
+
+We have some transformation we want to apply to each
+element in the array and get back a new array with the
+transformations applied.
+
+For the purpose of keeping as close to the simple type
+signature of Haskell and ignoring that `map` is actually
+on `Array.prototype` we'll write our TypeScript
+implementation like this:
+
+```ts
+function map<A, B>(fn: (a: A) => B, as: A[]): B[] {
+	return as.map(fn);
+}
+```
+
+Similar to the Haskell type signature, we can see that
+we have a function that takes an `A` and returns a `B`,
+and an array of `A`s. Then the return type is a an array
+of `B`s.
+
+Let's see what the type signature becomes when we
+actually use it.
+
+```ts
+const length = (s: string) => s.length;
+// map<string, number>(
+//   fn: (s: string) => number,
+//   as: string[],
+// ) => number[]
+const result = map(length, ["hi", "there"]);
+```
+
+We can see here that the types fill in the generics and
+we know that we're going to get an array of numbers
+back.
+
+## Reduce
+
+Next let's look at `reduce` in Haskell which is called
+`foldl` (short for fold left):
+
+```hs
+foldl :: Foldable t => (b -> a -> b) -> b -> t a -> b
+```
+
+This can be read as a function that accepts three
+arguments:
+
+1. A two argument function `(b -> a -> b)`. The first
+   argument in _this_ function is a value of type `b`,
+   the second argument to this function is a value of
+   type `a`, and the return type is a value of type `b`
+2. An initial `b` value
+3. A `Foldable` type `t` of `a`s. We will gloss over
+   what this means, but suffice it to say that lists
+   _are_ "foldable" so they can be used with `foldl`,
+   and this `Foldable t` means the `t a` is the "list of
+   `a`s". If you want to learn more on this, look into
+   Haskell's `typeclasses` and `higher kinded types`.
+
+A similar implementation in TypeScript (without the
+additional params in the reduce function such as `index`
+and `array`) would look like this:
+
+```ts
+function reduce<A, B>(
+	reducer: (accumulator: B, a: A) => B,
+	initialValue: B,
+	as: A[],
+): B {
+	return as.reduce(reducer, initialValue);
+}
+```
+
+### So what is happening here?
+
+The `B` type is the _accumulator_ type.
+
+> Whatever type this is will be the type that gets
+> returned by `reduce`.
+
+In most languages you _must_ supply an initial value for
+the accumulator. It iterates over each element in the
+list, passing the element into the reducer as the `A`
+value along with the accumulator result from the
+previous reducer invocation (or initial value for the
+first one), and the `reducer` must _somehow_ combine it
+with the `B` value accumulator. Whatever _combining_
+means in the context of your reducer.
+
+#### Because JavaScript has to be quirky...
+
+I said in _most_ languages you must supply the initial
+value, but in JavaScript if you don't supply an initial
+value for the accumulator it will actually use the
+`head` of the list as the initial value for the
+accumulator and then reduce the `tail`. In this case,
+the type of the accumulator is by default the same as
+whatever the array is of. This is _not_ normal, and I
+don't recommend using this because it is implicit and
+others working in the same code may not be aware of this
+quirk.
+
+The behavior is essentially this:
+
+```ts
+function reduceWithNoInitialValue<A>(
+	reducer: (accumulator: A, a: A) => A,
+	as: A[],
+) {
+	const [head, ...tail] = as;
+	return tail.reduce(reducer, head);
+}
+```
+
+## Basic Examples
+
+Let's see some basic examples and understand the types.
+
+### Adding
+
+```ts
+// 10
+const result = [1, 2, 3, 4].reduce((accumulator, a) => accumulator + a, 0);
+```
+
+In this case, both types `A` and `B` are numbers.
+_Combining_ them in this context means adding them all
+together. We start with `0` as the initial value because
+when added to any other number, it doesn't change it. It
+is the only sensible starting point for this.
+
+### Multiplying
+
+What if we want to multiply the numbers to combine them
+though? We update our reducer to multiply instead of
+add, then we update the initial value to be `1` instead
+of `0` for the same reason as before. It's the only
+viable starting value for multiplication.
+
+```ts
+// 24
+const result = [1, 2, 3, 4].reduce((accumulator, a) => accumulator * a, 1);
+```
+
+## Building other array operations with reduce
+
+Now let's change the type of the accumulator and thus
+the result!
+
+### Some
+
+What if we wanted to implement our own version of the
+`Array.prototype.some` function?
+
+Since we know `Array.prototype.some` returns a
+`boolean`, we know the accumulator (type `B`) must be a
+`boolean`!
+
+What kind of operation should we perform to _combine_ a
+value of type `A` with our `boolean` accumulator though?
+
+Well, if _any_ invocation of the `predicate` returns
+`true`, we want the entire result to be `true`, right?
+
+This sounds a lot like `or`!
+
+What should the initial value be? `true` or `false`? If
+we're using `or` to combine a bunch of booleans, we
+can't start with `true`, or the result will always be
+`true`. `false` _must_ be the initial value.
+
+```ts
+const or = (a: boolean, b: boolean) => a || b;
+const some = <A>(predicate: (a: A) => boolean, as: A[]) =>
+	as.reduce((accumulator, a) => or(accumulator, predicate(a)), false);
+
+const isEven = (n) => n % 2 === 0;
+const resultOne = some(isEven, [1, 3, 5]); // false
+const resultTwo = some(isEven, [1, 3, 4]); // true
+```
+
+### Every
+
+Similarly, we can implement `Array.prototype.every`
+using `reduce`!
+
+```ts
+const and = (a: boolean, b: boolean) => a && b;
+const every = <A>(predicate: (a: A) => boolean, as: A[]) =>
+	as.reduce((accumulator, a) => and(accumulator, predicate(a)), true);
+
+const isEven = (n) => n % 2 === 0;
+const resultOne = every(isEven, [1, 4, 6]); // false
+const resultTwo = every(isEven, [2, 4, 6]); // true
+```
+
+This time, the we've flipped the logic! We initialize
+with `true`, and now we `and` the accumulator together
+with the result of the `predicate`. If a single `false`
+value is returned from the predicate, the entire
+expression will be `false`!
+
+### Filter
+
+How about `Array.prototype.filter`?
+
+Well, the accumulator needs to be the same type as the
+original array because all we're doing is removing
+elements in the array that don't return `true` from the
+`predicate`, right?
+
+```ts
+function filter<A>(predicate: (a: A) => boolean, as: A[]): A[] {
+	return as.reduce(
+		(accumulator, a) => (predicate(a) ? [...accumulator, a] : accumulator),
+		[] as A[],
+	);
+}
+
+// [2, 4]
+const result = filter((n) => n % 2 === 0, [1, 2, 3, 4]);
+```
+
+If the `predicate` returns `true`, then we add the
+current element to the new accumulator, otherwise we
+just return the accumulator as is without adding the
+element.
+
+### Map
+
+Similarly, we can also implement our own `map` using
+`reduce`!
+
+The only difference is the return type is not the same
+as the original. If we started with `A[]` and we have an
+`(a: A) => B` function, we need to return `B[]`.
+
+```ts
+function map<A, B>(
+  fn: (a: A) => B,
+  as: A[],
+): B[] {
+  return as.reduce(
+    (accumulator, a) => [...accumulator, fn(a)]),
+    [] as B[],
+  )
+}
+
+// [6, 2, 3]
+const result = map(s => s.length, ["reduce", "is", "rad"])
+```
+
+## Reducing to objects
+
+There are many scenarios where you want the accumulator
+— let's look at a few.
+
+## Creating a map of entities by id
+
+Let's say you've got a _very_ long list of objects and
+you know that you're going to need to look them up by a
+unique `id` field.
+
+```ts
+type Person = {
+	id: string;
+	name: string;
+	email: string;
+};
+
+const people: Person[] = [
+	{
+		id: "1",
+		name: "Kevin Kipp",
+		email: "kevin.kipp@gmail.com",
+	},
+	// 10,000 more...
+];
+```
+
+Using `[].find()` will be expensive every time you
+perform the lookup because it has to iterate through the
+list one by one looking for the right person every time
+you want to access them by id.
+
+We can create an object that looks like this using
+reduce:
+
+```ts
+const personById = {
+	"1": {
+		id: "1",
+		name: "Kevin Kipp",
+		email: "kevin.kipp@gmail.com",
+	},
+	// 10,000 more by id
+};
+
+// can simply access now by key!
+const kevin = personById["1"];
+```
+
+How do we create this? Well, since an object is what we
+want, an empty object `{}` should be used as the
+accumulator.
+
+```ts
+type MapById<T> = {
+	[key: string]: T | undefined;
+};
+
+const peopleById = people.reduce(
+	(acc, person) => ({ ...acc, [person.id]: person }),
+	{} as MapById<Person>,
+);
+```
+
+### Transforming values on objects
+
+What if we want to do something like iterate over each
+key of an object and perform a transformation on it?
+`Object.entries` gives us a list of `[key, value]`
+tuples which we can then reduce onto a new object!
+
+```ts
+const original = {
+	foo: 1,
+	bar: 2,
+	baz: 3,
+};
+
+// {foo: 2, bar: 4, baz: 6}
+const result = Object.entries(original).reduce(
+	(accumulator, [key, value]) => ({
+		...accumulator,
+		[key]: value * 2,
+	}),
+	{} as typeof original,
+);
+```
+
+### Passing state through accumulators
+
+You can even pass state along in the accumulator. Let's
+say you wanted to create a function that counts the most
+frequently occuring string in a list of strings.
+
+```ts
+function findMostFrequentWord(words: string[]) {
+	const { mostFrequentWord } = words.reduce(
+		(accumulator, word) => {
+			const { mostFrequentWord, words } = accumulator;
+			const count = (words[word] || 0) + 1;
+			return {
+				words: {
+					...words,
+					[word]: count,
+				},
+				mostFrequentWord:
+					mostFrequentWord.count >= count
+						? mostFrequentWord
+						: {
+								word,
+								count,
+						  },
+			};
+		},
+		{
+			words: {},
+			mostFrequentWord: {
+				word: "",
+				count: 0,
+			},
+		},
+	);
+	return mostFrequentWord;
+}
+
+// {word: "foo", count: 3}
+const result = findMostFrequentWord(["foo", "bar", "baz", "bar", "foo", "foo"]);
+```
+
+Here the actual result we're really interested in is the
+`mostFrequentWord` which we destructure from the
+accumulator when we're done, but we also pass the
+`words` object along while reducing so we can keep
+counts of occurances. This allows us to perform
+computations like this iterating only once over the list
+without actually mutating anything directly!
+
+This was a pattern that I hadn't come across anywhere
+until I started playing with pure functional languages
+that don't allow _any_ mutation at all.
+
+## Conclusion
+
+The `reduce` function is incredibly powerful and
+hopefully a bit more clear now.
+
+I think the two key takeaways here are:
+
+1. You can use `reduce` any time you need to turn an
+   array into a value of some other type that may not
+   even be an array. Use the regular other array helpers
+   if they fit your need, but if not it's very likely
+   that `reduce` can do what you need.
+2. The accumulator's type _is the same as_ the return
+   type. Start by asking what the type of the value you
+   need is. Once you know that, you know what the types
+   of arguments your reducer will have which makes
+   implementing the reducer much easier!
