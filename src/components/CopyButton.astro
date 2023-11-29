@@ -1,0 +1,33 @@
+---
+type Props = { text: string };
+
+const { text } = Astro.props;
+---
+
+<button class="copy-button" data-text={text}>
+	<span class="idle">
+		<slot />
+	</span>
+	<span class="copied" hidden>✅ Copied!</span>
+</button>
+
+<script is:inline>
+	(() => {
+		const thisScript = document.currentScript;
+		const button = thisScript.previousElementSibling;
+		const idleContent = button.querySelector(".idle");
+		const copiedContent = button.querySelector(".copied");
+		let timeout = -1;
+		button.addEventListener("click", () => {
+			copiedContent.removeAttribute("hidden");
+			navigator.clipboard.writeText(button.dataset.text);
+			clearTimeout(timeout);
+			timeout = window.setTimeout(() => {
+				idleContent.hidden = false;
+				copiedContent.hidden = true;
+			}, 1500);
+			idleContent.hidden = true;
+			copiedContent.hidden = false;
+		});
+	})();
+</script>

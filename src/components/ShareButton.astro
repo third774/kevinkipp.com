@@ -1,0 +1,41 @@
+---
+type Props = { title: string; url: string };
+
+const { title, url } = Astro.props;
+---
+
+<button data-url={url} data-title={title}>
+	<div class="idle">
+		<slot />
+	</div>
+	<div hidden class="shared">Thanks!</div>
+</button>
+
+<script is:inline>
+	(() => {
+		const thisScript = document.currentScript;
+		const button = thisScript.previousElementSibling;
+		const idleContent = button.querySelector(".idle");
+		const sharedContent = button.querySelector(".shared");
+		if (navigator.share) {
+			let timeout = -1;
+			button.addEventListener("click", async () => {
+				try {
+					clearTimeout(timeout);
+					await navigator.share(button.dataset);
+					timeout = window.setTimeout(() => {
+						idleContent.hidden = false;
+						sharedContent.hidden = true;
+					}, 1500);
+					idleContent.hidden = true;
+					sharedContent.hidden = false;
+					sharedContent.removeAttribute("hidden");
+				} catch (err) {
+					console.error("Error sharing:", err.message);
+				}
+			});
+		} else {
+			button.remove();
+		}
+	})();
+</script>
