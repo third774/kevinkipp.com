@@ -68,10 +68,7 @@ const ogImage = heroImage
 				</Prose>
 				{
 					Astro.site && (
-						<Share
-							title={title}
-							url={`${Astro.site.toString()}/blog/${slug}`}
-						/>
+						<Share title={title} url={`${Astro.site.toString()}blog/${slug}`} />
 					)
 				}
 			</article>
