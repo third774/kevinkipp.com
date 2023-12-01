@@ -7,7 +7,7 @@ import FormattedDate from "../../components/FormattedDate.astro";
 import Header from "../../components/Header.astro";
 import Link from "../../components/Link.astro";
 import MainCenter from "../../components/MainCenter.astro";
-import { SITE_DESCRIPTION, SITE_TITLE } from "../../consts";
+import { SITE_DESCRIPTION } from "../../consts";
 import { getPublishedBlogPosts } from "../../content/blog/_getPublishedBlogPosts";
 import Html from "../../layouts/Html.astro";
 
@@ -16,7 +16,7 @@ const posts = await getPublishedBlogPosts();
 
 <!doctype html>
 <Html>
-	<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	<BaseHead title={"Kevin Kipp's Blog"} description={SITE_DESCRIPTION} />
 	<Body>
 		<Header />
 		<MainCenter>
@@ -25,34 +25,33 @@ const posts = await getPublishedBlogPosts();
 					{
 						posts.map((post) => (
 							<li>
-									<div class="space-y-2">
-										<div>
-											<h2
-												class={
-													"text-xl leading-none font-bold "
-												}
+								<div class="space-y-2">
+									<div>
+										<h2 class={"text-xl leading-none font-bold "}>
+											<Link
+												href={`/blog/${post.slug}/`}
+												transition:name={`blog-post-card-${post.data.title}`}
 											>
-												<Link href={`/blog/${post.slug}/`} transition:name={`blog-post-card-${post.data.title}`}>
-													{post.data.title}
-												</Link>
-											</h2>
-											<FormattedDate
+												{post.data.title}
+											</Link>
+										</h2>
+										<FormattedDate
 											transition:name="blog-post-date"
-												date={post.data.published}
-											/>
-										</div>
-
-										<p class="text-gray-700 dark:text-gray-300">
-											{post.data.description}
-										</p>
-										{post.data.heroImage && (
-											<Image
-												src={post.data.heroImage}
-												alt={post.data.heroAlt ?? null}
-												class="mb-4"
-											/>
-										)}
+											date={post.data.published}
+										/>
 									</div>
+
+									<p class="text-gray-700 dark:text-gray-300">
+										{post.data.description}
+									</p>
+									{post.data.heroImage && (
+										<Image
+											src={post.data.heroImage}
+											alt={post.data.heroAlt ?? null}
+											class="mb-4"
+										/>
+									)}
+								</div>
 							</li>
 						))
 					}
