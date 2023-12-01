@@ -8,7 +8,7 @@
 
 ![An image of a Macbook's arrow keys](../../assets/macbook-arrow-keys.jpg)
 
-After going on a journey of exploring various custom mechanical keyboards I became really accustomed to accessing
+After going on a journey of exploring various custom mechanical keyboards I became very accustomed to accessing
 my arrow keys on layer without needing to move my hands away from the home row position. This _really_ grew on me.
 So much so that it would drive me nuts needing to move my hand down to the arrow keys to use them.
 
@@ -19,6 +19,6 @@ I'm pretty happy with the solution I arrived at and thought maybe it'd be worth 
 I sure don't. Well, except maybe when using `⌘[` or `⌘]`. That button is in prime real-estate and significantly
 under-utilized! So I've remapped it with [Karabiner Elements](https://karabiner-elements.pqrs.org/) to change my
 IJKL keys to act as arrow keys. This also allows me to still use `⌘`, `⌥` and `⇧` with my left hand as I normally
-would.
+would when using arrow keys.
 
 So nice.
