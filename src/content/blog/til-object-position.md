@@ -14,3 +14,7 @@ Today I was messing around trying to maybe adapt this to be a web component, and
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
 So, I guess it's time to archive that repo!
+
+## Update
+
+I've created a [`<focus-picker>` web component](https://focus-picker.pages.dev) to help with the selection of `object-position`!
