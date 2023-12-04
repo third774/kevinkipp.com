@@ -19,6 +19,14 @@ const blog = defineCollection({
 					.transform((str) => (str ? new Date(str) : undefined)),
 				heroImage: image().optional(),
 				heroAlt: z.string().optional(),
+				scripts: z
+					.array(
+						z.object({
+							src: z.string(),
+							type: z.literal("module").optional(),
+						}),
+					)
+					.optional(),
 			})
 			.refine((data) => {
 				if (!data.heroImage) return true;

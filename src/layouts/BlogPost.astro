@@ -15,7 +15,15 @@ type Props = CollectionEntry<"blog">;
 
 const { data, slug } = Astro.props;
 
-const { title, description, published, updatedDate, heroImage, heroAlt } = data;
+const {
+	title,
+	description,
+	scripts,
+	published,
+	updatedDate,
+	heroImage,
+	heroAlt,
+} = data;
 
 const ogImage = heroImage
 	? (
@@ -74,5 +82,9 @@ const ogImage = heroImage
 			</article>
 		</MainCenter>
 		<Footer />
+		{
+			scripts &&
+				scripts.map((script) => <script src={script.src} type={script.type} />)
+		}
 	</Body>
 </Html>
