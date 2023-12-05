@@ -27,15 +27,7 @@ module.exports = {
 			"9xl": "clamp(3.6531rem, 2.2318rem + 7.1065vw, 7.7394rem)",
 		},
 		fontFamily: {
-			sans: [
-				"Inter",
-				"Roboto",
-				"Helvetica Neue",
-				"Arial Nova",
-				"Nimbus Sans",
-				"Arial",
-				"sans-serif",
-			],
+			sans: ["Recursive", "Recursive-fallback", "sans-serif"],
 			mono: [
 				"Monaspace Neon",
 				"Berkeley Mono",
