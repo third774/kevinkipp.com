@@ -45,7 +45,11 @@ module.exports = {
 				"monospace",
 			],
 		},
-		extend: {},
+		extend: {
+			fontWeight: {
+				blackest: "1000",
+			},
+		},
 	},
 	plugins: [require("@tailwindcss/typography")],
 };
