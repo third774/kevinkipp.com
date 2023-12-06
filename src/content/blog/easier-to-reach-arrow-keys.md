@@ -10,7 +10,7 @@
 
 After going on a journey of exploring various custom mechanical keyboards I became very accustomed to accessing
 my arrow keys on layer without needing to move my hands away from the home row position. This _really_ grew on me.
-So much so that it would drive me nuts needing to move my hand down to the arrow keys to use them.
+So much so that needing to move my hand down to the arrow keys on my laptop's keyboard started driving me nuts.
 
 I'm pretty happy with the solution I arrived at and thought maybe it'd be worth sharing!
 
