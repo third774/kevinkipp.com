@@ -20,6 +20,11 @@
 	src: local("Arial");
 }
 
+.font-mono,
+code {
+	font-variation-settings: "MONO" 1;
+}
+
 h1,
 h2,
 h3,

@@ -31,22 +31,7 @@ module.exports = {
 		},
 		fontFamily: {
 			sans: ["Recursive", "Recursive-fallback", "sans-serif"],
-			mono: [
-				"Monaspace Neon",
-				"Berkeley Mono",
-				"Commit Mono",
-				"MonoLisa",
-				"Dank Mono",
-				"Operator Mono",
-				"Fira Code",
-				"ui-monospace",
-				"Cascadia Code",
-				"Source Code Pro",
-				"Menlo",
-				"Consolas",
-				"DejaVu Sans Mono",
-				"monospace",
-			],
+			mono: ["Recursive", "Recursive-fallback", "sans-serif"],
 		},
 		extend: {
 			fontWeight: {
