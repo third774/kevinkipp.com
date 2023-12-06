@@ -6,7 +6,7 @@
   "scripts":
     [
       {
-        src: "https://www.unpkg.com/@stefanjudis/sparkly-text@1.0.7/sparkly-text.js",
+        src: "https://www.unpkg.com/@stefanjudis/sparkly-text@1.0.8/sparkly-text.js",
         type: "module",
       },
     ],
