@@ -13,7 +13,7 @@
 }
 ---
 
-This <sparkly-text style="--sparkly-text-color: pink; --sparkly-text-size: 2.5em">[sparkling web component](https://www.stefanjudis.com/blog/a-web-component-to-make-your-text-sparkle/)</sparkly-text> from Stefan Judis is _awesome_. Wrap it around anything to add some sparkles!
+This <sparkly-text style="--sparkly-text-color: oklch(89.12% 0.141 103.76); --sparkly-text-size: 2.5em">[sparkling web component](https://www.stefanjudis.com/blog/a-web-component-to-make-your-text-sparkle/)</sparkly-text> from Stefan Judis is _awesome_. Wrap it around anything to add some sparkles!
 
 ```html
 <sparkly-text>Sparkles!</sparkly-text>
