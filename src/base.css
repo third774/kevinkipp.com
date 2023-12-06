@@ -29,6 +29,7 @@ h6 {
 	font-variation-settings:
 		"CRSV" 1,
 		"CASL" 1;
+	text-wrap: balance;
 }
 
 em {
