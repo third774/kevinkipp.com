@@ -8,18 +8,19 @@
 		"build": "astro build",
 		"preview": "astro preview",
 		"astro": "astro",
-		"prettier": "prettier --write ."
+		"prettier": "prettier --write .",
+		"upgrade": "npx @astrojs/upgrade && npx npm-upgrade"
 	},
 	"dependencies": {
 		"@astrojs/cloudflare": "^8.0.0",
 		"@astrojs/mdx": "^2.0.0",
-		"@astrojs/rss": "^4.0.0",
+		"@astrojs/rss": "^4.0.1",
 		"@astrojs/sitemap": "^3.0.3",
 		"@astrojs/tailwind": "^5.0.3",
 		"@evilmartians/harmony": "^1.2.0",
 		"@types/markdown-it": "^13.0.7",
 		"@types/sanitize-html": "^2.9.5",
-		"astro": "^4.0.2",
+		"astro": "^4.0.3",
 		"astro-robots-txt": "^1.0.0",
 		"clsx": "^2.0.0",
 		"markdown-it": "^13.0.2",
