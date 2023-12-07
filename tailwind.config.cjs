@@ -37,6 +37,14 @@ module.exports = {
 			fontWeight: {
 				blackest: "1000",
 			},
+			typography: {
+				DEFAULT: {
+					css: {
+						"blockquote p:first-of-type::before": false,
+						"blockquote p:last-of-type::after": false,
+					},
+				},
+			},
 		},
 	},
 	plugins: [require("@tailwindcss/typography")],
