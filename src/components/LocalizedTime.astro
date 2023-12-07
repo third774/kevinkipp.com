@@ -1,0 +1,75 @@
+---
+interface Props {
+	weekday?: string;
+	year?: string;
+	month?: string;
+	day?: string;
+	hour?: string;
+	minute?: string;
+	second?: string;
+	timeZoneName?: string;
+}
+---
+
+<localized-time {...Astro.props}>
+	<slot />
+</localized-time>
+
+<script>
+	import invariant from "tiny-invariant";
+
+	class LocalizedTime extends HTMLElement {
+		// attributes
+		static get observedAttributes() {
+			return [
+				"weekday",
+				"year",
+				"month",
+				"day",
+				"hour",
+				"minute",
+				"second",
+				"time-zone-name",
+			];
+		}
+
+		constructor() {
+			super();
+
+			const time = this.querySelector("time");
+			invariant(time, "LocalizedTime must have a <time> element as a child");
+			invariant(
+				time.dateTime,
+				"LocalizedTime must have a dateTime attribute on the <time> element",
+			);
+
+			const weekday = this.getAttribute("weekday") ?? undefined;
+			const year = this.getAttribute("year") ?? undefined;
+			const month = this.getAttribute("month") ?? undefined;
+			const day = this.getAttribute("day") ?? undefined;
+			const hour = this.getAttribute("hour") ?? undefined;
+			const minute = this.getAttribute("minute") ?? undefined;
+			const second = this.getAttribute("second") ?? undefined;
+			const timeZoneName = this.getAttribute("time-zone-name") ?? undefined;
+
+			const options = {
+				weekday,
+				year,
+				month,
+				day,
+				hour,
+				minute,
+				second,
+				timeZoneName,
+			} as any;
+
+			time.textContent = new Date(time.dateTime).toLocaleDateString(
+				navigator.language,
+				options,
+			);
+		}
+	}
+
+	// Tell the browser to use our AstroHeart class for <astro-heart> elements.
+	customElements.define("localized-time", LocalizedTime);
+</script>

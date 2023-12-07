@@ -46,7 +46,17 @@ const ogImage = heroImage
 					<h1 class="text-3xl font-blackest leading-none">
 						{title}
 					</h1>
-					<FormattedDate transition:name="blog-post-date" date={published} />
+					<div
+						transition:name="blog-post-date"
+						class="text-xs text-gray-600 dark:text-gray-400"
+					>
+						<FormattedDate
+							date={published}
+							year="numeric"
+							month="short"
+							day="numeric"
+						/>
+					</div>
 					{
 						updatedDate && (
 							<div>

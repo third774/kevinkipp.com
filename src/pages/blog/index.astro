@@ -36,10 +36,17 @@ const posts = await getPublishedBlogPosts();
 												{post.data.title}
 											</Link>
 										</h2>
-										<FormattedDate
+										<div
 											transition:name="blog-post-date"
-											date={post.data.published}
-										/>
+											class="text-xs text-gray-600 dark:text-gray-400"
+										>
+											<FormattedDate
+												date={post.data.published}
+												year="numeric"
+												month="short"
+												day="numeric"
+											/>
+										</div>
 									</div>
 
 									<p class="text-gray-700 dark:text-gray-300">

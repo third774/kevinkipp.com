@@ -1,20 +1,23 @@
 ---
+import type { Code, Debug } from "astro:components";
+import LocalizedTime from "../components/LocalizedTime.astro";
 interface Props {
 	date: Date;
+	weekday?: string;
+	year?: string;
+	month?: string;
+	day?: string;
+	hour?: string;
+	minute?: string;
+	second?: string;
+	timeZoneName?: string;
 }
 
-const { date } = Astro.props;
+const { date, ...rest } = Astro.props;
 ---
 
-<time
-	class="text-xs text-gray-600 dark:text-gray-400"
-	datetime={date.toISOString()}
->
-	{
-		date.toLocaleDateString("en-us", {
-			year: "numeric",
-			month: "short",
-			day: "numeric",
-		})
-	}
-</time>
+<LocalizedTime {...rest}>
+	<time datetime={date.toISOString()}>
+		{date.toLocaleDateString("en-us", rest as any)}
+	</time>
+</LocalizedTime>
