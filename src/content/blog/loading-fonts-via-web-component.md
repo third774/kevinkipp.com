@@ -1,0 +1,26 @@
+---
+{
+  "title": "Loading fonts via web component",
+  "description": "Spice up your markdown blog posts with google-font",
+  "published": "2023-12-08T18:20:43-06:00",
+}
+---
+
+I made a silly little `<google-font>` web component to load fonts from [Google Fonts](https://fonts.google.com), I think it's kinda fun.
+
+<p class="codepen" data-height="331.171875" data-default-tab="html,result" data-slug-hash="WNPmpjK" data-user="third774" style="height: 331.171875px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/third774/pen/WNPmpjK">
+  google-font web component</a> by Kevin Kipp (<a href="https://codepen.io/third774">@third774</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+
+## Use it in markdown?
+
+In Jake Lazaroff's article [Web Components Will Outlive Your JavaScript Framework](https://jakelazaroff.com/words/web-components-will-outlive-your-javascript-framework/) he says:
+
+> But Markdown has a secret weapon: you can write HTML inside of it! That means any fancy interactive diagrams I wanted to add would be just as portable as my the rest of my Markdown as long as I could express them as plain HTML tags.
+
+This got me thinking — dang, I could use this in my markdown files to <google-font display="swap" family="Frijole">spice things up a bit!</google-font>
+
+<script type="module" src="https://unpkg.com/@third774/google-font"></script>
