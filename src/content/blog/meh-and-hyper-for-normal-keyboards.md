@@ -63,7 +63,10 @@ keyboard. I use the configuration below to achieve the desired result:
 			"to": [
 				{
 					"key_code": "left_option",
-					"modifiers": ["control", "shift"]
+					"modifiers": [
+						"control",
+						"shift"
+					]
 				}
 			],
 			"to_if_alone": [

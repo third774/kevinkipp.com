@@ -1,5 +1,8 @@
 ---
-{ "title": "TIL Object Position", "published": "2023-12-01T02:30:40-06:00" }
+{
+  "title": "TIL Object Position",
+  "published": "2023-12-01T02:30:40-06:00",
+}
 ---
 
 A while ago (I guess 6 years now?) I adapted a jQuery plugin called [FocusPoint](https://github.com/jonom/jquery-focuspoint) to be [dependency free](https://github.com/third774/image-focus).

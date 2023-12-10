@@ -42,7 +42,12 @@ has been rung.
 
 ```tsx
 export default function Index() {
-	return <h1>Someone is on the way to let you in!</h1>;
+	return (
+		<h1>
+			Someone is on the way to let you
+			in!
+		</h1>
+	);
 }
 ```
 
@@ -60,23 +65,33 @@ const webhookUrl =
 	"https://discord.com/api/webhooks/NUMS/RANDOM_NUMS_AND_CHARS";
 
 export const loader = async () => {
-	const time = new Date().toLocaleTimeString("en-US", {
-		timeZone: "America/Chicago",
-	});
+	const time =
+		new Date().toLocaleTimeString(
+			"en-US",
+			{
+				timeZone: "America/Chicago",
+			},
+		);
 	await fetch(webhookUrl, {
 		method: "post",
 		body: JSON.stringify({
 			content: `Someone is at the door: ${time}`,
 		}),
 		headers: {
-			"Content-Type": "application/json",
+			"Content-Type":
+				"application/json",
 		},
 	});
 	return null;
 };
 
 export default function Index() {
-	return <h1>Someone is on the way to let you in!</h1>;
+	return (
+		<h1>
+			Someone is on the way to let you
+			in!
+		</h1>
+	);
 }
 ```
 

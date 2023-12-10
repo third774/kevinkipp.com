@@ -1,5 +1,8 @@
 ---
-{ "title": "What does Redux model?", "published": "2019-09-29T01:27:11-06:00" }
+{
+  "title": "What does Redux model?",
+  "published": "2019-09-29T01:27:11-06:00",
+}
 ---
 
 In the previous post, we talked about the type signature
@@ -28,9 +31,15 @@ type SetAction = {
 	value: number;
 };
 
-type Action = IncrementAction | DecrementAction | SetAction;
+type Action =
+	| IncrementAction
+	| DecrementAction
+	| SetAction;
 
-function reducer(state: State, action: Action) {
+function reducer(
+	state: State,
+	action: Action,
+) {
 	switch (action.type) {
 		case "INCREMENT":
 			return state + 1;
@@ -84,7 +93,10 @@ const actions: Action[] = [
 ];
 
 // result === 15
-const result = actions.reduce(reducer, DEFAULT_STATE);
+const result = actions.reduce(
+	reducer,
+	DEFAULT_STATE,
+);
 ```
 
 We get `15` because even though we decremented a few

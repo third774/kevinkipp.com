@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+	tab-size: 2;
+}
+
 @font-face {
 	font-family: "Recursive";
 	font-style: oblique 0deg 15deg;

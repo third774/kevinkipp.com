@@ -1,5 +1,13 @@
 {
 	"useTabs": true,
 	"trailingComma": "all",
-	"plugins": ["prettier-plugin-organize-imports", "prettier-plugin-astro"]
+	"plugins": ["prettier-plugin-organize-imports", "prettier-plugin-astro"],
+	"overrides": [
+		{
+			"files": ["*.md"],
+			"options": {
+				"printWidth": 40
+			}
+		}
+	]
 }

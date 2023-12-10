@@ -41,7 +41,10 @@ on `Array.prototype` we'll write our TypeScript
 implementation like this:
 
 ```ts
-function map<A, B>(fn: (a: A) => B, as: A[]): B[] {
+function map<A, B>(
+	fn: (a: A) => B,
+	as: A[],
+): B[] {
 	return as.map(fn);
 }
 ```
@@ -60,7 +63,10 @@ const length = (s: string) => s.length;
 //   fn: (s: string) => number,
 //   as: string[],
 // ) => number[]
-const result = map(length, ["hi", "there"]);
+const result = map(length, [
+	"hi",
+	"there",
+]);
 ```
 
 We can see here that the types fill in the generics and
@@ -101,7 +107,10 @@ function reduce<A, B>(
 	initialValue: B,
 	as: A[],
 ): B {
-	return as.reduce(reducer, initialValue);
+	return as.reduce(
+		reducer,
+		initialValue,
+	);
 }
 ```
 
@@ -154,7 +163,10 @@ Let's see some basic examples and understand the types.
 
 ```ts
 // 10
-const result = [1, 2, 3, 4].reduce((accumulator, a) => accumulator + a, 0);
+const result = [1, 2, 3, 4].reduce(
+	(accumulator, a) => accumulator + a,
+	0,
+);
 ```
 
 In this case, both types `A` and `B` are numbers.
@@ -173,7 +185,10 @@ viable starting value for multiplication.
 
 ```ts
 // 24
-const result = [1, 2, 3, 4].reduce((accumulator, a) => accumulator * a, 1);
+const result = [1, 2, 3, 4].reduce(
+	(accumulator, a) => accumulator * a,
+	1,
+);
 ```
 
 ## Building other array operations with reduce
@@ -204,13 +219,27 @@ can't start with `true`, or the result will always be
 `true`. `false` _must_ be the initial value.
 
 ```ts
-const or = (a: boolean, b: boolean) => a || b;
-const some = <A>(predicate: (a: A) => boolean, as: A[]) =>
-	as.reduce((accumulator, a) => or(accumulator, predicate(a)), false);
+const or = (a: boolean, b: boolean) =>
+	a || b;
+const some = <A>(
+	predicate: (a: A) => boolean,
+	as: A[],
+) =>
+	as.reduce(
+		(accumulator, a) =>
+			or(accumulator, predicate(a)),
+		false,
+	);
 
 const isEven = (n) => n % 2 === 0;
-const resultOne = some(isEven, [1, 3, 5]); // false
-const resultTwo = some(isEven, [1, 3, 4]); // true
+const resultOne = some(
+	isEven,
+	[1, 3, 5],
+); // false
+const resultTwo = some(
+	isEven,
+	[1, 3, 4],
+); // true
 ```
 
 ### Every
@@ -219,13 +248,27 @@ Similarly, we can implement `Array.prototype.every`
 using `reduce`!
 
 ```ts
-const and = (a: boolean, b: boolean) => a && b;
-const every = <A>(predicate: (a: A) => boolean, as: A[]) =>
-	as.reduce((accumulator, a) => and(accumulator, predicate(a)), true);
+const and = (a: boolean, b: boolean) =>
+	a && b;
+const every = <A>(
+	predicate: (a: A) => boolean,
+	as: A[],
+) =>
+	as.reduce(
+		(accumulator, a) =>
+			and(accumulator, predicate(a)),
+		true,
+	);
 
 const isEven = (n) => n % 2 === 0;
-const resultOne = every(isEven, [1, 4, 6]); // false
-const resultTwo = every(isEven, [2, 4, 6]); // true
+const resultOne = every(
+	isEven,
+	[1, 4, 6],
+); // false
+const resultTwo = every(
+	isEven,
+	[2, 4, 6],
+); // true
 ```
 
 This time, the we've flipped the logic! We initialize
@@ -244,15 +287,24 @@ elements in the array that don't return `true` from the
 `predicate`, right?
 
 ```ts
-function filter<A>(predicate: (a: A) => boolean, as: A[]): A[] {
+function filter<A>(
+	predicate: (a: A) => boolean,
+	as: A[],
+): A[] {
 	return as.reduce(
-		(accumulator, a) => (predicate(a) ? [...accumulator, a] : accumulator),
+		(accumulator, a) =>
+			predicate(a)
+				? [...accumulator, a]
+				: accumulator,
 		[] as A[],
 	);
 }
 
 // [2, 4]
-const result = filter((n) => n % 2 === 0, [1, 2, 3, 4]);
+const result = filter(
+	(n) => n % 2 === 0,
+	[1, 2, 3, 4],
+);
 ```
 
 If the `predicate` returns `true`, then we add the
@@ -344,7 +396,10 @@ type MapById<T> = {
 };
 
 const peopleById = people.reduce(
-	(acc, person) => ({ ...acc, [person.id]: person }),
+	(acc, person) => ({
+		...acc,
+		[person.id]: person,
+	}),
 	{} as MapById<Person>,
 );
 ```
@@ -364,7 +419,9 @@ const original = {
 };
 
 // {foo: 2, bar: 4, baz: 6}
-const result = Object.entries(original).reduce(
+const result = Object.entries(
+	original,
+).reduce(
 	(accumulator, [key, value]) => ({
 		...accumulator,
 		[key]: value * 2,
@@ -380,38 +437,53 @@ say you wanted to create a function that counts the most
 frequently occuring string in a list of strings.
 
 ```ts
-function findMostFrequentWord(words: string[]) {
-	const { mostFrequentWord } = words.reduce(
-		(accumulator, word) => {
-			const { mostFrequentWord, words } = accumulator;
-			const count = (words[word] || 0) + 1;
-			return {
-				words: {
-					...words,
-					[word]: count,
-				},
-				mostFrequentWord:
-					mostFrequentWord.count >= count
-						? mostFrequentWord
-						: {
-								word,
-								count,
-						  },
-			};
-		},
-		{
-			words: {},
-			mostFrequentWord: {
-				word: "",
-				count: 0,
+function findMostFrequentWord(
+	words: string[],
+) {
+	const { mostFrequentWord } =
+		words.reduce(
+			(accumulator, word) => {
+				const {
+					mostFrequentWord,
+					words,
+				} = accumulator;
+				const count =
+					(words[word] || 0) + 1;
+				return {
+					words: {
+						...words,
+						[word]: count,
+					},
+					mostFrequentWord:
+						mostFrequentWord.count >=
+						count
+							? mostFrequentWord
+							: {
+									word,
+									count,
+							  },
+				};
 			},
-		},
-	);
+			{
+				words: {},
+				mostFrequentWord: {
+					word: "",
+					count: 0,
+				},
+			},
+		);
 	return mostFrequentWord;
 }
 
 // {word: "foo", count: 3}
-const result = findMostFrequentWord(["foo", "bar", "baz", "bar", "foo", "foo"]);
+const result = findMostFrequentWord([
+	"foo",
+	"bar",
+	"baz",
+	"bar",
+	"foo",
+	"foo",
+]);
 ```
 
 Here the actual result we're really interested in is the
