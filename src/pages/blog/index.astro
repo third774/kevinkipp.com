@@ -49,7 +49,10 @@ const posts = await getPublishedBlogPosts();
 										</div>
 									</div>
 
-									<p class="text-gray-700 dark:text-gray-300">
+									<p
+										class="text-gray-700 dark:text-gray-300"
+										transition:name={`blog-post-description-${post.data.title}`}
+									>
 										{post.data.description}
 									</p>
 									{post.data.heroImage && (

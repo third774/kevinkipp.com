@@ -64,7 +64,10 @@ const ogImage = heroImage
 							</div>
 						)
 					}
-					<p class="text-gray-700 dark:text-gray-300">
+					<p
+						class="text-gray-700 dark:text-gray-300"
+						transition:name={`blog-post-description-${title}`}
+					>
 						{description}
 					</p>
 					{
