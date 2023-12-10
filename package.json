@@ -6,6 +6,7 @@
 		"dev": "astro dev --open",
 		"start": "astro dev",
 		"build": "astro build",
+		"newpost": "node ./scripts/newpost.js",
 		"preview": "astro preview",
 		"astro": "astro",
 		"prettier": "prettier --write .",
