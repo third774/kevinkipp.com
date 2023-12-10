@@ -74,11 +74,13 @@ blockquote {
 	}
 }
 
-:root {
-	--scrollbar-background: theme(colors.gray.300);
-	--scrollbar-foreground: theme(colors.teal.600);
+body {
+	--scrollbar-background: theme(colors.gray.400);
+	--scrollbar-foreground: theme(colors.teal.700);
+}
 
-	@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
+	body {
 		--scrollbar-background: theme(colors.gray.700);
 		--scrollbar-foreground: theme(colors.teal.400);
 	}
