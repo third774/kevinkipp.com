@@ -37,7 +37,7 @@ const posts = await getPublishedBlogPosts();
 											</Link>
 										</h2>
 										<div
-											transition:name="blog-post-date"
+											transition:name={`blog-post-date-${post.data.title}`}
 											class="text-xs text-gray-600 dark:text-gray-400"
 										>
 											<FormattedDate

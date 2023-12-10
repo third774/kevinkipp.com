@@ -47,7 +47,7 @@ const ogImage = heroImage
 						{title}
 					</h1>
 					<div
-						transition:name="blog-post-date"
+						transition:name={`blog-post-date-${title}`}
 						class="text-xs text-gray-600 dark:text-gray-400"
 					>
 						<FormattedDate
