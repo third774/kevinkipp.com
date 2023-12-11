@@ -10,7 +10,9 @@
 		"preview": "astro preview",
 		"astro": "astro",
 		"prettier": "prettier --write .",
-		"upgrade": "npx @astrojs/upgrade && npx npm-upgrade"
+		"upgrade": "npx @astrojs/upgrade && npx npm-upgrade",
+		"typecheck": "tsc --noEmit",
+		"typecheck:watch": "tsc --noEmit --watch"
 	},
 	"dependencies": {
 		"@astrojs/cloudflare": "^8.0.0",
