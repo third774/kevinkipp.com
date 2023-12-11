@@ -16,14 +16,16 @@ export async function GET(context: AstroUserConfig) {
 		description: "Kevin's blog — not his first, probably not his last.",
 		stylesheet: "../pretty-feed-v3.xsl",
 		site: context.site,
-		items: blog.map((post) => ({
-			title: post.data.title,
-			pubDate: post.data.published,
-			description: post.data.description,
-			// Compute RSS link from post `slug`
-			// This example assumes all posts are rendered as `/blog/[slug]` routes
-			link: `/blog/${post.slug}/`,
-			content: sanitizeHtml(marked.parse(post.body)),
-		})),
+		items: await Promise.all(
+			blog.map(async (post) => ({
+				title: post.data.title,
+				pubDate: post.data.published,
+				description: post.data.description,
+				// Compute RSS link from post `slug`
+				// This example assumes all posts are rendered as `/blog/[slug]` routes
+				link: `/blog/${post.slug}/`,
+				content: sanitizeHtml(await marked.parse(post.body)),
+			})),
+		),
 	});
 }
