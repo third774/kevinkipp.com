@@ -18,11 +18,11 @@ const rl = readline.createInterface({
 rl.question("Enter the title of the post: ", (title) => {
 	rl.question("Enter the description of the post: ", (description) => {
 		const fileName = `${title.replace(/\s+/g, "-").toLowerCase()}.md`;
-		const filePath = `./src/content/blog/${fileName}`;
-
+		const filePath = `./src/content/blog/-draft-${fileName}`;
 		const fileContent = `---
 {
-	"title": "${title}"${description ? `,\n	"description": "${description}"` : ""}
+	"title": "${title}",${description ? `,\n	"description": "${description}",` : ""}
+	"published": "${new Date().toISOString()}",
 }
 ---
 
