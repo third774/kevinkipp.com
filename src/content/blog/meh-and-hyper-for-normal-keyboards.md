@@ -9,7 +9,7 @@
 
 ## What are Meh and Hyper?
 
-Meh (`⌃⌥⇧`) and Hyper (`⌃⌥⇧⌘`) are aliases for modifier combinations that are _so_ awkard to
+Meh (<kbd>⌃</kbd><kbd>⌥</kbd><kbd>⇧</kbd>) and Hyper (<kbd>⌃</kbd><kbd>⌥</kbd><kbd>⇧</kbd><kbd>⌘</kbd>) are aliases for modifier combinations that are _so_ awkard to
 hold that _almost_ no application uses them, making them great candidates for global hotkeys
 you may want to set using something like [Raycast](https://www.raycast.com/).
 
@@ -22,15 +22,15 @@ same awkwardness that affords you the ability to use those as global hotkeys to 
 
 ## It's time for Caps Lock to go
 
-The Caps Lock key is _so rarely used_ and located in such prime real-estate on the keyboard.
-If we bind Caps Lock as the Meh (`⌃⌥⇧`), it can be held with the left pinky and unlocks a full
+The <kbd>Caps Lock</kbd> key is _so rarely used_ and located in such prime real-estate on the keyboard.
+If we bind <kbd>Caps Lock</kbd> as the Meh (<kbd>⌃</kbd><kbd>⌥</kbd><kbd>⇧</kbd>), it can be held with the left pinky and unlocks a full
 keyboard of shortcuts. Additionally, it's easy to add ⌘ to the mix with the left thumb to
-make it Hyper (`⌃⌥⇧⌘`) which adds another entire layer on top of that!
+make it Hyper (<kbd>⌃</kbd><kbd>⌥</kbd><kbd>⇧</kbd><kbd>⌘</kbd>) which adds another entire layer on top of that!
 
 ### The sins of the past
 
-Ever since Apple removed the physical Escape key in favor of the touch bar I've had
-Caps Lock bound to Esc, and as a Vim user that muscle memory is pretty hard to unlearn now.
+Ever since Apple removed the physical <kbd>Escape</kbd> key in favor of the touch bar I've had
+<kbd>Caps Lock</kbd> bound to <kbd>Escape</kbd>, and as a Vim user that muscle memory is pretty hard to unlearn now.
 
 After having spent some time messing around with [homerow mods](https://precondition.github.io/home-row-mods)
 though when I built my [Chocofi](https://shop.beekeeb.com/product/chocofi-36-keys-kailh-low-profile-choc-v1-mechanical-ergonomic-hotswap-split-keyboard-diy-kit/) keyboard,
@@ -40,7 +40,7 @@ If you're not cursed with the same afflication, this solution is even better for
 won't even need to worry about the dual functionality.
 
 While I ultimately ended up moving away from homerow mods because I found the them to sometimes
-be problematic, I've found that it's not really a problem for me with the Escape key since I
+be problematic, I've found that it's not really a problem for me with the <kbd>Escape</kbd> key since I
 don't really use it while typing prose. I just tap it when I need to tap it, and pretty much
 never need to hold it down.
 
@@ -79,7 +79,7 @@ keyboard. I use the configuration below to achieve the desired result:
 }
 ```
 
-If you don't care about using Caps Lock as Escape, then just remove the `to_if_alone` key!
+If you don't care about using <kbd>Caps Lock</kbd> as <kbd>Escape</kbd>, then just remove the `to_if_alone` key!
 
 ## Go forth and bind keys
 
