@@ -11,7 +11,9 @@ import Prose from "../components/Prose.astro";
 import Html from "./Html.astro";
 import Share from "../components/Share.astro";
 
-type Props = CollectionEntry<"blog">;
+type Props = CollectionEntry<"blog"> & {
+	minutesRead: number;
+};
 
 const { data, slug } = Astro.props;
 
@@ -56,6 +58,12 @@ const ogImage = heroImage
 							month="short"
 							day="numeric"
 						/>
+
+						 •
+
+						<span>
+							~{Astro.props.minutesRead}
+						</span>
 					</div>
 					{
 						updatedDate && (

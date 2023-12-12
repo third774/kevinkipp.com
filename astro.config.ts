@@ -4,6 +4,7 @@ import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import robotsTxt from "astro-robots-txt";
 import { defineConfig } from "astro/config";
+import { remarkReadingTime } from "./remark-reading-time.mjs";
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,4 +19,7 @@ export default defineConfig({
 	],
 	output: "hybrid",
 	adapter: cloudflare(),
+	markdown: {
+		remarkPlugins: [remarkReadingTime],
+	},
 });
