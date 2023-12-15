@@ -1,0 +1,73 @@
+---
+{
+  "title": "Minimizing friction to posting",
+  "description": "How I finally started posting to my blog more regularly",
+  "published": "2023-12-15T02:01:02.141Z",
+}
+---
+
+Like most front-end developers, I've done the ol' _build a blog_ thing that ends with me spending
+way more time working on _building_ the blog, only to post like once or twice before letting it
+sit idle for years.
+
+This time around, I decided it would be different. Part of that was picking tech that is simple,
+like [Astro](https://astro.build). But that alone wasn't all I needed. What _really_ did it for me
+was realizing that I was making it too hard for myself.
+
+I made a few changes, and surprise — I feel like posting way more often!
+
+1. By default, the Astro blog example requires a hero image and description for each post. Removing these
+   was way more liberating than I thought it would be!
+2. I realized don't need to make each post such a big deal. Doesn't need to be a long, super well
+   thought out essay. Saw something cool? Post something super short about it! I appreciate other
+   people doing this. I should do it too.
+3. Scripting the creation of a new blog post — this is the icing on the cake. At first I had created
+   a script in my blog to create a new post file that would ask for the post title and create the
+   file for me. But then I came across [Script Kit](https://www.scriptkit.com/) and thought I could
+   make a script to do this without even having my blog open in VS Code yet.
+
+Here's the script:
+
+```ts
+// Name: New Astro Blog Post
+
+import "@johnlindquist/kit";
+
+const title = await arg(
+	"What's the title of the post?",
+);
+const description = await arg(
+	"What's the description of the post?",
+);
+const slug = title
+	.toLowerCase()
+	.split(" ")
+	.join("-");
+const blogCollectionPath = await env(
+	"ASTRO_BLOG_COLLECTION_PATH",
+);
+const content = `---
+{
+  "title": "${title}",${
+		description
+			? `\n  "description": "${description}",`
+			: ""
+	}
+  "published": "${new Date().toISOString()}"
+}
+---
+
+`;
+const filePath = `${blogCollectionPath}/${slug}.md`;
+const editedContent =
+	await editor(content);
+await writeFile(
+	filePath,
+	editedContent,
+);
+await exec(
+	`/opt/homebrew/bin/code ${filePath}`,
+);
+```
+
+This is _delightful_. Starting a blog post is a breeze.
