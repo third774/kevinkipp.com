@@ -3,6 +3,8 @@ dist/
 # generated types
 .astro/
 
+public/open-graph/
+
 # dependencies
 node_modules/
 
