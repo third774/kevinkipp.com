@@ -9,7 +9,13 @@ import Header from "../components/Header.astro";
 import MainCenter from "../components/MainCenter.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import Html from "../layouts/Html.astro";
-import { Picture } from "astro:assets";
+import { getImage } from "astro:assets";
+
+const { src } = await getImage({
+	src: profile,
+	widths: [200, 400, 600, 800, 1000, 1200, 1400, 1600],
+	formats: ["avif", "webp", "jpeg"],
+});
 ---
 
 <!doctype html>
@@ -20,10 +26,11 @@ import { Picture } from "astro:assets";
 		<MainCenter class="space-y-4 grid place-items-center max-w-5xl">
 			<div transition:name="page-header">
 				<div class="flex flex-wrap gap-8 justify-around items-center">
-					<Picture
+					<img
 						class="profile max-w-[12rem]"
-						src={profile}
-						formats={["avif", "webp"]}
+						src={src}
+						height="200"
+						width="200"
 						alt="Kevin Kipp in Yosemite with a river with El Capitan in the background. He's smiling and wearing a tan hat."
 					/>
 					<div class="">
