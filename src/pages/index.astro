@@ -1,4 +1,6 @@
 ---
+import profile from "../profile.jpg";
+
 import { cn } from "../utils/cn";
 import BaseHead from "../components/BaseHead.astro";
 import Body from "../components/Body.astro";
@@ -7,6 +9,7 @@ import Header from "../components/Header.astro";
 import MainCenter from "../components/MainCenter.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import Html from "../layouts/Html.astro";
+import { Picture } from "astro:assets";
 ---
 
 <!doctype html>
@@ -14,22 +17,32 @@ import Html from "../layouts/Html.astro";
 	<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	<Body>
 		<Header title={SITE_TITLE} />
-		<MainCenter class="space-y-4 grid place-items-center">
+		<MainCenter class="space-y-4 grid place-items-center max-w-5xl">
 			<div transition:name="page-header">
-				<h1 class="text-3xl font-blackest">
-					👨🏻 Heyo! I'm <span
-						class={cn(
-							"text-transparent bg-clip-text bg-gradient-to-r",
-							"from-teal-600 via-yellow-500 to-pink-600",
-							"dark:from-teal-400 dark:via-yellow-400 dark:to-pink-400",
-						)}>Kevin Kipp</span
-					>.
-				</h1>
+				<div class="flex flex-wrap gap-8 justify-around items-center">
+					<Picture
+						class="profile max-w-[12rem]"
+						src={profile}
+						formats={["avif", "webp"]}
+						alt="Kevin Kipp in Yosemite with a river with El Capitan in the background. He's smiling and wearing a tan hat."
+					/>
+					<div class="">
+						<h1 class="text-3xl font-blackest">
+							Heyo! I'm <span
+								class={cn(
+									"text-transparent bg-clip-text bg-gradient-to-r",
+									"from-teal-600 via-yellow-500 to-pink-600",
+									"dark:from-teal-400 dark:via-yellow-400 dark:to-pink-400",
+								)}>Kevin Kipp</span
+							>.
+						</h1>
 
-				<div class="space-y-2 text-lg">
-					<p class="text-gray-600 dark:text-gray-400">
-						UI Engineer based in Austin, TX.
-					</p>
+						<div class="space-y-2 text-lg">
+							<p class="text-gray-600 dark:text-gray-400">
+								UI Engineer based in Austin, TX.
+							</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</MainCenter>
