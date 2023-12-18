@@ -1,5 +1,5 @@
 ---
-import { Image, getImage } from "astro:assets";
+import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import Body from "../components/Body.astro";
@@ -26,20 +26,14 @@ const {
 	heroImage,
 	heroAlt,
 } = data;
-
-const ogImage = heroImage
-	? (
-			await getImage({
-				src: heroImage,
-				width: 1200,
-				height: 630,
-			})
-	  ).src
-	: undefined;
 ---
 
 <Html>
-	<BaseHead title={title} description={description} image={ogImage} />
+	<BaseHead
+		title={title}
+		description={description}
+		image={`/open-graph/${slug}.png`}
+	/>
 	<Body>
 		<Header />
 		<MainCenter>
