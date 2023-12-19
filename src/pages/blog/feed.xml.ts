@@ -23,7 +23,7 @@ export async function GET(context: AstroUserConfig) {
 				description: post.data.description,
 				// Compute RSS link from post `slug`
 				// This example assumes all posts are rendered as `/blog/[slug]` routes
-				link: `/blog/${post.slug}/`,
+				link: `/blog/${post.slug}/?utm_source=rss&utm_medium=feed`,
 				content: sanitizeHtml(await marked.parse(post.body)),
 			})),
 		),
