@@ -1,0 +1,73 @@
+---
+{
+  "title": "A quick way to visit a random page on MDN",
+  "published": "2023-12-19T07:20:20.004Z",
+}
+---
+
+Maybe in the vein of Chris Coyier's post on [A `/random` Route on a WordPress Site](https://chriscoyier.net/2023/11/29/a-random-route-on-a-wordpress-site/),
+I found myself kinda interested in being able to just go to a random page on MDN. I didn't find an obvious existing feature for this, so I hacked one together.
+It's pretty simple — it fetches MDN's sitemap, parses the XML, and grabs a random URL then redirects to it.
+
+https://mdn-random.kkipp.workers.dev
+
+I _love_ [Copilot](https://github.com/features/copilot) for this kind of stuff. I had this thing built in less than 10 minutes.
+This [Json2TS Raycast extension](http://www.raycast.com/gbarba/json2ts) was also pretty helpful for generating TS interfaces for the parsed XML.
+
+Here's the complete code:
+
+```ts
+import xml2js from "xml2js";
+export interface Env {}
+
+interface Sitemap {
+	urlset: Urlset;
+}
+interface Urlset {
+	$: $;
+	url: UrlItem[];
+}
+interface $ {
+	xmlns: string;
+}
+interface UrlItem {
+	loc: string[];
+	lastmod: string[];
+}
+
+export default {
+	async fetch(
+		request: Request,
+		env: Env,
+		ctx: ExecutionContext,
+	): Promise<Response> {
+		const mdnSitemap = await fetch(
+			"https://developer.mozilla.org/sitemaps/en-us/sitemap.xml.gz",
+		);
+		// parse xml sitemap
+		const sitemapString =
+			await mdnSitemap.text();
+		const parsed =
+			await (xml2js.parseStringPromise(
+				sitemapString,
+			) as Promise<Sitemap>);
+
+		// pick a random url
+		const randomIndex = Math.floor(
+			Math.random() *
+				parsed.urlset.url.length,
+		);
+		const randomUrl =
+			parsed.urlset.url[randomIndex]
+				.loc[0];
+
+		// redirect to random url
+		return new Response(null, {
+			status: 302,
+			headers: {
+				Location: randomUrl,
+			},
+		});
+	},
+};
+```
