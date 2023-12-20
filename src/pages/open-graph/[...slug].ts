@@ -6,6 +6,17 @@ import { getPublishedBlogPosts } from "../../content/blog/_getPublishedBlogPosts
 
 const isProd = import.meta.env.PROD;
 
+// generate screenshot for each post
+const browser = await puppeteer.launch();
+const page = await browser.newPage();
+
+// set viewport size
+await page.setViewport({
+	width: 1200,
+	height: 630,
+	deviceScaleFactor: 1,
+});
+
 const template = (props: { title: string; description?: string }) => `
 <!DOCTYPE html>
 <html>
@@ -75,31 +86,19 @@ const template = (props: { title: string; description?: string }) => `
 export async function getStaticPaths() {
 	const posts = await getPublishedBlogPosts();
 
-	return Promise.all(
-		posts.map(async (post) => {
-			await generateScreenshot(post);
-			return {
-				params: { slug: post.slug },
-				props: post,
-			};
-		}),
-	);
+	let results = [];
+	for (const post of posts) {
+		await generateScreenshot(post);
+		results.push({
+			params: { slug: post.slug },
+			props: post,
+		});
+	}
+	await browser.close();
+	return results;
 }
 
 async function generateScreenshot(post: CollectionEntry<"blog">) {
-	// TODO: make this check if the screenshot already exists
-
-	// generate screenshot for each post
-	const browser = await puppeteer.launch();
-	const page = await browser.newPage();
-
-	// set viewport size
-	await page.setViewport({
-		width: 1200,
-		height: 630,
-		deviceScaleFactor: 1,
-	});
-
 	await page.setContent(template(post.data));
 	await page.waitForNetworkIdle();
 
@@ -113,7 +112,6 @@ async function generateScreenshot(post: CollectionEntry<"blog">) {
 		path: `${path}${filename}`,
 	});
 	console.log(`Created screenshot ${path}${filename}`);
-	await browser.close();
 }
 
 export const GET: APIRoute = ({ request, params: { slug } }) => {
