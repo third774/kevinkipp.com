@@ -19,8 +19,9 @@ await page.setViewport({
 
 const template = (props: { title: string; description?: string }) => `
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+	<meta charset="UTF-8">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Recursive:wght,CASL,CRSV@400,0,0.5;1000,0,0.5;1000,1,1&display=swap" rel="stylesheet">
