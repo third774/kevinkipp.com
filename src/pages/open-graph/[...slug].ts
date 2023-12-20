@@ -24,13 +24,13 @@ const template = (props: { title: string; description?: string }) => `
 	<meta charset="UTF-8">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Recursive:wght,CASL,CRSV@400,0,0.5;1000,0,0.5;1000,1,1&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Recursive:wght,CASL,CRSV@400,0,0.5;1000,0,0.5;1000,1,1&family=Noto+Color+Emoji&display=swap" rel="stylesheet">
 		<style>
 			:root {
 				--surface: #2C2E36; 
 				--foreground: #E1E3EE;
 				--dim: #B7BAC4;
-				font-family: 'Recursive', sans-serif;
+				font-family: 'Recursive', 'Noto Color Emoji', sans-serif;
 				font-size: 2.5rem;
 				line-height: 1.5;
 			}
