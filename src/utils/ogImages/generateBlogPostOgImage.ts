@@ -101,9 +101,9 @@ export async function generateBlogPostOgImage(post: CollectionEntry<"blog">) {
 	const path = `${isProd ? "dist" : "public"}/open-graph/`;
 
 	// if file exists, skip
-	// if (fs.existsSync(`${path}${filename}`)) {
-	// 	return;
-	// }
+	if (fs.existsSync(`${path}${filename}`)) {
+		return;
+	}
 
 	await page.setContent(template(post.data));
 	await page.waitForNetworkIdle();
