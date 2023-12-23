@@ -5,6 +5,7 @@ import BlogPost from "../../layouts/BlogPost.astro";
 
 export async function getStaticPaths() {
 	const posts = await getPublishedBlogPosts();
+
 	return posts.map((post) => ({
 		params: { slug: post.slug },
 		props: post,
@@ -16,6 +17,6 @@ const post = Astro.props;
 const { Content, remarkPluginFrontmatter } = await post.render();
 ---
 
-<BlogPost minutesRead={remarkPluginFrontmatter.minutesRead} {...post}>
+<BlogPost minutesRead={remarkPluginFrontmatter.minutesRead} post={post}>
 	<Content />
 </BlogPost>
