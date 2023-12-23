@@ -21,10 +21,7 @@ const isActive = href === pathname || href === pathname.replace(/\/$/, "");
 	<slot />
 	{
 		isActive && (
-			<hr
-				class="absolute bottom-0 left-0 w-full border-b-2 border-current"
-				transition:name="nav-active-underline"
-			/>
+			<hr class="absolute bottom-0 left-0 w-full border-b-2 border-current" />
 		)
 	}
 </a>

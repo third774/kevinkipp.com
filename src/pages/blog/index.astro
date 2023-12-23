@@ -30,16 +30,12 @@ const posts = await getPublishedBlogPosts();
 										<h2>
 											<Link
 												href={`/blog/${post.slug}/`}
-												transition:name={`blog-post-card-${post.data.title}`}
 												class="text-xl leading-none font-bold"
 											>
 												{post.data.title}
 											</Link>
 										</h2>
-										<div
-											transition:name={`blog-post-date-${post.data.title}`}
-											class="text-xs text-gray-600 dark:text-gray-400"
-										>
+										<div class="text-xs text-gray-600 dark:text-gray-400">
 											<FormattedDate
 												date={post.data.published}
 												year="numeric"
@@ -49,10 +45,7 @@ const posts = await getPublishedBlogPosts();
 										</div>
 									</div>
 
-									<p
-										class="text-gray-700 dark:text-gray-300"
-										transition:name={`blog-post-description-${post.data.title}`}
-									>
+									<p class="text-gray-700 dark:text-gray-300">
 										{post.data.description}
 									</p>
 									{post.data.heroImage && (
