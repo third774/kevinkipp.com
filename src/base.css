@@ -7,6 +7,14 @@
 	scrollbar-gutter: stable both-edges;
 }
 
+:where(.subtle) {
+	color: theme(colors.gray.700);
+}
+
+:where(.dark .subtle) {
+	color: theme(colors.gray.400);
+}
+
 @font-face {
 	font-family: "Recursive";
 	font-style: oblique 0deg 15deg;

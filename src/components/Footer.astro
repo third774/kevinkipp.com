@@ -6,11 +6,11 @@ export const prerender = false;
 const today = new Date();
 ---
 
-<footer class="mx-auto mt-12 md:mt-20 text-gray-600 dark:text-gray-400">
-	<div>
+<footer class="mx-auto mt-12 md:mt-20">
+	<div class="subtle">
 		&copy; {today.getFullYear()} Kevin Kipp
 	</div>
-	<div class="flex gap-4 my-8">
+	<div class="flex gap-4 my-8 text-gray-600">
 		<SocialLink href={MASTADON_PROFILE} target="_blank">
 			<span class="sr-only">Follow Kevin Kipp on Mastodon</span>
 			<svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32"

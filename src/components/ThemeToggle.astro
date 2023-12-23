@@ -1,0 +1,59 @@
+---
+interface Props extends Omit<astroHTML.JSX.ButtonHTMLAttributes, "id"> {}
+---
+
+<button {...Astro.props} id="themeToggle"></button>
+<script is:inline>
+	function update(theme = "auto") {
+		if (
+			theme === "dark" ||
+			(theme === "auto" &&
+				window.matchMedia("(prefers-color-scheme: dark)").matches)
+		) {
+			document.documentElement.classList.add("dark");
+		} else {
+			document.documentElement.classList.remove("dark");
+		}
+	}
+	window.addEventListener("storage", (e) => {
+		e.key === "theme" && update(e.newValue);
+	});
+	window
+		.matchMedia("(prefers-color-scheme: dark)")
+		.addEventListener("change", () => {
+			update(localStorage.getItem("theme") ?? "auto");
+		});
+	update(localStorage.getItem("theme") ?? "auto");
+
+	const themeCycle = ["auto", "light", "dark"];
+
+	const themeToggle = document.getElementById("themeToggle");
+
+	const theme = localStorage.getItem("theme") || "auto";
+	themeToggle.innerHTML =
+		theme === "dark"
+			? // moon
+			  "🌙"
+			: theme === "light"
+			  ? "🌞"
+			  : "◑";
+
+	themeToggle.addEventListener("click", () => {
+		const theme = localStorage.getItem("theme") || "auto";
+		const index = themeCycle.indexOf(theme);
+		const nextIndex = (index + 1) % themeCycle.length;
+		const nextTheme = themeCycle[nextIndex];
+
+		localStorage.setItem("theme", nextTheme);
+
+		update(nextTheme);
+
+		themeToggle.innerHTML =
+			nextTheme === "dark"
+				? // moon
+				  "🌙"
+				: nextTheme === "light"
+				  ? "🌞"
+				  : "◑";
+	});
+</script>

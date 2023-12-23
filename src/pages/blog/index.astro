@@ -35,7 +35,7 @@ const posts = await getPublishedBlogPosts();
 												{post.data.title}
 											</Link>
 										</h2>
-										<div class="text-xs text-gray-600 dark:text-gray-400">
+										<div class="text-xs subtle">
 											<FormattedDate
 												date={post.data.published}
 												year="numeric"
@@ -45,9 +45,7 @@ const posts = await getPublishedBlogPosts();
 										</div>
 									</div>
 
-									<p class="text-gray-700 dark:text-gray-300">
-										{post.data.description}
-									</p>
+									<p class="subtle">{post.data.description}</p>
 									{post.data.heroImage && (
 										<Image
 											src={post.data.heroImage}
