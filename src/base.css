@@ -4,6 +4,7 @@
 
 :root {
 	tab-size: 2;
+	scrollbar-gutter: stable both-edges;
 }
 
 @font-face {
