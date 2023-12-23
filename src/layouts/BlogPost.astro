@@ -10,12 +10,16 @@ import MainCenter from "../components/MainCenter.astro";
 import Prose from "../components/Prose.astro";
 import Html from "./Html.astro";
 import Share from "../components/Share.astro";
+import { generateBlogPostOgImage } from "../utils/generateBlogPostOgImage";
 
-type Props = CollectionEntry<"blog"> & {
+type Props = {
+	post: CollectionEntry<"blog">;
 	minutesRead: number;
 };
 
-const { data, slug } = Astro.props;
+await generateBlogPostOgImage(Astro.props.post);
+
+const { data, slug } = Astro.props.post;
 
 const {
 	title,

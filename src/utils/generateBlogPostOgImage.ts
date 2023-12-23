@@ -1,8 +1,6 @@
-import type { APIRoute } from "astro";
 import type { CollectionEntry } from "astro:content";
 import fs from "fs";
 import puppeteer from "puppeteer";
-import { getPublishedBlogPosts } from "../../content/blog/_getPublishedBlogPosts";
 
 const isProd = import.meta.env.PROD;
 
@@ -84,27 +82,17 @@ const template = (props: { title: string; description?: string }) => `
   </body>
 `;
 
-export async function getStaticPaths() {
-	const posts = await getPublishedBlogPosts();
-
-	let results = [];
-	for (const post of posts) {
-		await generateScreenshot(post);
-		results.push({
-			params: { slug: post.slug },
-			props: post,
-		});
-	}
-	await browser.close();
-	return results;
-}
-
-async function generateScreenshot(post: CollectionEntry<"blog">) {
-	await page.setContent(template(post.data));
-	await page.waitForNetworkIdle();
-
+export async function generateBlogPostOgImage(post: CollectionEntry<"blog">) {
 	const filename = `${post.slug}.png`;
 	const path = `${isProd ? "dist" : "public"}/open-graph/`;
+
+	// if file exists, skip
+	if (fs.existsSync(`${path}${filename}`)) {
+		return;
+	}
+
+	await page.setContent(template(post.data));
+	await page.waitForNetworkIdle();
 
 	// ensure directory exists
 	fs.mkdirSync(path, { recursive: true });
@@ -114,12 +102,3 @@ async function generateScreenshot(post: CollectionEntry<"blog">) {
 	});
 	console.log(`Created screenshot ${path}${filename}`);
 }
-
-export const GET: APIRoute = ({ request, params: { slug } }) => {
-	return new Response(null, {
-		status: 302,
-		headers: {
-			location: slug ? `/open-graph/${slug.replace(/\/$/, "")}.png` : "/",
-		},
-	});
-};
