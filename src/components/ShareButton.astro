@@ -1,42 +1,16 @@
----
-type Props = { title: string; url: string };
-
-const { title, url } = Astro.props;
----
-
-<button data-url={url} data-title={title}>
-	<span class="idle">
+<share-button>
+	<button>
 		<slot />
-	</span>
-	<span hidden class="shared">Thanks!</span>
-</button>
+	</button>
+</share-button>
 
-<script is:inline>
-	(() => {
-		const thisScript = document.currentScript;
-		const button = thisScript.previousElementSibling;
-		const idleContent = button.querySelector(".idle");
-		const sharedContent = button.querySelector(".shared");
-		if (navigator.share) {
-			let timeout = -1;
-			button.addEventListener("click", async () => {
-				try {
-					clearTimeout(timeout);
-					await navigator.share(button.dataset);
-					timeout = window.setTimeout(() => {
-						idleContent.style.display = "inline";
-						sharedContent.style.display = "none";
-					}, 1500);
-					console.log("Shared:", button.dataset);
-					idleContent.style.display = "none";
-					sharedContent.style.display = "inline";
-					sharedContent.removeAttribute("hidden");
-				} catch (err) {
-					console.error("Error sharing:", err.message);
-				}
-			});
-		} else {
-			button.remove();
-		}
-	})();
+<script>
+	import "@daviddarnes/share-button";
 </script>
+
+<style>
+	share-button:not(:defined),
+	share-button:defined a {
+		display: none;
+	}
+</style>
