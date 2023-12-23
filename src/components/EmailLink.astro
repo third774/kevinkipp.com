@@ -1,0 +1,14 @@
+---
+type Props = { subject: string; body: string } & Omit<
+	astroHTML.JSX.AnchorHTMLAttributes,
+	"href"
+>;
+const { subject, body } = Astro.props;
+
+// https://developers.cloudflare.com/support/more-dashboard-apps/cloudflare-scrape-shield/what-is-email-address-obfuscation/#troubleshoot-email-obfuscation
+---
+
+<!--email_off-->
+<a {...Astro.props} href={`mailto:?subject=${subject}&body=${body}`}><slot /></a
+>
+<!--/email_off-->
