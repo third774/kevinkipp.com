@@ -19,9 +19,16 @@ const base64ProfilePicture = fs.readFileSync("src/assets/profile.jpg", {
 	encoding: "base64",
 });
 
-const base64FontFile = fs.readFileSync("public/fonts/recursive.woff2", {
+const base64RecursiveFont = fs.readFileSync("public/fonts/recursive.woff2", {
 	encoding: "base64",
 });
+
+const base64EmojiFont = fs.readFileSync(
+	"public/fonts/NotoColorEmoji-Regular.ttf",
+	{
+		encoding: "base64",
+	},
+);
 
 const template = (props: { title: string; description?: string }) => `
 <!DOCTYPE html>
@@ -31,8 +38,14 @@ const template = (props: { title: string; description?: string }) => `
 		<style>
 			@font-face {
 				font-family: 'Recursive';
-				src: url(data:font/ttf;charset=utf-8;base64,${base64FontFile}) format('truetype');
+				src: url(data:font/ttf;charset=utf-8;base64,${base64RecursiveFont}) format('truetype');
 				font-weight: 300 1000;
+			}
+
+			@font-face {
+				font-family: 'Noto Color Emoji';
+				src: url(data:font/ttf;charset=utf-8;base64,${base64EmojiFont}) format('truetype');
+				font-weight: 400;
 			}
 
 			:root {
