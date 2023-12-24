@@ -15,26 +15,33 @@ await page.setViewport({
 	deviceScaleFactor: 1,
 });
 
-// Load profile picture into memory
-const profilePicture = fs.readFileSync("src/assets/profile.jpg");
+const base64ProfilePicture = fs.readFileSync("src/assets/profile.jpg", {
+	encoding: "base64",
+});
 
-const base64ProfilePicture = Buffer.from(profilePicture).toString("base64");
+const base64FontFile = fs.readFileSync("public/fonts/recursive.woff2", {
+	encoding: "base64",
+});
 
 const template = (props: { title: string; description?: string }) => `
 <!DOCTYPE html>
 <html lang="en">
   <head>
 	<meta charset="UTF-8">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Recursive:wght,CASL,CRSV@400,0,0.5;1000,0,0.5;1000,1,1&family=Noto+Color+Emoji&display=swap" rel="stylesheet">
 		<style>
+			@font-face {
+				font-family: 'Recursive';
+				src: url(data:font/ttf;charset=utf-8;base64,${base64FontFile}) format('truetype');
+				font-weight: 300 1000;
+			}
+
 			:root {
 				--surface: #2C2E36; 
 				--foreground: #E1E3EE;
 				--dim: #B7BAC4;
 				font-family: 'Recursive', 'Noto Color Emoji', sans-serif;
 				font-size: 2.25rem;
+				font-weight: 500;
 				line-height: 1.5;
 			}
 
@@ -80,7 +87,7 @@ const template = (props: { title: string; description?: string }) => `
 			.name {
 				text-decoration: underline;
 				text-decoration-color: oklch(.744141 .151562 340 / 1);
-				font-weight: 500;
+				text-underline-offset: 4px;
 			}
 		</style>
   </head>
