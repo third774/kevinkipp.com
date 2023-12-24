@@ -34,7 +34,7 @@ const template = (props: { title: string; description?: string }) => `
 				--foreground: #E1E3EE;
 				--dim: #B7BAC4;
 				font-family: 'Recursive', 'Noto Color Emoji', sans-serif;
-				font-size: 2rem;
+				font-size: 2.25rem;
 				line-height: 1.5;
 			}
 
@@ -72,26 +72,32 @@ const template = (props: { title: string; description?: string }) => `
 			}
 
 			.grid {
-				padding: 2.5rem;
+				padding: 2rem;
 				display: grid;
-				align-content: center;
-				gap: 1.5rem;
+				align-content: space-between;
 			}
 
 			.name {
 				text-decoration: underline;
 				text-decoration-color: oklch(.744141 .151562 340 / 1);
+				font-weight: 500;
 			}
 		</style>
   </head>
   <body>
 		<div class="grid">
-			<div style="display: flex; align-items: center;">
-				<img style="display: block; border-radius: 35% 65% 60% 25% / 35% 20% 60% 65%; max-width: 3rem;" src="data:image/png;base64, ${base64ProfilePicture}" />
-				<p style="opacity: .7; margin-left: 1rem;">by <span class="name">Kevin Kipp</span></p>
+			<div>
+				<h1>${props.title}</h1>
+				${
+					props.description
+						? `<p style="margin-top: 1em;" class="dim">${props.description}</p>`
+						: ""
+				}
 			</div>
-			<h1>${props.title}</h1>
-			${props.description ? `<p class="dim">${props.description}</p>` : ""}
+			<div style="display: flex; align-items: end;">
+				<p class="name" style="opacity: .7; line-height: 1; margin-left: auto; margin-right: 1rem;">kevinkipp.com</p>
+				<img style="display: block; border-radius: 35% 65% 60% 25% / 35% 20% 60% 65%; max-width: 3rem;" src="data:image/png;base64, ${base64ProfilePicture}" />
+			</div>
 		</div>
   </body>
 `;
@@ -100,12 +106,19 @@ export async function generateBlogPostOgImage(post: CollectionEntry<"blog">) {
 	const filename = `${post.slug}.png`;
 	const path = `${isProd ? "dist" : "public"}/open-graph/`;
 
-	// if file exists, skip
-	if (fs.existsSync(`${path}${filename}`)) {
+	// For prod builds if file exists, skip
+	if (isProd && fs.existsSync(`${path}${filename}`)) {
 		return;
 	}
 
 	await page.setContent(template(post.data));
+	// await page.setContent(
+	// 	template({
+	// 		title: "Attention he extremity unwilling on otherwise. Conviction up",
+	// 		description:
+	// 			"Prepared do an dissuade be so whatever steepest. Yet her beyond looked either day wished nay. By doubtful disposed do no",
+	// 	}),
+	// );
 	await page.waitForNetworkIdle();
 
 	// ensure directory exists
