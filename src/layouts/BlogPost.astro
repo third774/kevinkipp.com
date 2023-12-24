@@ -10,14 +10,11 @@ import MainCenter from "../components/MainCenter.astro";
 import Prose from "../components/Prose.astro";
 import Html from "./Html.astro";
 import Share from "../components/Share.astro";
-import { generateBlogPostOgImage } from "../utils/ogImages/generateBlogPostOgImage";
 
 type Props = {
 	post: CollectionEntry<"blog">;
 	minutesRead: number;
 };
-
-await generateBlogPostOgImage(Astro.props.post);
 
 const { data, slug } = Astro.props.post;
 
@@ -43,7 +40,7 @@ const {
 		<MainCenter>
 			<article class="space-y-12">
 				<div class="space-y-3">
-					<h1 class="text-3xl font-blackest leading-none">
+					<h1 class="text-3xl leading-none font-blackest">
 						{title}
 					</h1>
 					<div class="text-xs subtle">
