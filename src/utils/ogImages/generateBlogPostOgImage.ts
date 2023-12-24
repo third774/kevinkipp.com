@@ -30,7 +30,7 @@ const base64EmojiFont = fs.readFileSync(
 	},
 );
 
-const template = (props: { title: string; description?: string }) => `
+const template = `
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -107,12 +107,8 @@ const template = (props: { title: string; description?: string }) => `
   <body>
 		<div class="grid">
 			<div>
-				<h1>${props.title}</h1>
-				${
-					props.description
-						? `<p style="margin-top: 1em;" class="dim">${props.description}</p>`
-						: ""
-				}
+				<h1 id="title"></h1>
+				<p style="margin-top: 1em;" id="description" class="dim"></p>
 			</div>
 			<div style="display: flex; align-items: end;">
 				<p class="name" style="opacity: .7; line-height: 1; margin-left: auto; margin-right: 1rem;">kevinkipp.com</p>
@@ -121,6 +117,11 @@ const template = (props: { title: string; description?: string }) => `
 		</div>
   </body>
 `;
+
+await page.setContent(template);
+await page.waitForNetworkIdle();
+const title = await page.$("#title");
+const description = await page.$("#description");
 
 export async function generateBlogPostOgImage(post: CollectionEntry<"blog">) {
 	const filename = `${post.slug}.png`;
@@ -131,15 +132,18 @@ export async function generateBlogPostOgImage(post: CollectionEntry<"blog">) {
 		return;
 	}
 
-	await page.setContent(template(post.data));
-	// await page.setContent(
-	// 	template({
-	// 		title: "Attention he extremity unwilling on otherwise. Conviction up",
-	// 		description:
-	// 			"Prepared do an dissuade be so whatever steepest. Yet her beyond looked either day wished nay. By doubtful disposed do no",
-	// 	}),
-	// );
-	await page.waitForNetworkIdle();
+	await title?.evaluate((el, content) => {
+		el.textContent = content;
+	}, post.data.title);
+
+	await description?.evaluate((el, content) => {
+		if (content) {
+			el.removeAttribute("hidden");
+			el.textContent = content;
+		} else {
+			el.setAttribute("hidden", "true");
+		}
+	}, post.data.description);
 
 	// ensure directory exists
 	fs.mkdirSync(path, { recursive: true });
