@@ -1,0 +1,24 @@
+---
+import { execSync } from "node:child_process";
+import Html from "../layouts/Html.astro";
+import BaseHead from "../components/BaseHead.astro";
+import Body from "../components/Body.astro";
+import CopyButton from "../components/CopyButton.astro";
+
+// get commit hash
+const commitHash = execSync("git rev-parse --short HEAD").toString().trim();
+---
+
+<Html>
+	<BaseHead title="version" />
+	<Body>
+		<div class="grid h-full place-items-center">
+			<div>
+				<h1 class="text-lg subtle">Version</h1>
+				<CopyButton class="text-2xl" text={commitHash}>
+					{commitHash}
+				</CopyButton>
+			</div>
+		</div>
+	</Body>
+</Html>
