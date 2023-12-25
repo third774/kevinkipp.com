@@ -1,0 +1,27 @@
+---
+{
+  "title": "TIL form elements have a formdata event",
+  "description": "If you're using FormData from a form, you can stop listening for submit events!",
+  "published": "2023-12-25T07:41:51.861Z",
+}
+---
+
+Whoa, this is neat. Check out the [`FormDataEvent` on MDN](https://developer.mozilla.org/en-US/docs/Web/API/FormDataEvent)!
+
+You don't need to construct an instance of `FormData` if instead of listening for `submit` events you listen for `formdata` events!
+
+```js
+// modified from MDN docs for brevity
+formElem.addEventListener(
+	"formdata",
+	(e) => {
+		const formData = e.formData;
+		console.log(
+			"formdata fired",
+			formData,
+		);
+	},
+);
+```
+
+It even has [great browser support](https://caniuse.com/mdn-api_formdataevent)!
