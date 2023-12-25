@@ -2,19 +2,23 @@
 import { type CollectionEntry } from "astro:content";
 import { getPublishedBlogPosts } from "../../content/blog/_getPublishedBlogPosts";
 import BlogPost from "../../layouts/BlogPost.astro";
+import { generateBlogPostOgImage } from "../../utils/ogImages/generateBlogPostOgImage";
+
+interface Props {
+	post: CollectionEntry<"blog">;
+}
 
 export async function getStaticPaths() {
 	const posts = await getPublishedBlogPosts();
-
 	return posts.map((post) => ({
 		params: { slug: post.slug },
-		props: post,
+		props: { post },
 	}));
 }
-type Props = CollectionEntry<"blog">;
 
-const post = Astro.props;
+const { post } = Astro.props;
 const { Content, remarkPluginFrontmatter } = await post.render();
+await generateBlogPostOgImage(post);
 ---
 
 <BlogPost minutesRead={remarkPluginFrontmatter.minutesRead} post={post}>
