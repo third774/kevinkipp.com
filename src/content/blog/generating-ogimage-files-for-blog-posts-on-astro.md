@@ -7,7 +7,7 @@
 ---
 
 I wanted to add some nice `og:image` files for my blog posts, but in the spirit of
-[minimizing friction to posting](http://localhost:4321/blog/minimizing-friction-to-posting/)
+[minimizing friction to posting](/blog/minimizing-friction-to-posting/)
 I wanted to automate the process so that I'm not making things any harder for myself.
 
 ```ts
