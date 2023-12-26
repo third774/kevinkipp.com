@@ -5,6 +5,21 @@
 :root {
 	tab-size: 2;
 	scrollbar-gutter: stable both-edges;
+
+	/* Recursive font variation settings defaults https://www.recursive.design/ */
+	/* Monospace: Sans (natural-width) or Mono (fixed-width) */
+	--recursive-mono: "MONO" 0;
+	/* Casual: Linear to Casual */
+	--recursive-casl: "CASL" 0;
+	/* Slant: 0 to -15 degrees, auto cursive at -14 */
+	--recursive-slnt: "slnt" 0;
+	/* Cursive: 0 always roman, 0.5 auto substitution, or 1 always cursive */
+	--recursive-crsv: "CRSV" 0.5;
+}
+
+* {
+	font-variation-settings: var(--recursive-mono), var(--recursive-casl),
+		var(--recursive-slnt), var(--recursive-crsv);
 }
 
 :where(.subtle) {
@@ -35,7 +50,7 @@
 
 .font-mono,
 code {
-	font-variation-settings: "MONO" 1;
+	--recursive-mono: "MONO" 1;
 }
 
 h1,
@@ -44,9 +59,8 @@ h3,
 h4,
 h5,
 h6 {
-	font-variation-settings:
-		"CRSV" 1,
-		"CASL" 1;
+	--recursive-crsv: "CRSV" 1;
+	--recursive-casl: "CASL" 1;
 	text-wrap: balance;
 }
 
