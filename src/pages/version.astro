@@ -4,6 +4,7 @@ import Html from "../layouts/Html.astro";
 import BaseHead from "../components/BaseHead.astro";
 import Body from "../components/Body.astro";
 import CopyButton from "../components/CopyButton.astro";
+import Header from "../components/Header.astro";
 
 // get commit hash
 const commitHash = execSync("git rev-parse --short HEAD").toString().trim();
@@ -17,6 +18,7 @@ const commitHashLong = commitHash.slice(3);
 <Html>
 	<BaseHead title="version" />
 	<Body>
+		<Header />
 		<div class="grid h-full place-items-center">
 			<div class="w-48">
 				<h1 class="text-lg subtle">Version</h1>
