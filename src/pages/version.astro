@@ -7,16 +7,23 @@ import CopyButton from "../components/CopyButton.astro";
 
 // get commit hash
 const commitHash = execSync("git rev-parse --short HEAD").toString().trim();
+
+//first three characters of commit hash
+const commitHashShort = commitHash.slice(0, 3);
+// the commit hash without the first three characters
+const commitHashLong = commitHash.slice(3);
 ---
 
 <Html>
 	<BaseHead title="version" />
 	<Body>
 		<div class="grid h-full place-items-center">
-			<div>
+			<div class="w-48">
 				<h1 class="text-lg subtle">Version</h1>
 				<CopyButton class="text-2xl" text={commitHash}>
-					{commitHash}
+					<span class="font-extrabold">{commitHashShort}</span><span
+						class="font-light">{commitHashLong}</span
+					>
 				</CopyButton>
 			</div>
 		</div>
