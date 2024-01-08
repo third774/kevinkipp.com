@@ -1,7 +1,7 @@
 ---
 {
   "title": "Paper Owl (VS Code theme)",
-  "description": "Based on Steph Ango's Flexoki color scheme, and forked from Sarah Drasner's Night Owl theme",
+  "description": "An adaptation of Sarah Drasner's Night Owl theme based on Steph Ango's Flexoki color scheme",
   "published": "2024-01-08T08:32:03.513Z",
 }
 ---
