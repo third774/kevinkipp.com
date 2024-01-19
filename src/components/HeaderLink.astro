@@ -12,7 +12,7 @@ const isActive = href === pathname || href === pathname.replace(/\/$/, "");
 <a
 	href={href}
 	class:list={[
-		"inline-block p-3 relative",
+		"inline-block p-3 relative uppercase",
 		className,
 		{ "text-teal-700 dark:text-teal-400": isActive },
 	]}
