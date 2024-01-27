@@ -19,49 +19,43 @@ const posts = await getPublishedBlogPosts();
 	<Body>
 		<Header />
 		<MainCenter>
-			<div class="pb-12">
-				<h1 class="text-4xl font-blackest">For You Page</h1>
-				<p>If you're here, I guess these posts for you! 😅</p>
-			</div>
-			<section>
-				<ul class="grid gap-10 md:gap-16">
-					{
-						posts.map((post) => (
-							<li>
-								<div class="space-y-2">
-									<div>
-										<h2>
-											<Link
-												href={`/blog/${post.slug}/`}
-												class="text-xl leading-none font-bold"
-											>
-												{post.data.title}
-											</Link>
-										</h2>
-										<div class="text-xs subtle">
-											<FormattedDate
-												date={post.data.published}
-												year="numeric"
-												month="short"
-												day="numeric"
-											/>
-										</div>
-									</div>
-
-									<p class="subtle">{post.data.description}</p>
-									{post.data.heroImage && (
-										<Image
-											src={post.data.heroImage}
-											alt={post.data.heroAlt ?? null}
-											class="mb-4"
+			<ul class="grid gap-10 md:gap-16">
+				{
+					posts.map((post) => (
+						<li>
+							<div class="space-y-2">
+								<div>
+									<h2>
+										<Link
+											href={`/blog/${post.slug}/`}
+											class="text-xl leading-none font-bold"
+										>
+											{post.data.title}
+										</Link>
+									</h2>
+									<div class="text-xs subtle">
+										<FormattedDate
+											date={post.data.published}
+											year="numeric"
+											month="short"
+											day="numeric"
 										/>
-									)}
+									</div>
 								</div>
-							</li>
-						))
-					}
-				</ul>
-			</section>
+
+								<p class="subtle">{post.data.description}</p>
+								{post.data.heroImage && (
+									<Image
+										src={post.data.heroImage}
+										alt={post.data.heroAlt ?? null}
+										class="mb-4"
+									/>
+								)}
+							</div>
+						</li>
+					))
+				}
+			</ul>
 		</MainCenter>
 		<Footer />
 		<snow-fall></snow-fall>

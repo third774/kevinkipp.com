@@ -1,21 +1,29 @@
 ---
+import { Image } from "astro:assets";
 import profile from "../assets/profile.jpg";
 
-import { cn } from "../utils/cn";
+import { getImage } from "astro:assets";
 import BaseHead from "../components/BaseHead.astro";
 import Body from "../components/Body.astro";
 import Footer from "../components/Footer.astro";
+import FormattedDate from "../components/FormattedDate.astro";
 import Header from "../components/Header.astro";
+import Link from "../components/Link.astro";
 import MainCenter from "../components/MainCenter.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
+import { getPublishedBlogPosts } from "../content/blog/_getPublishedBlogPosts";
 import Html from "../layouts/Html.astro";
-import { getImage } from "astro:assets";
 
 const { src } = await getImage({
 	src: profile,
 	widths: [200, 400, 600, 800, 1000, 1200, 1400, 1600],
 	formats: ["avif", "webp", "jpeg"],
 });
+
+const posts = await getPublishedBlogPosts().then(
+	// only show the first 5 posts
+	(posts) => posts.filter((_, index) => index < 10),
+);
 ---
 
 <Html>
@@ -23,32 +31,65 @@ const { src } = await getImage({
 	<Body>
 		<Header title={SITE_TITLE} />
 		<MainCenter class="space-y-4 grid place-items-center max-w-5xl">
-			<div>
-				<div class="flex flex-wrap gap-8 justify-around items-center">
-					<img
-						class="profile max-w-[12rem]"
-						src={src}
-						height="200"
-						width="200"
-						alt="Kevin Kipp in Yosemite with a river with El Capitan in the background. He's smiling and wearing a tan hat."
-					/>
-					<div class="">
-						<h1 class="text-3xl font-blackest">
-							Heyo! I'm <span
-								class={cn(
-									"text-transparent bg-clip-text bg-gradient-to-r",
-									"from-teal-600 via-yellow-500 to-pink-600",
-									"dark:from-teal-400 dark:via-yellow-400 dark:to-pink-400",
-								)}>Kevin Kipp</span
-							>.
-						</h1>
-
-						<div class="space-y-2 text-lg">
-							<p class="text-gray-600">UI Engineer based in Austin, TX.</p>
-						</div>
+			<div class="flex flex-wrap gap-8 justify-around items-center mb-8">
+				<img
+					class="profile max-w-[8rem]"
+					src={src}
+					height="200"
+					width="200"
+					alt="Kevin Kipp in Yosemite with a river with El Capitan in the background. He's smiling and wearing a tan hat."
+				/>
+				<div class="">
+					<h1 class="text-3xl font-blackest">👋🏻 Heyo! I'm Kevin.</h1>
+					<div class="space-y-2 text-lg">
+						<p class="text-gray-600">UI Engineer based in Austin, TX.</p>
 					</div>
 				</div>
 			</div>
+
+			<section>
+				<h2 class="mb-16 text-lg subtle">Latest posts</h2>
+				<ul class="grid gap-10 md:gap-16">
+					{
+						posts.map((post) => (
+							<li>
+								<div class="space-y-2">
+									<div>
+										<h2>
+											<Link
+												href={`/blog/${post.slug}/`}
+												class="text-xl leading-none font-bold"
+											>
+												{post.data.title}
+											</Link>
+										</h2>
+										<div class="text-xs subtle">
+											<FormattedDate
+												date={post.data.published}
+												year="numeric"
+												month="short"
+												day="numeric"
+											/>
+										</div>
+									</div>
+
+									<p class="subtle">{post.data.description}</p>
+									{post.data.heroImage && (
+										<Image
+											src={post.data.heroImage}
+											alt={post.data.heroAlt ?? null}
+											class="mb-4"
+										/>
+									)}
+								</div>
+							</li>
+						))
+					}
+				</ul>
+				<div class="mt-12 text-lg">
+					<Link href="/blog">Older posts →</Link>
+				</div>
+			</section>
 		</MainCenter>
 		<Footer />
 		<snow-fall></snow-fall>
