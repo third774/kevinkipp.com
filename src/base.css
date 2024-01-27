@@ -86,7 +86,7 @@ blockquote {
 	-webkit-tap-highlight-color: transparent;
 }
 
-:where(p, h1, h2, h3, h4, h5, h6) {
+:where(p, h1, h2, h3, h4, h5, h6, li) {
 	overflow-wrap: break-word;
 	text-wrap: pretty;
 }
