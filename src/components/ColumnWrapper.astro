@@ -5,6 +5,7 @@ interface Props extends astroHTML.JSX.HTMLAttributes {}
 ---
 
 <div
+	{...Astro.props}
 	class={cn(
 		"mx-auto w-[min(100%,var(--max-col-width,70ch))] flex-auto px-4",
 		Astro.props.class,

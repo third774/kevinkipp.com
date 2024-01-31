@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Link from "../components/Link.astro";
 import Page from "../layouts/Page.astro";
 import MainCenter from "../components/MainCenter.astro";
+import ColumnWrapper from "../components/ColumnWrapper.astro";
 
 const wishes = await getCollection("wishes");
 
@@ -14,59 +15,60 @@ const randomizedOrderWishes = wishes.sort(() => Math.random() - 0.5);
 		title: "Kevin's Wishlist",
 	}}
 >
-	<MainCenter style="--max-col-width: 80rem;">
-		<style>
-			.wish-grid {
-				--min: 40ch;
-				--gap: 0.5rem;
-
-				display: grid;
-				grid-gap: var(--gap);
-				/* min() with 100% prevents overflow
-  in extra narrow spaces */
-				grid-template-columns: repeat(
-					auto-fit,
-					minmax(min(100%, var(--min)), 1fr)
-				);
-			}
-		</style>
-		<div>
-			<div>
-				<h1 class="text-3xl leading-none font-blackest">Kevin's Wishlist</h1>
-				<p class="mt-4 max-w-prose">
-					Inspired by Taylor Troesh's
-					<!-- prettier-ignore -->
-					<Link href="https://taylor.town/wish-manifesto">Wishlist Manifesto</Link>,
-					everything on this list is something I'd be delighted to receive as a
-					gift! I do remove items I receive or no longer want, so you can feel
-					confident that you'd be getting me something I'd truly enjoy.
-				</p>
-			</div>
-			<div class="wish-grid">
-				{
-					randomizedOrderWishes.map(({ data }) => (
-						<a class="block group" href={data.url}>
-							<div class="mt-8 space-y-3 p-4 group-hover:bg-gray-200 dark:group-hover:bg-gray-800">
-								<img
-									class="aspect-square object-contain bg-white"
-									src={data.image}
-								/>
-								<div class="flex justify-between gap-2">
-									<h2 class="text-lg leading-none font-bold">{data.title}</h2>
-									<span>
-										{data.price && (
-											<span class="text-sm leading-none font-bold">
-												${Math.round(data.price)}
-											</span>
-										)}
-									</span>
-								</div>
-								<p class="subtle">{data.description}</p>
-							</div>
-						</a>
-					))
+	<ColumnWrapper style="--max-col-width: 80rem;">
+		<MainCenter>
+			<style>
+				.wish-grid {
+					--min: 40ch;
+					--gap: 0.5rem;
+					display: grid;
+					grid-gap: var(--gap);
+					/* min() with 100% prevents overflow
+			in extra narrow spaces */
+					grid-template-columns: repeat(
+						auto-fit,
+						minmax(min(100%, var(--min)), 1fr)
+					);
 				}
+			</style>
+			<div>
+				<div>
+					<h1 class="text-3xl leading-none font-blackest">Kevin's Wishlist</h1>
+					<p class="mt-4 max-w-prose">
+						Inspired by Taylor Troesh's
+						<!-- prettier-ignore -->
+						<Link href="https://taylor.town/wish-manifesto">Wishlist Manifesto</Link>,
+						everything on this list is something I'd be delighted to receive as
+						a gift! I do remove items I receive or no longer want, so you can
+						feel confident that you'd be getting me something I'd truly enjoy.
+					</p>
+				</div>
+				<div class="wish-grid">
+					{
+						randomizedOrderWishes.map(({ data }) => (
+							<a class="block group" href={data.url}>
+								<div class="mt-8 space-y-3 p-4 group-hover:bg-gray-200 dark:group-hover:bg-gray-800">
+									<img
+										class="aspect-square object-contain bg-white"
+										src={data.image}
+									/>
+									<div class="flex justify-between gap-2">
+										<h2 class="text-lg leading-none font-bold">{data.title}</h2>
+										<span>
+											{data.price && (
+												<span class="text-sm leading-none font-bold">
+													${Math.round(data.price)}
+												</span>
+											)}
+										</span>
+									</div>
+									<p class="subtle">{data.description}</p>
+								</div>
+							</a>
+						))
+					}
+				</div>
 			</div>
-		</div>
-	</MainCenter>
+		</MainCenter>
+	</ColumnWrapper>
 </Page>
