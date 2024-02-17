@@ -30,10 +30,10 @@ const posts = await getPublishedBlogPosts().then(
 	<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	<Body>
 		<Header title={SITE_TITLE} />
-		<MainCenter class="space-y-4 grid place-items-center max-w-5xl">
-			<div class="flex flex-wrap gap-8 justify-around items-center mb-8">
+		<MainCenter class="space-y-4 grid max-w-5xl">
+			<div class="flex flex-wrap gap-8 items-center mb-8">
 				<img
-					class="profile max-w-[8rem]"
+					class="profile max-w-[8rem] md:max-w-[12rem]"
 					src={src}
 					height="200"
 					width="200"
