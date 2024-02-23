@@ -2,6 +2,7 @@
 import MainCenter from "../components/MainCenter.astro";
 import Page from "../layouts/Page.astro";
 import { getSubscriptions } from "../api/feedbin";
+import Link from "../components/Link.astro";
 
 const subscriptions = await getSubscriptions().then((subs) =>
 	subs.filter((sub) => sub.site_url !== Astro.site?.toString()),
@@ -19,16 +20,22 @@ const subscriptions = await getSubscriptions().then((subs) =>
 			<ul class="space-y-4 columns-1 md:columns-2">
 				{
 					subscriptions.map((sub) => (
-						<li class="flex items-baseline gap-2">
-							<img
-								class="self-baseline h-[1.4ex] w-[1.4ex]"
-								height="16"
-								width="16"
-								src={`https://www.google.com/s2/favicons?sz=64&domain_url=${sub.site_url}`}
-								alt={sub.title}
-							/>
+						<li>
+							<Link
+								class="flex items-baseline gap-2"
+								class="flex items-baseline gap-2 hover:underline underline-offset-2 decoration-pink-500"
+								href={sub.site_url}
+							>
+								<img
+									class="self-baseline h-[1.4ex] w-[1.4ex]"
+									height="16"
+									width="16"
+									src={`https://www.google.com/s2/favicons?sz=64&domain_url=${sub.site_url}`}
+									alt={sub.title}
+								/>
 
-							<a href={sub.site_url}>{sub.title}</a>
+								{sub.title}
+							</Link>
 						</li>
 					))
 				}
