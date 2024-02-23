@@ -5,11 +5,11 @@ const { class: className, ...rest } = Astro.props;
 ---
 
 <a class="absolute" id="skip-target"></a>
-<ColumnWrapper>
-	<main
-		class={cn("mt-12 md:mt-20 space-y-12 md:space-y-20", className)}
-		{...rest}
-	>
+<main
+	class={cn("mt-12 md:mt-20 space-y-12 md:space-y-20", className)}
+	{...rest}
+>
+	<ColumnWrapper>
 		<slot />
-	</main>
-</ColumnWrapper>
+	</ColumnWrapper>
+</main>
