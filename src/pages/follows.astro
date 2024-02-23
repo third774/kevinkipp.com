@@ -5,7 +5,11 @@ import { getSubscriptions } from "../api/feedbin";
 import Link from "../components/Link.astro";
 
 const subscriptions = await getSubscriptions().then((subs) =>
-	subs.filter((sub) => sub.site_url !== Astro.site?.toString()),
+	subs.filter(
+		(sub) =>
+			sub.site_url !== Astro.site?.toString() &&
+			sub.site_url !== "http://pages.feedbinusercontent.com",
+	),
 );
 ---
 
