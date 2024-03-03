@@ -10,6 +10,7 @@ import Main from "../../components/Main.astro";
 import { SITE_DESCRIPTION } from "../../consts";
 import { getPublishedBlogPosts } from "../../content/blog/_getPublishedBlogPosts";
 import Html from "../../layouts/Html.astro";
+import ColumnWrapper from "../../components/ColumnWrapper.astro";
 
 const posts = await getPublishedBlogPosts();
 ---
@@ -19,43 +20,46 @@ const posts = await getPublishedBlogPosts();
 	<Body>
 		<Header />
 		<Main>
-			<ul class="grid gap-10 md:gap-16">
-				{
-					posts.map((post) => (
-						<li>
-							<div class="space-y-2">
-								<div>
-									<h2>
-										<Link
-											href={`/blog/${post.slug}/`}
-											class="text-xl leading-none font-bold"
-										>
-											{post.data.title}
-										</Link>
-									</h2>
-									<div class="text-xs subtle">
-										<FormattedDate
-											date={post.data.published}
-											year="numeric"
-											month="short"
-											day="numeric"
-										/>
+			<ColumnWrapper>
+				<h1 class="my-16 text-3xl font-blackest">Blog archive</h1>
+				<ul class="grid gap-10 md:gap-16">
+					{
+						posts.map((post) => (
+							<li>
+								<div class="space-y-2">
+									<div>
+										<h2>
+											<Link
+												href={`/blog/${post.slug}/`}
+												class="text-xl font-bold leading-none"
+											>
+												{post.data.title}
+											</Link>
+										</h2>
+										<div class="text-xs subtle">
+											<FormattedDate
+												date={post.data.published}
+												year="numeric"
+												month="short"
+												day="numeric"
+											/>
+										</div>
 									</div>
-								</div>
 
-								<p class="subtle">{post.data.description}</p>
-								{post.data.heroImage && (
-									<Image
-										src={post.data.heroImage}
-										alt={post.data.heroAlt ?? null}
-										class="mb-4"
-									/>
-								)}
-							</div>
-						</li>
-					))
-				}
-			</ul>
+									<p class="subtle">{post.data.description}</p>
+									{post.data.heroImage && (
+										<Image
+											src={post.data.heroImage}
+											alt={post.data.heroAlt ?? null}
+											class="mb-4"
+										/>
+									)}
+								</div>
+							</li>
+						))
+					}
+				</ul>
+			</ColumnWrapper>
 		</Main>
 		<Footer />
 	</Body>
