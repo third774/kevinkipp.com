@@ -1,0 +1,58 @@
+---
+import { desc } from "drizzle-orm";
+import FormattedDate from "../components/FormattedDate.astro";
+import Link from "../components/Link.astro";
+import MainCenter from "../components/MainCenter.astro";
+import Page from "../layouts/Page.astro";
+import { getDb, linkShare } from "../schema";
+
+export const prerender = false;
+
+const db = getDb(Astro.locals);
+const data = await db.select().from(linkShare).orderBy(desc(linkShare.created));
+---
+
+<Page
+	headProps={{
+		title: "Links worth sharing",
+		description: "A collection of links from Kevin",
+	}}
+>
+	<MainCenter>
+		<div class="space-y-12">
+			<div>
+			<h1 class="font-blackest text-3xl">Links worth sharing</h1>
+			<p class="subtle">RSS feed coming soon!</p>
+
+			</div>
+
+			<ul class="space-y-8">
+				{
+					data.map((link) => (
+						<li>
+							<style>
+								.share-link {
+									display: block;
+									text-wrap: balance;
+								}
+								</style>
+							<Link class="text-lg font-extrabold share-link" href={link.url}>
+								{link.title}
+							</Link>
+							<div class="text-xs subtle">
+								Shared
+								<FormattedDate
+									date={link.created}
+									year="numeric"
+									month="short"
+									day="numeric"
+								/>
+							</div>
+							{link.remark && <p>{link.remark}</p>}
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</MainCenter>
+</Page>

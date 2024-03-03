@@ -18,7 +18,17 @@ export default defineConfig({
 		robotsTxt(),
 	],
 	output: "hybrid",
-	adapter: cloudflare(),
+	adapter: cloudflare({
+		runtime: {
+			mode: "local",
+			type: "pages",
+			bindings: {
+				DB: {
+					type: "d1",
+				},
+			},
+		},
+	}),
 	markdown: {
 		remarkPlugins: [remarkReadingTime],
 	},
