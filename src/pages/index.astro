@@ -30,8 +30,8 @@ const posts = await getPublishedBlogPosts().then(
 	<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	<Body>
 		<Header title={SITE_TITLE} />
-		<MainCenter class="space-y-4 grid">
-			<div class="flex flex-wrap gap-8 items-center mb-8">
+		<MainCenter class="grid space-y-4">
+			<div class="flex flex-wrap items-center gap-8 mb-8">
 				<img
 					class="profile max-w-[8rem] md:max-w-[12rem]"
 					src={src}
@@ -58,7 +58,7 @@ const posts = await getPublishedBlogPosts().then(
 										<h2>
 											<Link
 												href={`/blog/${post.slug}/`}
-												class="text-xl leading-none font-bold"
+												class="text-xl font-bold leading-none"
 											>
 												{post.data.title}
 											</Link>
