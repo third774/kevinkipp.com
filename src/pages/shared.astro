@@ -22,8 +22,10 @@ const data = await db.select().from(linkShare).orderBy(desc(linkShare.created));
 	<Main>
 		<ColumnWrapper>
 			<div class="my-16">
-				<h1 class="font-blackest text-3xl">Links worth sharing</h1>
-				<p class="subtle">RSS feed for these coming soon!</p>
+				<h1 class="text-3xl font-blackest">Links worth sharing</h1>
+				<p class="subtle">
+					<Link href="/shared/feed.xml">RSS Feed</Link>
+				</p>
 			</div>
 			<div class="space-y-12">
 				<ul class="space-y-8">
@@ -40,14 +42,14 @@ const data = await db.select().from(linkShare).orderBy(desc(linkShare.created));
 									{link.title}
 								</Link>
 								<div class="text-xs subtle">
-									Shared on
+									Shared 
 									<FormattedDate
 										date={link.created}
 										year="numeric"
 										month="short"
 										day="numeric"
 									/>
-									from 
+									•
 									{new URL(link.url).hostname}
 								</div>
 								{link.remark && <p>{link.remark}</p>}
