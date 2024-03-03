@@ -26,7 +26,7 @@ const { title, description, published, updatedDate, heroImage, heroAlt } = data;
 	<BaseHead
 		title={title}
 		description={description}
-		image={`/open-graph/${slug}.png`}
+		image={`/open-graph${Astro.url.pathname}og-image.png`}
 	/>
 	<Body>
 		<Header />

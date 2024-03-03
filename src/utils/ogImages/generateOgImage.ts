@@ -1,4 +1,3 @@
-import type { CollectionEntry } from "astro:content";
 import fs from "fs";
 import puppeteer from "puppeteer";
 import { template } from "./template";
@@ -25,16 +24,20 @@ const title = await page.$("#title");
 const description = await page.$("#description");
 const isProd = import.meta.env.PROD;
 
-export async function generateBlogPostOgImage(post: CollectionEntry<"blog">) {
-	console.time(`screenshot for ${post.slug}`);
-	const filename = `${post.slug}.png`;
+export async function generateOgImage(config: {
+	pathname: string;
+	title: string;
+	description?: string;
+}) {
+	console.time(`screenshot for ${config.pathname}`);
+	const filename = `og-image.png`;
 	// In prod, the public folder has already been copied to dist
 	// so we need to use the dist folder instead.
-	const path = `${isProd ? "dist" : "public"}/open-graph/`;
+	const path = `${isProd ? "dist" : "public"}/open-graph${config.pathname}`;
 
 	await title?.evaluate((el, content) => {
 		el.textContent = content;
-	}, post.data.title);
+	}, config.title);
 
 	await description?.evaluate((el, content) => {
 		if (content) {
@@ -43,7 +46,7 @@ export async function generateBlogPostOgImage(post: CollectionEntry<"blog">) {
 		} else {
 			el.setAttribute("hidden", "true");
 		}
-	}, post.data.description);
+	}, config.description);
 
 	// ensure directory exists
 	fs.mkdirSync(path, { recursive: true });
@@ -51,6 +54,6 @@ export async function generateBlogPostOgImage(post: CollectionEntry<"blog">) {
 	await page.screenshot({
 		path: `${path}${filename}`,
 	});
-	console.timeEnd(`screenshot for ${post.slug}`);
+	console.timeEnd(`screenshot for ${config.pathname}`);
 	console.log(`Created screenshot ${path}${filename}`);
 }
