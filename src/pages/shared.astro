@@ -2,9 +2,10 @@
 import { desc } from "drizzle-orm";
 import FormattedDate from "../components/FormattedDate.astro";
 import Link from "../components/Link.astro";
-import MainCenter from "../components/MainCenter.astro";
+import Main from "../components/Main.astro";
 import Page from "../layouts/Page.astro";
 import { getDb, linkShare } from "../schema";
+import ColumnWrapper from "../components/ColumnWrapper.astro";
 
 export const prerender = false;
 
@@ -18,41 +19,43 @@ const data = await db.select().from(linkShare).orderBy(desc(linkShare.created));
 		description: "A collection of links from Kevin",
 	}}
 >
-	<MainCenter>
-		<div class="space-y-12">
-			<div>
-			<h1 class="font-blackest text-3xl">Links worth sharing</h1>
-			<p class="subtle">RSS feed coming soon!</p>
-
+	<Main>
+		<ColumnWrapper>
+			<div class="my-16">
+				<h1 class="font-blackest text-3xl">Links worth sharing</h1>
+				<p class="subtle">RSS feed for these coming soon!</p>
 			</div>
-
-			<ul class="space-y-8">
-				{
-					data.map((link) => (
-						<li>
-							<style>
-								.share-link {
-									display: block;
-									text-wrap: balance;
-								}
-								</style>
-							<Link class="text-lg font-extrabold share-link" href={link.url}>
-								{link.title}
-							</Link>
-							<div class="text-xs subtle">
-								Shared
-								<FormattedDate
-									date={link.created}
-									year="numeric"
-									month="short"
-									day="numeric"
-								/>
-							</div>
-							{link.remark && <p>{link.remark}</p>}
-						</li>
-					))
-				}
-			</ul>
-		</div>
-	</MainCenter>
+			<div class="space-y-12">
+				<ul class="space-y-8">
+					{
+						data.map((link) => (
+							<li>
+								<style>
+									.share-link {
+										display: block;
+										text-wrap: balance;
+									}
+									</style>
+								<Link class="text-lg font-extrabold share-link" href={link.url}>
+									{link.title}
+								</Link>
+								<div class="text-xs subtle">
+									Shared on
+									<FormattedDate
+										date={link.created}
+										year="numeric"
+										month="short"
+										day="numeric"
+									/>
+									from 
+									{new URL(link.url).hostname}
+								</div>
+								{link.remark && <p>{link.remark}</p>}
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</ColumnWrapper>
+	</Main>
 </Page>

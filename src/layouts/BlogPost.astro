@@ -6,10 +6,11 @@ import Body from "../components/Body.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import Header from "../components/Header.astro";
-import MainCenter from "../components/MainCenter.astro";
+import Main from "../components/Main.astro";
 import Prose from "../components/Prose.astro";
 import Html from "./Html.astro";
 import Share from "../components/Share.astro";
+import ColumnWrapper from "../components/ColumnWrapper.astro";
 
 type Props = {
 	post: CollectionEntry<"blog">;
@@ -37,56 +38,61 @@ const {
 	/>
 	<Body>
 		<Header />
-		<MainCenter>
-			<article class="space-y-12">
-				<div class="space-y-3">
-					<h1 class="text-3xl leading-none font-blackest">
-						{title}
-					</h1>
-					<div class="text-xs subtle">
-						<FormattedDate
-							date={published}
-							year="numeric"
-							month="short"
-							day="numeric"
-						/> • <span>
-							~{Astro.props.minutesRead}
-						</span>
+		<Main>
+			<ColumnWrapper>
+				<article class="space-y-12">
+					<div class="space-y-3 my-16">
+						<h1 class="text-3xl leading-none font-blackest">
+							{title}
+						</h1>
+						<div class="text-xs subtle">
+							<FormattedDate
+								date={published}
+								year="numeric"
+								month="short"
+								day="numeric"
+							/> • <span>
+								~{Astro.props.minutesRead}
+							</span>
+						</div>
+						{
+							updatedDate && (
+								<div>
+									Last updated on <FormattedDate date={updatedDate} />
+								</div>
+							)
+						}
+						<p class="subtle">
+							{description}
+						</p>
+						{
+							heroImage && (
+								<div class="hero-image">
+									<Image
+										class="max-w-full"
+										width={1020}
+										height={510}
+										src={heroImage}
+										alt={heroAlt ?? ""}
+									/>
+								</div>
+							)
+						}
 					</div>
+					<Prose>
+						<slot />
+					</Prose>
 					{
-						updatedDate && (
-							<div>
-								Last updated on <FormattedDate date={updatedDate} />
-							</div>
+						Astro.site && (
+							<Share
+								title={title}
+								url={`${Astro.site.toString()}blog/${slug}`}
+							/>
 						)
 					}
-					<p class="subtle">
-						{description}
-					</p>
-					{
-						heroImage && (
-							<div class="hero-image">
-								<Image
-									class="max-w-full"
-									width={1020}
-									height={510}
-									src={heroImage}
-									alt={heroAlt ?? ""}
-								/>
-							</div>
-						)
-					}
-				</div>
-				<Prose>
-					<slot />
-				</Prose>
-				{
-					Astro.site && (
-						<Share title={title} url={`${Astro.site.toString()}blog/${slug}`} />
-					)
-				}
-			</article>
-		</MainCenter>
+				</article>
+			</ColumnWrapper>
+		</Main>
 		<Footer />
 		{
 			scripts &&

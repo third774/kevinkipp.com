@@ -6,7 +6,7 @@ import Footer from "../../components/Footer.astro";
 import FormattedDate from "../../components/FormattedDate.astro";
 import Header from "../../components/Header.astro";
 import Link from "../../components/Link.astro";
-import MainCenter from "../../components/MainCenter.astro";
+import Main from "../../components/Main.astro";
 import { SITE_DESCRIPTION } from "../../consts";
 import { getPublishedBlogPosts } from "../../content/blog/_getPublishedBlogPosts";
 import Html from "../../layouts/Html.astro";
@@ -18,7 +18,7 @@ const posts = await getPublishedBlogPosts();
 	<BaseHead title={"Kevin Kipp's Blog"} description={SITE_DESCRIPTION} />
 	<Body>
 		<Header />
-		<MainCenter>
+		<Main>
 			<ul class="grid gap-10 md:gap-16">
 				{
 					posts.map((post) => (
@@ -56,7 +56,7 @@ const posts = await getPublishedBlogPosts();
 					))
 				}
 			</ul>
-		</MainCenter>
+		</Main>
 		<Footer />
 	</Body>
 </Html>

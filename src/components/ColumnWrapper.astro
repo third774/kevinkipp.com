@@ -2,13 +2,17 @@
 import { cn } from "../utils/cn";
 
 interface Props extends astroHTML.JSX.HTMLAttributes {}
+
+const { class: className, ...rest } = Astro.props;
 ---
 
 <div
-	{...Astro.props}
+	{...rest}
 	class={cn(
-		"mx-auto w-[min(100%,var(--max-col-width,70ch))] flex-auto px-[var(--gutter,1rem)]",
-		Astro.props.class,
+		"w-[min(100%,var(--max-col-width,70ch))]",
+		"mx-auto",
+		"px-[var(--gutter,1rem)]",
+		className,
 	)}
 >
 	<slot />

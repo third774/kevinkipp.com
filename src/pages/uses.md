@@ -5,13 +5,13 @@
 }
 ---
 
-# Kevin uses
+# Things I use
 
 ## 💻 Hardware
 
 - Macbook Pro M1 32GB
 - [Ultimate Hacking Keyboard](https://ultimatehackingkeyboard.com)
-- Logitech MX Master 3
+- [Logitech MX Master 3](https://www.logitech.com/en-us/products/mice/mx-master-3s.910-006557.html)
 
 ## 💿 Software
 
@@ -29,7 +29,7 @@
 - iPhone 14
 - [MagSafe Wallet](https://www.apple.com/shop/product/MT273ZM/A/iphone-finewoven-wallet-with-magsafe-evergreen)
 - Apple Watch Series 8
-- AirPods Max 2
+- AirPods Pro (2nd gen)
 
 ## 🤖 Code
 

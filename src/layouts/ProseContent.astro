@@ -3,9 +3,10 @@ import BaseHead, {
 	type Props as HeadProps,
 } from "../components/BaseHead.astro";
 import Body from "../components/Body.astro";
+import ColumnWrapper from "../components/ColumnWrapper.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
-import MainCenter from "../components/MainCenter.astro";
+import Main from "../components/Main.astro";
 import Prose from "../components/Prose.astro";
 import Html from "./Html.astro";
 
@@ -18,13 +19,15 @@ type Props = {
 	<BaseHead title={Astro.props.frontmatter.title} />
 	<Body>
 		<Header />
-		<MainCenter>
-			<article class="space-y-12">
-				<Prose>
-					<slot />
-				</Prose>
-			</article>
-		</MainCenter>
+		<Main>
+			<ColumnWrapper>
+				<article>
+					<Prose>
+						<slot />
+					</Prose>
+				</article>
+			</ColumnWrapper>
+		</Main>
 		<Footer />
 	</Body>
 </Html>

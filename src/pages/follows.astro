@@ -1,8 +1,9 @@
 ---
-import MainCenter from "../components/MainCenter.astro";
+import Main from "../components/Main.astro";
 import Page from "../layouts/Page.astro";
 import { getSubscriptions } from "../api/feedbin";
 import Link from "../components/Link.astro";
+import ColumnWrapper from "../components/ColumnWrapper.astro";
 
 const subscriptions = await getSubscriptions().then((subs) =>
 	subs.filter(
@@ -18,9 +19,9 @@ const subscriptions = await getSubscriptions().then((subs) =>
 		title: "Kevin's RSS Subscriptions",
 	}}
 >
-	<MainCenter>
-		<div class="space-y-16">
-			<h1 class="text-3xl font-blackest">Kevin follows</h1>
+	<Main>
+		<ColumnWrapper>
+			<h1 class="text-3xl font-blackest my-16">Kevin follows</h1>
 			<ul class="space-y-4 columns-1 md:columns-2">
 				{
 					subscriptions.map((sub) => (
@@ -37,13 +38,12 @@ const subscriptions = await getSubscriptions().then((subs) =>
 									src={`https://www.google.com/s2/favicons?sz=64&domain_url=${sub.site_url}`}
 									alt={sub.title}
 								/>
-
 								{sub.title}
 							</Link>
 						</li>
 					))
 				}
 			</ul>
-		</div>
-	</MainCenter>
+		</ColumnWrapper>
+	</Main>
 </Page>
