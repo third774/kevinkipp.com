@@ -14,6 +14,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import { getPublishedBlogPosts } from "../content/blog/_getPublishedBlogPosts";
 import Html from "../layouts/Html.astro";
 import ColumnWrapper from "../components/ColumnWrapper.astro";
+import { generateOgImage } from "../utils/ogImages/generateOgImage";
 
 const { src } = await getImage({
 	src: profile,
@@ -25,6 +26,12 @@ const posts = await getPublishedBlogPosts().then(
 	// only show the first 5 posts
 	(posts) => posts.filter((_, index) => index < 10),
 );
+
+await generateOgImage({
+	title: "👋🏻 Heyo! I'm Kevin.",
+	description: "UI Engineer based in Austin, TX.",
+	pathname: "/",
+});
 ---
 
 <Html>

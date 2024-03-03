@@ -2,7 +2,7 @@
 import { type CollectionEntry } from "astro:content";
 import { getPublishedBlogPosts } from "../../content/blog/_getPublishedBlogPosts";
 import BlogPost from "../../layouts/BlogPost.astro";
-import { generateBlogPostOgImage } from "../../utils/ogImages/generateBlogPostOgImage";
+import { generateOgImage } from "../../utils/ogImages/generateOgImage";
 
 interface Props {
 	post: CollectionEntry<"blog">;
@@ -18,7 +18,11 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content, remarkPluginFrontmatter } = await post.render();
-await generateBlogPostOgImage(post);
+await generateOgImage({
+	title: post.data.title,
+	description: post.data.description,
+	pathname: Astro.url.pathname,
+});
 ---
 
 <BlogPost minutesRead={remarkPluginFrontmatter.minutesRead} post={post}>
