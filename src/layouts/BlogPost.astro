@@ -19,15 +19,7 @@ type Props = {
 
 const { data, slug } = Astro.props.post;
 
-const {
-	title,
-	description,
-	scripts,
-	published,
-	updatedDate,
-	heroImage,
-	heroAlt,
-} = data;
+const { title, description, published, updatedDate, heroImage, heroAlt } = data;
 ---
 
 <Html>
@@ -41,7 +33,7 @@ const {
 		<Main>
 			<ColumnWrapper>
 				<article class="space-y-12">
-					<div class="space-y-3 my-16">
+					<div class="my-16 space-y-3">
 						<h1 class="text-3xl leading-none font-blackest">
 							{title}
 						</h1>
@@ -94,9 +86,5 @@ const {
 			</ColumnWrapper>
 		</Main>
 		<Footer />
-		{
-			scripts &&
-				scripts.map((script) => <script src={script.src} type={script.type} />)
-		}
 	</Body>
 </Html>
