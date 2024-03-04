@@ -11,6 +11,9 @@ export const prerender = false;
 
 const db = getDb(Astro.locals);
 const data = await db.select().from(linkShare).orderBy(desc(linkShare.created));
+
+Astro.response.headers.set("Cache-Control", "public, max-age=60, s-maxage=60");
+
 ---
 
 <Page
