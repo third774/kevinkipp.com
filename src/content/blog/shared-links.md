@@ -1,0 +1,26 @@
+---
+{
+  "title": "/shared links",
+  "description": "A new page & RSS feed where I'll be sharing interesting links",
+  "published": "2024-03-05T04:57:55.324Z",
+}
+---
+
+For a little while now, I've been wanting to set up a page and RSS feed where I
+can share links, kinda similar to [Jeremy Keith's links page](https://adactio.com/links).
+Until now, I've mostly been using Astro's [content collections](https://docs.astro.build/en/guides/content-collections/)
+to manage my [/blog](/blog) and [/wish](/wish) pages, which has worked out nicely.
+
+I didn't want to use content collections just for sharing a link, though. That
+felt like too much friction. I wanted to be able to make a Raycast extension
+for myself to quickly share a link, maybe with an optional remark about it.
+
+In order to do this, I was going to need an API with a database. Since I work
+at Cloudflare I generally try to use it as much as possible, so I knew I wanted
+to use [D1](https://developers.cloudflare.com/d1/), and have been hearing good
+things about [Drizzle](https://orm.drizzle.team/), so I figured I'd give that a
+go. I plan on writing up a guide on how I set everything up, but for now...
+
+Check out the new page over at <sparkly-text style="--sparkly-text-color: oklch(89.12% 0.141 103.76); --sparkly-text-size: 2.5em"><a href="/shared">/shared</a></sparkly-text>
+
+<script src="https://www.unpkg.com/@stefanjudis/sparkly-text@1.0.8/sparkly-text.js" type="module" ></script>
