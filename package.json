@@ -8,6 +8,8 @@
 		"db:migrate:local": "wrangler d1 migrations apply kevinkipp.com --local",
 		"db:migrate:prod": "wrangler d1 migrations apply kevinkipp.com",
 		"db:migrate:preview": "wrangler d1 migrations apply --env preview kevinkipp.com_preview",
+		"db:studio:local": "cross-env LOCAL_DB_PATH=$(find .wrangler/state/v3/d1/miniflare-D1DatabaseObject -type f -name '*.sqlite' -print -quit) drizzle-kit studio",
+		"db:studio:prod": "drizzle-kit studio",
 		"start": "astro dev",
 		"build": "astro build",
 		"newpost": "node ./scripts/newpost.js",
@@ -44,6 +46,8 @@
 	"devDependencies": {
 		"@csstools/postcss-oklab-function": "^3.0.9",
 		"@tailwindcss/typography": "^0.5.10",
+		"better-sqlite3": "^9.4.3",
+		"cross-env": "^7.0.3",
 		"drizzle-kit": "^0.20.14",
 		"prettier": "^3.2.4",
 		"prettier-plugin-astro": "^0.12.3",
