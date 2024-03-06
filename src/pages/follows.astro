@@ -9,7 +9,8 @@ const subscriptions = await getSubscriptions().then((subs) =>
 	subs.filter(
 		(sub) =>
 			sub.site_url !== Astro.site?.toString() &&
-			sub.site_url !== "http://pages.feedbinusercontent.com",
+			sub.site_url !== "http://pages.feedbinusercontent.com" &&
+			sub.site_url !== "http://substack.com",
 	),
 );
 ---
@@ -21,7 +22,7 @@ const subscriptions = await getSubscriptions().then((subs) =>
 >
 	<Main>
 		<ColumnWrapper>
-			<h1 class="text-3xl font-blackest my-16">Kevin follows</h1>
+			<h1 class="my-16 text-3xl font-blackest">Kevin follows</h1>
 			<ul class="space-y-4 columns-1 md:columns-2">
 				{
 					subscriptions.map((sub) => (
