@@ -9,6 +9,7 @@
 		"db:migrate:prod": "wrangler d1 migrations apply kevinkipp.com",
 		"db:migrate:preview": "wrangler d1 migrations apply --env preview kevinkipp.com_preview",
 		"db:studio:local": "cross-env LOCAL_DB_PATH=$(find .wrangler/state/v3/d1/miniflare-D1DatabaseObject -type f -name '*.sqlite' -print -quit) drizzle-kit studio",
+		"db:studio:preview": "cross-env DB_NAME='kevinkipp.com_preview' WRANGLER_CONFIG='--environment=preview' drizzle-kit studio",
 		"db:studio:prod": "drizzle-kit studio",
 		"start": "astro dev",
 		"build": "astro build",

@@ -1,11 +1,18 @@
 import type { Config } from "drizzle-kit";
 
-export default process.env.LOCAL_DB_PATH
+const {
+	LOCAL_DB_PATH,
+	WRANGLER_CONFIG,
+	DB_NAME = "kevinkipp.com",
+} = process.env;
+
+// Use better-sqlite driver for local development
+export default LOCAL_DB_PATH
 	? ({
 			schema: "./src/schema.ts",
 			driver: "better-sqlite",
 			dbCredentials: {
-				url: process.env.LOCAL_DB_PATH!,
+				url: LOCAL_DB_PATH,
 			},
 		} satisfies Config)
 	: ({
@@ -13,7 +20,13 @@ export default process.env.LOCAL_DB_PATH
 			out: "./migrations",
 			driver: "d1",
 			dbCredentials: {
-				wranglerConfigPath: new URL("wrangler.toml", import.meta.url).pathname,
-				dbName: "kevinkipp.com",
+				wranglerConfigPath:
+					new URL("wrangler.toml", import.meta.url).pathname +
+					// This is a hack to inject additional cli flags to wrangler
+					// since drizzle-kit doesn't support specifying environments
+					WRANGLER_CONFIG
+						? ` ${WRANGLER_CONFIG}`
+						: "",
+				dbName: DB_NAME,
 			},
 		} satisfies Config);
