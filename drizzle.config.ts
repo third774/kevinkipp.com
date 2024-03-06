@@ -1,7 +1,4 @@
 import type { Config } from "drizzle-kit";
-import path from "path";
-
-const wranglerConfigPath = path.resolve(__dirname, "wrangler.toml");
 
 export default process.env.LOCAL_DB_PATH
 	? ({
@@ -16,7 +13,7 @@ export default process.env.LOCAL_DB_PATH
 			out: "./migrations",
 			driver: "d1",
 			dbCredentials: {
-				wranglerConfigPath,
+				wranglerConfigPath: new URL("wrangler.toml", import.meta.url).pathname,
 				dbName: "kevinkipp.com",
 			},
 		} satisfies Config);
