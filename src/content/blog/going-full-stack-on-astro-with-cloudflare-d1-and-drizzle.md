@@ -386,3 +386,7 @@ git push -u origin HEAD
 ```
 
 The preview build should work! Go ahead and merge it, and prod should work too! 🎉
+
+## That's all!
+
+You can check out the completed code on [Github](https://github.com/third774/astro-d1-drizzle-demo).
