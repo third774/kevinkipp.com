@@ -1,0 +1,65 @@
+---
+import { getImage } from "astro:assets";
+import profile from "../assets/profile.jpg";
+import "../base.css";
+import BaseHead from "../components/BaseHead.astro";
+import Body from "../components/Body.astro";
+import Link from "../components/Link.astro";
+import Html from "../layouts/Html.astro";
+
+export const prerender = false;
+
+const title = Astro.url.searchParams.get("title") ?? "Kevin Kipp";
+const description =
+	Astro.url.searchParams.get("description") ??
+	(title === "Kevin Kipp" ? "UI Engineer based in Austin, TX" : null);
+
+const { src } = await getImage({
+	src: profile,
+	widths: [200, 400, 600, 800, 1000, 1200, 1400, 1600],
+	formats: ["avif", "webp", "jpeg"],
+});
+---
+
+<Html>
+	<BaseHead title={title}>
+		<style>
+			@font-face {
+				font-family: "Noto Color Emoji";
+				src: url("/fonts/NotoColorEmoji-Regular.ttf") format("truetype");
+				font-weight: 400;
+			}
+
+			body {
+				font-family: "Recursive", "Noto Color Emoji", sans-serif;
+			}
+		</style>
+	</BaseHead>
+
+	<Body>
+		<div class="grid content-between h-full p-16">
+			<div>
+				<h1 class="text-5xl leading-none font-blackest text-balance">
+					{title}
+				</h1>
+				{
+					description && (
+						<p class="mt-12 text-2xl text-pretty sublte" id="description">
+							{description}
+						</p>
+					)
+				}
+			</div>
+			<div style="display: flex; align-items: end;">
+				<Link class="ml-auto mr-6 text-xl">
+					{Astro.site?.origin}
+				</Link>
+				<img
+					class="max-w-48"
+					style="display: block; border-radius: 35% 65% 60% 25% / 35% 20% 60% 65%;"
+					src={src}
+				/>
+			</div>
+		</div>
+	</Body>
+</Html>
