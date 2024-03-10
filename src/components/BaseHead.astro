@@ -9,7 +9,16 @@ export interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = "/open-graph/og-image.png" } = Astro.props;
+let { title, description, image } = Astro.props;
+
+if (!image) {
+	const searchParams = new URLSearchParams();
+	searchParams.set("title", title);
+	if (description) {
+		searchParams.set("description", description);
+	}
+	image = "https://og-images.kevinkipp.com/" + "?" + searchParams.toString();
+}
 ---
 
 <head>
@@ -19,8 +28,6 @@ const { title, description, image = "/open-graph/og-image.png" } = Astro.props;
 	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 	<meta name="generator" content={Astro.generator} />
 	<meta name="author" content="Kevin Kipp" />
-
-	<!-- Font preloads -->
 
 	<!-- Canonical URL -->
 	<link rel="canonical" href={canonicalURL} />
@@ -38,26 +45,17 @@ const { title, description, image = "/open-graph/og-image.png" } = Astro.props;
 	<meta property="og:site_name" content="Kevin Kipp" />
 	<meta property="og:title" content={title} />
 	{description && <meta property="og:description" content={description} />}
-	{
-		image && (
-			<>
-				<meta property="og:image" content={new URL(image, Astro.url)} />
-				<meta property="og:image:width" content="1200" />
-				<meta property="og:image:height" content="630" />
-			</>
-		)
-	}
+
+	<meta property="og:image" content={image} />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
 
 	<!-- Twitter -->
 	<meta property="twitter:card" content="summary_large_image" />
 	<meta property="twitter:url" content={Astro.url} />
 	<meta property="twitter:title" content={title} />
 	{description && <meta property="twitter:description" content={description} />}
-	{
-		image && (
-			<meta property="twitter:image" content={new URL(image, Astro.url)} />
-		)
-	}
+	<meta property="twitter:image" content={image} />
 
 	<link
 		rel="alternate"

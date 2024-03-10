@@ -1,0 +1,29 @@
+diff --git a/node_modules/astro/dist/runtime/server/render/util.js b/node_modules/astro/dist/runtime/server/render/util.js
+index 44fe49e..a55817b 100644
+--- a/node_modules/astro/dist/runtime/server/render/util.js
++++ b/node_modules/astro/dist/runtime/server/render/util.js
+@@ -70,6 +70,9 @@ Make sure to use the static attribute syntax (\`${key}={value}\`) instead of the
+   if (key === "className") {
+     return markHTMLString(` class="${toAttributeString(value, shouldEscape)}"`);
+   }
++  if (typeof value === 'string' && value.includes('&') && urlCanParse(value)) {
++		return markHTMLString(` ${key}="${toAttributeString(value, false)}"`);
++	}
+   if (value === true && (key.startsWith("data-") || htmlBooleanAttributes.test(key))) {
+     return markHTMLString(` ${key}`);
+   } else {
+@@ -131,6 +134,14 @@ function promiseWithResolvers() {
+     reject
+   };
+ }
++function urlCanParse(url) {
++	try {
++		new URL(url, 'http://example.com');
++		return true;
++	} catch {
++		return false;
++	}
++}
+ export {
+   addAttribute,
+   defineScriptVars,
