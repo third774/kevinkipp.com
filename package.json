@@ -37,6 +37,7 @@
 		"astro-robots-txt": "^1.0.0",
 		"clsx": "^2.1.0",
 		"drizzle-orm": "^0.29.4",
+		"jose": "^5.2.3",
 		"marked": "^11.1.1",
 		"mdast-util-to-string": "^4.0.0",
 		"patch-package": "^8.0.0",

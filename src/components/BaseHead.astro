@@ -1,5 +1,6 @@
 ---
 import "../base.css";
+import { signJwt } from "../utils/jwt";
 
 export interface Props {
 	title: string;
@@ -11,13 +12,19 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 let { title, description, image } = Astro.props;
 
+const jwt = await signJwt(import.meta.env.API_TOKEN ?? "og-images-secret", {
+	title,
+	description,
+	image,
+});
+
 if (!image) {
 	const searchParams = new URLSearchParams();
 	searchParams.set("title", title);
 	if (description) {
 		searchParams.set("description", description);
 	}
-	image = "https://og-images.kevinkipp.com/" + "?" + searchParams.toString();
+	image = "https://og-images.kevinkipp.com/" + jwt;
 }
 ---
 
