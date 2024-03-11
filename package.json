@@ -18,7 +18,9 @@
 		"preview": "wrangler pages dev ./dist",
 		"astro": "astro",
 		"prettier": "prettier --write .",
-		"upgrade": "npx @astrojs/upgrade && npx npm-upgrade",
+		"upgrade": "npm-run-all upgrade:*",
+		"upgrade:astro": "npx @astrojs/upgrade",
+		"upgrade:others": "npx npm-upgrade",
 		"typecheck": "tsc --noEmit",
 		"typecheck:watch": "tsc --noEmit --watch"
 	},
@@ -51,6 +53,7 @@
 		"better-sqlite3": "^9.4.3",
 		"cross-env": "^7.0.3",
 		"drizzle-kit": "^0.20.14",
+		"npm-run-all": "^4.1.5",
 		"prettier": "^3.2.4",
 		"prettier-plugin-astro": "^0.12.3",
 		"prettier-plugin-organize-imports": "^3.2.4"
