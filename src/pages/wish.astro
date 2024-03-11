@@ -13,6 +13,8 @@ const randomizedOrderWishes = wishes.sort(() => Math.random() - 0.5);
 <Page
 	headProps={{
 		title: "Kevin's Wishlist",
+		description:
+			"Everything here is something I'd be delighted to receive as a gift!",
 	}}
 >
 	<Main>
@@ -47,16 +49,16 @@ const randomizedOrderWishes = wishes.sort(() => Math.random() - 0.5);
 					{
 						randomizedOrderWishes.map(({ data }) => (
 							<a class="block group" href={data.url}>
-								<div class="space-y-3 p-4 group-hover:bg-gray-200 dark:group-hover:bg-gray-800">
+								<div class="p-4 space-y-3 group-hover:bg-gray-200 dark:group-hover:bg-gray-800">
 									<img
-										class="aspect-square object-contain bg-white"
+										class="object-contain bg-white aspect-square"
 										src={data.image}
 									/>
 									<div class="flex justify-between gap-2">
-										<h2 class="text-lg leading-none font-bold">{data.title}</h2>
+										<h2 class="text-lg font-bold leading-none">{data.title}</h2>
 										<span>
 											{data.price && (
-												<span class="text-sm leading-none font-bold">
+												<span class="text-sm font-bold leading-none">
 													${Math.round(data.price)}
 												</span>
 											)}
