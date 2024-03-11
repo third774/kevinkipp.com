@@ -16,24 +16,18 @@
 ## 💿 Software
 
 - [Raycast](https://raycast.com)
-- [Script Kit](https://www.scriptkit.com/)
 - [VS Code](https://code.visualstudio.com/)
 - [Obsidian](https://obsidian.md/)
 - [Arc](https://arc.net/)
 - [YNAB](https://www.ynab.com/)
+- [Astro](https://astro.build/)
+- [Remix](https://remix.run/)
 
 ## 👖 Pocket carry
 
 - [Rovyvon A8](https://www.amazon.com/RovyVon-Flashlight-Momentary-Keychain-Magnetic/dp/B0B4CJ7X8F/ref=sr_1_4)
 - [Victorinox Minichamp](https://www.amazon.com/Victorinox-Swiss-MiniChamp-Pocket-Knife/dp/B00005ML8D/ref=sr_1_1)
 - iPhone 14
-- [MagSafe Wallet](https://www.apple.com/shop/product/MT273ZM/A/iphone-finewoven-wallet-with-magsafe-evergreen)
+- [ESR MagSafe Wallet/Phone stand/Tracker/](https://www.amazon.com/gp/product/B0BY8MJG52)
 - Apple Watch Series 8
 - AirPods Pro (2nd gen)
-
-## 🤖 Code
-
-- [Remix](https://remix.run/)
-- [React](https://react.dev/)
-- [Astro](https://astro.build/)
-- [Cloudflare Pages](https://pages.cloudflare.com/)
