@@ -33,6 +33,15 @@ In this overview, I'll refer to "the blog" which is this site, and "the og worke
    renders the content given to it by the title & description, but it also loads the appropriate styles and font.
 5. The og worker takes a screenshot, and saves it to R2 before returning the image.
 
+## What's great about this
+
+Looking back at the list of limitations I had found with my previous approach, every issue has been resolved.
+
+- Every page (static or not) can have an og image by just supplying a `title` and `description`.
+- Nothing special for styles like inlining the font as base64. Can also just use tailwind classes easily.
+- Iterating on the styles has a tight feedback loop since it's just a dynamic page on the blog.
+- Won't slow down build times.
+
 ## What could be better
 
 It takes 2-3 seconds to generate the image, and I suspect that most of that is just spinning up Puppeteer.
