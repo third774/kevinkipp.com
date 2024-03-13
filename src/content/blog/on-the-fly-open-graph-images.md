@@ -20,7 +20,7 @@ These have been bugging me ever since I got it working, and now I think I've fig
 
 ## The architecture
 
-In this overview, I'll refer to "the blog" which is this site, and "the og worker" which serves the images.
+In this overview, I'll refer to "the blog" which is this site, and "the og worker" which generates the images using [Cloudflare Browser Rendering](https://developers.cloudflare.com/browser-rendering/) and stores/serves the images from [R2](https://developers.cloudflare.com/r2/).
 
 1. The blog renders an `og:image` meta tag with URL pointing to the og worker that generates
    the image. The title and description are put into a JWT that is signed by the blog so the worker
