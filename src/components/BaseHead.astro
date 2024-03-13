@@ -1,7 +1,6 @@
 ---
 import "../base.css";
-import { signJwt } from "../utils/jwt";
-
+import OgImage from "../components/OgImage.astro";
 export interface Props {
 	title: string;
 	description?: string;
@@ -11,21 +10,6 @@ export interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 let { title, description, image } = Astro.props;
-
-const jwt = await signJwt(import.meta.env.API_TOKEN ?? "og-images-secret", {
-	title,
-	description,
-	image,
-});
-
-if (!image) {
-	const searchParams = new URLSearchParams();
-	searchParams.set("title", title);
-	if (description) {
-		searchParams.set("description", description);
-	}
-	image = "https://og-images.kevinkipp.com/" + jwt;
-}
 ---
 
 <head>
@@ -53,16 +37,13 @@ if (!image) {
 	<meta property="og:title" content={title} />
 	{description && <meta property="og:description" content={description} />}
 
-	<meta property="og:image" content={image} />
-	<meta property="og:image:width" content="1200" />
-	<meta property="og:image:height" content="630" />
+	<OgImage title={title} description={description} image={image} />
 
 	<!-- Twitter -->
-	<meta property="twitter:card" content="summary_large_image" />
+
 	<meta property="twitter:url" content={Astro.url} />
 	<meta property="twitter:title" content={title} />
 	{description && <meta property="twitter:description" content={description} />}
-	<meta property="twitter:image" content={image} />
 
 	<link
 		rel="alternate"
