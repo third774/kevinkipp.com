@@ -124,6 +124,4 @@ await generateBlogPostOgImage(post);
 </BlogPost>
 ```
 
-That's all there is to it — and it produces the image below!
-
-<img alt="Image preview of this blog post" src="/open-graph/generating-ogimage-files-for-blog-posts-on-astro.png" style="border: .25rem solid white;" />
+That's all there is to it!
