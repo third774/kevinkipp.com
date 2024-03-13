@@ -181,12 +181,6 @@ import {
 	text,
 } from "drizzle-orm/sqlite-core";
 
-export const getDb = (
-	locals: App.Locals,
-) => {
-	return drizzle(locals.runtime.env.DB);
-};
-
 export const linkShare = sqliteTable(
 	"linkShare",
 	{
