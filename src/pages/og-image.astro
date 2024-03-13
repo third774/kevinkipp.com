@@ -14,11 +14,12 @@ const description =
 	Astro.url.searchParams.get("description") ??
 	(title === "Kevin Kipp" ? "UI Engineer based in Austin, TX" : null);
 
-const { src } = await getImage({
+const { src, attributes } = await getImage({
 	src: profile,
-	widths: [200, 400, 600, 800, 1000, 1200, 1400, 1600],
+	widths: [200],
 	formats: ["avif", "webp", "jpeg"],
 });
+console.log(attributes);
 ---
 
 <Html>
@@ -27,6 +28,7 @@ const { src } = await getImage({
 		description="Hey, you found my Open Graph image template! This page is usually only seen by computers. 😅"
 	>
 		<style>
+			/* Puppeteer can't render emojis, so we've got to provide a font for them */
 			@font-face {
 				font-family: "Noto Color Emoji";
 				src: url("/fonts/NotoColorEmoji-Regular.ttf") format("truetype");
@@ -53,15 +55,11 @@ const { src } = await getImage({
 					)
 				}
 			</div>
-			<div style="display: flex; align-items: end;">
+			<div class="flex items-end">
 				<Link class="ml-auto mr-6 text-xl">
 					{Astro.site?.host}
 				</Link>
-				<img
-					class="max-w-48"
-					style="display: block; border-radius: 35% 65% 60% 25% / 35% 20% 60% 65%;"
-					src={src}
-				/>
+				<img class="profile max-w-48" src={src} {...attributes} />
 			</div>
 		</div>
 	</Body>
