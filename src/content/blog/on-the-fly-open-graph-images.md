@@ -46,6 +46,6 @@ between requests.
 
 If you're curious to see the implementation of this, check these files on github:
 
-[Where the og:image link is generated](https://github.com/third774/kevinkipp.com/blob/main/src/components/OgImage.astro)
-[Where the og:image template is rendered](https://github.com/third774/kevinkipp.com/blob/main/src/pages/og-image.astro)
-[The code for the og image worker](https://github.com/third774/og-image-generation/blob/main/src/index.ts)
+- [Where the og:image link is generated](https://github.com/third774/kevinkipp.com/blob/main/src/components/OgImage.astro)
+- [Where the og:image template is rendered](https://github.com/third774/kevinkipp.com/blob/main/src/pages/og-image.astro)
+- [The code for the og image worker](https://github.com/third774/og-image-generation/blob/main/src/index.ts)
