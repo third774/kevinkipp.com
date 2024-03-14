@@ -10,7 +10,7 @@ export interface Props {
 let { title, description, image } = Astro.props;
 
 if (!image) {
-	const jwt = new jose.SignJWT({
+	const jwt = await new jose.SignJWT({
 		title,
 		description,
 	})
