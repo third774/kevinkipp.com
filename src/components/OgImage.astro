@@ -1,5 +1,5 @@
 ---
-import { signJwt } from "../utils/jwt";
+import * as jose from "jose";
 
 export interface Props {
 	title: string;
@@ -10,10 +10,15 @@ export interface Props {
 let { title, description, image } = Astro.props;
 
 if (!image) {
-	const jwt = await signJwt(import.meta.env.API_TOKEN ?? "og-images-secret", {
+	const jwt = new jose.SignJWT({
 		title,
 		description,
-	});
+	})
+		.setProtectedHeader({ alg: "HS256" })
+		.setIssuedAt()
+		.sign(
+			new TextEncoder().encode(import.meta.env.API_TOKEN ?? "og-images-secret"),
+		);
 	image = "https://og-images.kevinkipp.com/" + jwt;
 }
 ---
