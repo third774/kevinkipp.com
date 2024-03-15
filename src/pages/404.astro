@@ -1,0 +1,30 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Body from "../components/Body.astro";
+import ColumnWrapper from "../components/ColumnWrapper.astro";
+import Header from "../components/Header.astro";
+import Link from "../components/Link.astro";
+import Blockquote from "../components/Blockquote.astro";
+import Main from "../components/Main.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import Html from "../layouts/Html.astro";
+---
+
+<Html>
+	<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	<Body>
+		<Header title={SITE_TITLE} />
+		<Main>
+			<ColumnWrapper>
+				<h1 class="my-16 text-4xl font-blackest">Not Found</h1>
+				<Blockquote>
+					Oh no, four oh four.
+					<br />
+					Lost in the web, seek no more.
+					<br />
+					<Link href="/">Home</Link> is always near.
+				</Blockquote>
+			</ColumnWrapper>
+		</Main>
+	</Body>
+</Html>
