@@ -1,5 +1,22 @@
 import harmonyPalette from "@evilmartians/harmony/tailwind";
 
+/* @link https://utopia.fyi/type/calculator?c=320,16,1.125,1240,18,1.2,10,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+const fontSizes = {
+	"--step--2": "clamp(0.7813rem, 0.7932rem + -0.0154vi, 0.7901rem)",
+	"--step--1": "clamp(0.8889rem, 0.872rem + 0.0845vi, 0.9375rem)",
+	"--step-0": "clamp(1rem, 0.9565rem + 0.2174vi, 1.125rem)",
+	"--step-1": "clamp(1.125rem, 1.0467rem + 0.3913vi, 1.35rem)",
+	"--step-2": "clamp(1.2656rem, 1.1424rem + 0.6163vi, 1.62rem)",
+	"--step-3": "clamp(1.4238rem, 1.2429rem + 0.9046vi, 1.944rem)",
+	"--step-4": "clamp(1.6018rem, 1.3475rem + 1.2713vi, 2.3328rem)",
+	"--step-5": "clamp(1.802rem, 1.4551rem + 1.7345vi, 2.7994rem)",
+	"--step-6": "clamp(2.0273rem, 1.564rem + 2.3164vi, 3.3592rem)",
+	"--step-7": "clamp(2.2807rem, 1.6719rem + 3.0441vi, 4.0311rem)",
+	"--step-8": "clamp(2.5658rem, 1.7757rem + 3.9505vi, 4.8373rem)",
+	"--step-9": "clamp(2.8865rem, 1.8715rem + 5.0752vi, 5.8048rem)",
+	"--step-10": "clamp(3.2473rem, 1.954rem + 6.4668vi, 6.9657rem)",
+};
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
@@ -13,21 +30,20 @@ module.exports = {
 			xl: "80em",
 			"2xl": "96em",
 		},
-		// https://utopia.fyi/type/calculator/?c=320,18,1.125,1240,20,1.2,10,2,&s=0.75%7C0.5%7C0.25,1.5%7C2%7C3%7C4%7C6,s-l&g=s,l,xl,12
 		fontSize: {
-			xs: "clamp(0.8681rem, 0.8959rem + -0.0359vw, 0.8888rem)",
-			sm: "clamp(1rem, 0.9854rem + 0.0728vw, 1.0419rem)",
-			base: "clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem)",
-			lg: "clamp(1.2656rem, 1.1841rem + 0.4076vw, 1.5rem)",
-			xl: "clamp(1.4238rem, 1.2929rem + 0.6543vw, 1.8rem)",
-			"2xl": "clamp(1.6019rem, 1.4077rem + 0.9707vw, 2.16rem)",
-			"3xl": "clamp(1.8019rem, 1.5271rem + 1.3739vw, 2.5919rem)",
-			"4xl": "clamp(2.0275rem, 1.6508rem + 1.8837vw, 3.1106rem)",
-			"5xl": "clamp(2.2806rem, 1.7756rem + 2.525vw, 3.7325rem)",
-			"6xl": "clamp(2.5656rem, 1.9002rem + 3.3272vw, 4.4788rem)",
-			"7xl": "clamp(2.8863rem, 2.0206rem + 4.3283vw, 5.375rem)",
-			"8xl": "clamp(3.2475rem, 2.1336rem + 5.5696vw, 6.45rem)",
-			"9xl": "clamp(3.6531rem, 2.2318rem + 7.1065vw, 7.7394rem)",
+			xs: fontSizes["--step--2"],
+			sm: fontSizes["--step--1"],
+			base: fontSizes["--step-0"],
+			lg: fontSizes["--step-1"],
+			xl: fontSizes["--step-2"],
+			"2xl": fontSizes["--step-3"],
+			"3xl": fontSizes["--step-4"],
+			"4xl": fontSizes["--step-5"],
+			"5xl": fontSizes["--step-6"],
+			"6xl": fontSizes["--step-7"],
+			"7xl": fontSizes["--step-8"],
+			"8xl": fontSizes["--step-9"],
+			"9xl": fontSizes["--step-10"],
 		},
 		fontFamily: {
 			sans: ["Recursive", "Recursive-fallback", "sans-serif"],
@@ -40,7 +56,7 @@ module.exports = {
 			typography: {
 				DEFAULT: {
 					css: {
-						fontSize: "clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem)",
+						fontSize: fontSizes["--step-0"],
 						"blockquote p:first-of-type::before": false,
 						"blockquote p:last-of-type::after": false,
 					},

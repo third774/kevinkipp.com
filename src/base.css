@@ -135,3 +135,18 @@ body {
 .profile {
 	border-radius: 35% 65% 60% 25% / 35% 20% 60% 65%;
 }
+
+.flow > * + * {
+	margin-block-start: var(--flow-space, 1em);
+}
+
+h1,
+h2,
+h3 {
+	--flow-space: 1.5em;
+}
+
+.flow ol {
+	margin-inline-start: 2em;
+	list-style-type: decimal;
+}

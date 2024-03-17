@@ -1,0 +1,15 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { twMerge } from "tailwind-merge";
+
+interface Props extends HTMLAttributes<"pre"> {}
+const { class: className, tabindex, ...rest } = Astro.props;
+---
+
+<!-- whitespace formatting is important for this element! -->
+<pre
+	class={twMerge(
+		"text-sm px-[1.5em] py-[1em] -mx-[1.5em] rounded-lg",
+		className,
+	)}
+	{...rest}><slot /></pre>

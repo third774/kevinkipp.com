@@ -1,0 +1,26 @@
+---
+import Page from "../layouts/Page.astro";
+import { components } from "../utils/components.astro";
+import { Content, frontmatter } from "../content/misc/uses.mdx";
+import ColumnWrapper from "../components/ColumnWrapper.astro";
+import Main from "../components/Main.astro";
+---
+
+<Page
+	headProps={{
+		title: frontmatter.title,
+	}}
+>
+	<Main>
+		<ColumnWrapper>
+			<style is:global>
+				h1 {
+					margin-block: 4rem;
+				}
+			</style>
+			<div class="flow">
+				<Content components={components} />
+			</div>
+		</ColumnWrapper>
+	</Main>
+</Page>
