@@ -68,6 +68,7 @@ We're going to need a wrangler.toml file with the `database_id` from each of the
 we just created.
 
 ```toml
+# wrangler.toml
 node_compat = true
 
 [[d1_databases]]
@@ -95,6 +96,7 @@ echo .wrangler >> .gitignore
 We need to add the D1 binding like this:
 
 ```ts
+// astro.config.ts
 import { defineConfig } from "astro/config";
 
 import cloudflare from "@astrojs/cloudflare";
@@ -132,6 +134,7 @@ with D1 projects, so we're going to use a [workaround](https://github.com/drizzl
 for now. This is what our `drizzle.config.ts` file will look like:
 
 ```ts
+// drizzle.config.ts
 import type { Config } from "drizzle-kit";
 
 const {
@@ -155,10 +158,7 @@ export default LOCAL_DB_PATH
 			driver: "d1",
 			dbCredentials: {
 				wranglerConfigPath:
-					new URL(
-						"wrangler.toml",
-						import.meta.url,
-					).pathname +
+					new URL("wrangler.toml", import.meta.url).pathname +
 					// This is a hack to inject additional cli flags to wrangler
 					// since drizzle-kit doesn't support specifying environments
 					WRANGLER_CONFIG
@@ -174,58 +174,45 @@ export default LOCAL_DB_PATH
 Let's go ahead and create `src/schema.ts`
 
 ```ts
+// src/schema.ts
 import { drizzle } from "drizzle-orm/d1";
-import {
-	integer,
-	sqliteTable,
-	text,
-} from "drizzle-orm/sqlite-core";
+import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
-export const linkShare = sqliteTable(
-	"linkShare",
-	{
-		id: integer("id").primaryKey({
-			autoIncrement: true,
-		}),
-		url: text("url").notNull(),
-		title: text("title").notNull(),
-		remark: text("remark"),
-		created: integer("created", {
-			mode: "timestamp_ms",
-		})
-			.notNull()
-			.$defaultFn(() => new Date()),
-		modified: integer("modified", {
-			mode: "timestamp_ms",
-		})
-			.notNull()
-			.$defaultFn(() => new Date()),
-		deleted: integer("deleted", {
-			mode: "timestamp_ms",
-		}),
-	},
-);
+export const linkShare = sqliteTable("linkShare", {
+	id: integer("id").primaryKey({
+		autoIncrement: true,
+	}),
+	url: text("url").notNull(),
+	title: text("title").notNull(),
+	remark: text("remark"),
+	created: integer("created", {
+		mode: "timestamp_ms",
+	})
+		.notNull()
+		.$defaultFn(() => new Date()),
+	modified: integer("modified", {
+		mode: "timestamp_ms",
+	})
+		.notNull()
+		.$defaultFn(() => new Date()),
+	deleted: integer("deleted", {
+		mode: "timestamp_ms",
+	}),
+});
 ```
 
 ## Add scripts to `package.json`
 
-Let's add the following scripts to our `package.json`'s `scripts`.
+Let's add the following npm scripts to our `package.json`'s `scripts`.
 
 ```json
-{
-	// ...
-	"scripts": {
-		"db:generate": "drizzle-kit generate:sqlite",
-		"db:migrate:local": "wrangler d1 migrations apply d1-demo-prod-db --local",
-		"db:migrate:prod": "wrangler d1 migrations apply d1-demo-prod-db",
-		"db:migrate:preview": "wrangler d1 migrations apply --env preview d1-demo-preview-db",
-		"db:studio:local": "cross-env LOCAL_DB_PATH=$(find .wrangler/state/v3/d1/miniflare-D1DatabaseObject -type f -name '*.sqlite' -print -quit) drizzle-kit studio",
-		"db:studio:preview": "cross-env DB_NAME='d1-demo-preview-db' WRANGLER_CONFIG='--environment=preview' drizzle-kit studio",
-		"db:studio:prod": "drizzle-kit studio"
-		// ...
-	}
-	// ...
-}
+"db:generate": "drizzle-kit generate:sqlite",
+"db:migrate:local": "wrangler d1 migrations apply d1-demo-prod-db --local",
+"db:migrate:prod": "wrangler d1 migrations apply d1-demo-prod-db",
+"db:migrate:preview": "wrangler d1 migrations apply --env preview d1-demo-preview-db",
+"db:studio:local": "cross-env LOCAL_DB_PATH=$(find .wrangler/state/v3/d1/miniflare-D1DatabaseObject -type f -name '*.sqlite' -print -quit) drizzle-kit studio",
+"db:studio:preview": "cross-env DB_NAME='d1-demo-preview-db' WRANGLER_CONFIG='--environment=preview' drizzle-kit studio",
+"db:studio:prod": "drizzle-kit studio"
 ```
 
 ## Generate migrations
@@ -261,17 +248,16 @@ Try inserting a row into the `linkShares` table adding only the `url` and `title
 In `env.d.ts`, we need to do this:
 
 ```ts
+// env.d.ts
 /// <reference types="astro/client" />
 /// <reference path="../.astro/types.d.ts" />
 
-type D1Database =
-	import("@cloudflare/workers-types/experimental").D1Database;
+type D1Database = import("@cloudflare/workers-types/experimental").D1Database;
 type ENV = {
 	DB: D1Database;
 };
 
-type Runtime =
-	import("@astrojs/cloudflare").AdvancedRuntime<ENV>;
+type Runtime = import("@astrojs/cloudflare").AdvancedRuntime<ENV>;
 
 declare namespace App {
 	interface Locals extends Runtime {}
@@ -284,13 +270,12 @@ In `src/pages/index.astro`, you can now query the D1 database:
 
 ```astro
 ---
+// src/pages/index.astro
 import { desc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/d1";
 import { linkShare } from "../schema";
 
-const db = drizzle(
-	Astro.locals.runtime.env.DB,
-);
+const db = drizzle(Astro.locals.runtime.env.DB);
 
 const links = await db
 	.select()
@@ -301,19 +286,9 @@ const links = await db
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link
-			rel="icon"
-			type="image/svg+xml"
-			href="/favicon.svg"
-		/>
-		<meta
-			name="viewport"
-			content="width=device-width"
-		/>
-		<meta
-			name="generator"
-			content={Astro.generator}
-		/>
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
 		<title>Astro</title>
 	</head>
 	<body>
@@ -322,9 +297,7 @@ const links = await db
 			{
 				links.map((link) => (
 					<li>
-						<a href={link.url}>
-							{link.title}
-						</a>
+						<a href={link.url}>{link.title}</a>
 					</li>
 				))
 			}
