@@ -40,6 +40,7 @@ module.exports = {
 			typography: {
 				DEFAULT: {
 					css: {
+						fontSize: "clamp(1.125rem, 1.0815rem + 0.2174vw, 1.25rem)",
 						"blockquote p:first-of-type::before": false,
 						"blockquote p:last-of-type::after": false,
 					},
