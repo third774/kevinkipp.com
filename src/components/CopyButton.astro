@@ -1,15 +1,23 @@
 ---
 import { cn } from "../utils/cn";
-type Props = { text: string } & astroHTML.JSX.ButtonHTMLAttributes;
+type Props = {
+	text?: string;
+	from?: string;
+} & astroHTML.JSX.ButtonHTMLAttributes;
 
-const { text, class: className, ...rest } = Astro.props;
+const { text, from, class: className, ...rest } = Astro.props;
 ---
 
-<button class={cn("copy-button", className)} data-text={text} {...rest}>
+<button
+	class={cn("copy-button", className)}
+	data-from={from}
+	data-text={text}
+	{...rest}
+>
 	<span class="idle">
 		<slot />
 	</span>
-	<span class="copied" hidden>✅ Copied!</span>
+	<span class="copied" hidden>Copied!</span>
 </button>
 
 <script is:inline>
@@ -21,7 +29,10 @@ const { text, class: className, ...rest } = Astro.props;
 		let timeout = -1;
 		button.addEventListener("click", () => {
 			copiedContent.removeAttribute("hidden");
-			navigator.clipboard.writeText(button.dataset.text);
+			const { text, from } = button.dataset;
+			navigator.clipboard.writeText(
+				from ? document.querySelector(from).textContent : text,
+			);
 			clearTimeout(timeout);
 			timeout = window.setTimeout(() => {
 				idleContent.style.display = "inline";
