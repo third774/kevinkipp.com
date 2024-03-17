@@ -7,7 +7,6 @@ import ColumnWrapper from "../components/ColumnWrapper.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import Main from "../components/Main.astro";
-import Prose from "../components/Prose.astro";
 import Html from "./Html.astro";
 
 type Props = {
@@ -21,10 +20,8 @@ type Props = {
 		<Header />
 		<Main>
 			<ColumnWrapper>
-				<article>
-					<Prose>
-						<slot />
-					</Prose>
+				<article class="flow">
+					<slot />
 				</article>
 			</ColumnWrapper>
 		</Main>

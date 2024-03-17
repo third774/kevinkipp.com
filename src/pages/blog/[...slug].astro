@@ -2,6 +2,7 @@
 import { type CollectionEntry } from "astro:content";
 import { getPublishedBlogPosts } from "../../content/blog/_getPublishedBlogPosts";
 import BlogPost from "../../layouts/BlogPost.astro";
+import { components } from "../../utils/components.astro";
 
 interface Props {
 	post: CollectionEntry<"blog">;
@@ -20,5 +21,5 @@ const { Content, remarkPluginFrontmatter } = await post.render();
 ---
 
 <BlogPost minutesRead={remarkPluginFrontmatter.minutesRead} post={post}>
-	<Content />
+	<Content components={components} />
 </BlogPost>

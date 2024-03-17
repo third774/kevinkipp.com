@@ -1,0 +1,23 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "../utils/cn";
+import Link from "./Link.astro";
+
+interface Props extends HTMLAttributes<"h4"> {}
+
+const { class: className, id, ...props } = Astro.props;
+---
+
+<h4
+	class={cn("group text-xl font-bold leading-tight", className)}
+	id={id}
+	{...props}
+>
+	<slot />
+	<Link
+		href={`#${id}`}
+		class="opacity-0 group-hover:opacity-100 focus-visible:opacity-100"
+	>
+		#
+	</Link>
+</h4>

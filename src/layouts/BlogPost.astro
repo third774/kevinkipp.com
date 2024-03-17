@@ -3,14 +3,15 @@ import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import Body from "../components/Body.astro";
+import Hr from "../components/Hr.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import Header from "../components/Header.astro";
 import Main from "../components/Main.astro";
-import Prose from "../components/Prose.astro";
 import Html from "./Html.astro";
 import Share from "../components/Share.astro";
 import ColumnWrapper from "../components/ColumnWrapper.astro";
+import H1 from "../components/H1.astro";
 
 type Props = {
 	post: CollectionEntry<"blog">;
@@ -30,9 +31,9 @@ const { title, description, published, updatedDate, heroImage, heroAlt } = data;
 			<ColumnWrapper>
 				<article class="space-y-12">
 					<div class="my-16 space-y-3">
-						<h1 class="text-4xl leading-none font-blackest">
+						<H1>
 							{title}
-						</h1>
+						</H1>
 						<div class="text-sm subtle">
 							<FormattedDate
 								date={published}
@@ -67,10 +68,10 @@ const { title, description, published, updatedDate, heroImage, heroAlt } = data;
 							)
 						}
 					</div>
-					<Prose>
-						<hr />
+					<Hr />
+					<div class="flow">
 						<slot />
-					</Prose>
+					</div>
 					{
 						Astro.site && (
 							<Share

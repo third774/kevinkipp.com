@@ -14,6 +14,7 @@ import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import { getPublishedBlogPosts } from "../content/blog/_getPublishedBlogPosts";
 import Html from "../layouts/Html.astro";
 import ColumnWrapper from "../components/ColumnWrapper.astro";
+import H1 from "../components/H1.astro";
 
 const { src } = await getImage({
 	src: profile,
@@ -35,14 +36,14 @@ const posts = await getPublishedBlogPosts().then(
 			<ColumnWrapper>
 				<div class="flex flex-wrap items-center gap-8 my-24">
 					<img
-						class="profile max-w-[8rem] md:max-w-[12rem]"
+						class="profile max-w-[6rem] sm:max-w-[14rem] md:max-w-max"
 						src={src}
-						height="200"
-						width="200"
+						height="270"
+						width="270"
 						alt="Kevin Kipp in Yosemite with a river with El Capitan in the background. He's smiling and wearing a tan hat."
 					/>
 					<div class="">
-						<h1 class="text-4xl font-blackest">👋🏻 Heyo! I'm Kevin.</h1>
+						<H1>👋🏻 Heyo! I'm Kevin.</H1>
 						<div class="space-y-2 text-lg">
 							<p class="subtle">UI Engineer based in Austin, TX.</p>
 						</div>
@@ -57,7 +58,7 @@ const posts = await getPublishedBlogPosts().then(
 								<li>
 									<div class="space-y-2">
 										<div>
-											<h2>
+											<h2 class="text-3xl font-black leading-none">
 												<Link
 													href={`/blog/${post.slug}/`}
 													class="text-xl font-bold leading-none"
