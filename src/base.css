@@ -107,21 +107,25 @@ body {
 	}
 }
 
-* {
-	scrollbar-color: var(--scrollbar-foreground) var(--scrollbar-background);
-}
-
 *::-webkit-scrollbar {
-	width: 10px; /* Mostly for vertical scrollbars */
-	height: 10px; /* Mostly for horizontal scrollbars */
+	width: 10px;
+	height: 10px;
 }
 
 *::-webkit-scrollbar-thumb {
 	background: var(--scrollbar-foreground);
+	border-radius: 10px;
 }
 
 *::-webkit-scrollbar-track {
 	background: var(--scrollbar-background);
+}
+
+@supports not selector(::-webkit-scrollbar) {
+	* {
+		scrollbar-color: var(--scrollbar-foreground) var(--scrollbar-background);
+		scrollbar-width: thin;
+	}
 }
 
 .prose pre:has(> code) {
