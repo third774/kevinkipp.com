@@ -128,12 +128,6 @@ body {
 	}
 }
 
-.prose pre:has(> code) {
-	@media screen(md) {
-		margin-inline: calc(theme(spacing.4) * -1);
-	}
-}
-
 .profile {
 	border-radius: 35% 65% 60% 25% / 35% 20% 60% 65%;
 }
