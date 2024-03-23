@@ -17,10 +17,14 @@
 	--recursive-crsv: "CRSV" 0.5;
 
 	--color-subtle: theme(colors.gray.700);
+	--scrollbar-background: theme(colors.gray.400);
+	--scrollbar-foreground: theme(colors.teal.700);
 }
 
 html.dark {
 	--color-subtle: theme(colors.gray.400);
+	--scrollbar-background: theme(colors.gray.700);
+	--scrollbar-foreground: theme(colors.teal.400);
 }
 
 * {
@@ -92,18 +96,6 @@ blockquote {
 @media (prefers-reduced-motion: no-preference) {
 	:where(html:focus-within) {
 		scroll-behavior: smooth;
-	}
-}
-
-body {
-	--scrollbar-background: theme(colors.gray.400);
-	--scrollbar-foreground: theme(colors.teal.700);
-}
-
-@media (prefers-color-scheme: dark) {
-	body {
-		--scrollbar-background: theme(colors.gray.700);
-		--scrollbar-foreground: theme(colors.teal.400);
 	}
 }
 
