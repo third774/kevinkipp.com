@@ -71,16 +71,15 @@ h6 {
 em,
 .italic {
 	background: var(--color-emphasized);
-	font-variation-settings:
-		"CRSV" 1,
-		"CASL" 1;
+	--recursive-casl: "CASL" 1;
+	--recursive-crsv: "CRSV" 1;
+	--recursive-slnt: "slnt" -15;
 }
 
 blockquote {
-	font-variation-settings:
-		"CRSV" 1,
-		"CASL" 1,
-		"slnt" -15;
+	--recursive-casl: "CASL" 1;
+	--recursive-slnt: "slnt" -15;
+	--recursive-crsv: "CRSV" 1;
 }
 
 :where(body) {
