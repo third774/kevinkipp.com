@@ -22,6 +22,11 @@ module.exports = {
 	content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
 	theme: {
 		colors: harmonyPalette,
+		textColor: (theme) => ({
+			...theme("colors"),
+			subtle: "var(--color-subtle)",
+		}),
+
 		// https://zellwk.com/blog/media-query-units/
 		screens: {
 			sm: "40em",
@@ -64,5 +69,5 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [require("@tailwindcss/typography")],
+	plugins: [],
 };

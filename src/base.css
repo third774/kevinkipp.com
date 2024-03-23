@@ -15,19 +15,17 @@
 	--recursive-slnt: "slnt" 0;
 	/* Cursive: 0 always roman, 0.5 auto substitution, or 1 always cursive */
 	--recursive-crsv: "CRSV" 0.5;
+
+	--color-subtle: theme(colors.gray.700);
+}
+
+html.dark {
+	--color-subtle: theme(colors.gray.400);
 }
 
 * {
 	font-variation-settings: var(--recursive-mono), var(--recursive-casl),
 		var(--recursive-slnt), var(--recursive-crsv);
-}
-
-:where(.subtle) {
-	color: theme(colors.gray.700);
-}
-
-:where(.dark .subtle) {
-	color: theme(colors.gray.400);
 }
 
 @font-face {

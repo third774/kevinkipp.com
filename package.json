@@ -48,7 +48,6 @@
 	},
 	"devDependencies": {
 		"@csstools/postcss-oklab-function": "^3.0.9",
-		"@tailwindcss/typography": "^0.5.10",
 		"better-sqlite3": "^9.4.3",
 		"cross-env": "^7.0.3",
 		"drizzle-kit": "^0.20.14",

@@ -45,7 +45,7 @@ const posts = await getPublishedBlogPosts().then(
 					<div class="">
 						<H1>👋🏻 Heyo! I'm Kevin.</H1>
 						<div class="space-y-2 text-lg">
-							<p class="subtle">UI Engineer based in Austin, TX.</p>
+							<p class="text-subtle">UI Engineer based in Austin, TX.</p>
 						</div>
 					</div>
 				</div>
@@ -66,7 +66,7 @@ const posts = await getPublishedBlogPosts().then(
 													{post.data.title}
 												</Link>
 											</h2>
-											<div class="text-xs subtle">
+											<div class="text-xs text-subtle">
 												<FormattedDate
 													date={post.data.published}
 													year="numeric"
@@ -76,7 +76,7 @@ const posts = await getPublishedBlogPosts().then(
 											</div>
 										</div>
 
-										<p class="subtle">{post.data.description}</p>
+										<p class="text-subtle">{post.data.description}</p>
 										{post.data.heroImage && (
 											<Image
 												src={post.data.heroImage}
