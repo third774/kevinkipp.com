@@ -17,12 +17,14 @@
 	--recursive-crsv: "CRSV" 0.5;
 
 	--color-subtle: theme(colors.gray.700);
+	--color-emphasized: theme(colors.teal.300);
 	--scrollbar-background: theme(colors.gray.400);
 	--scrollbar-foreground: theme(colors.teal.700);
 }
 
 html.dark {
 	--color-subtle: theme(colors.gray.400);
+	--color-emphasized: theme(colors.teal.800);
 	--scrollbar-background: theme(colors.gray.700);
 	--scrollbar-foreground: theme(colors.teal.400);
 }
@@ -66,7 +68,9 @@ h6 {
 	text-wrap: balance;
 }
 
-em {
+em,
+.italic {
+	background: var(--color-emphasized);
 	font-variation-settings:
 		"CRSV" 1,
 		"CASL" 1;
