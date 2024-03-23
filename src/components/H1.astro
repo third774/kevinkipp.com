@@ -8,7 +8,7 @@ const { class: className, ...props } = Astro.props;
 ---
 
 <h1
-	class={cn("group text-4xl font-blackest leading-none", className)}
+	class={cn("group text-4xl font-blackest leading-none w-fit", className)}
 	{...props}
 >
 	<slot />
