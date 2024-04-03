@@ -6,6 +6,8 @@
 }
 ---
 
+import Link from "../../components/Link.astro";
+
 For a little while now, I've been wanting to set up a page and RSS feed where I
 can share links, kinda similar to [Jeremy Keith's links page](https://adactio.com/links).
 Until now, I've mostly been using Astro's [content collections](https://docs.astro.build/en/guides/content-collections/)
@@ -21,6 +23,9 @@ to use [D1](https://developers.cloudflare.com/d1/), and have been hearing good
 things about [Drizzle](https://orm.drizzle.team/), so I figured I'd give that a
 go. I plan on writing up a guide on how I set everything up, but for now...
 
-Check out the new page over at <sparkly-text style="--sparkly-text-color: oklch(89.12% 0.141 103.76); --sparkly-text-size: 2.5em"><a href="/shared">/shared</a></sparkly-text>
+Check out the new page over at <sparkly-text style="--sparkly-text-color: oklch(89.12% 0.141 103.76); --sparkly-text-size: 2.5em"><Link href="/shared">/shared</Link></sparkly-text>
 
-<script src="https://www.unpkg.com/@stefanjudis/sparkly-text@1.0.8/sparkly-text.js" type="module" ></script>
+<script
+	src="https://www.unpkg.com/@stefanjudis/sparkly-text@1.0.8/sparkly-text.js"
+	type="module"
+></script>
