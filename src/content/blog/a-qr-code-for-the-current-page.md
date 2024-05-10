@@ -27,23 +27,16 @@ that already had access to the element.
 ```html
 <script type="module">
 	import QrCode from "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/components/qr-code/qr-code.component.js";
-	const elementName = "href-qr-code";
-	if (
-		!window.customElements.get(
-			elementName,
-		)
-	) {
-		window.customElements.define(
-			elementName,
-			class HrefQrCode extends QrCode {
-				connectedCallback() {
-					super.connectedCallback();
-					this.value =
-						window.location.href;
-				}
-			},
-		);
-	}
+	window.customElements.define(
+		"href-qr-code",
+		class HrefQrCode extends QrCode {
+			connectedCallback() {
+				super.connectedCallback();
+				this.value =
+					window.location.href;
+			}
+		},
+	);
 </script>
 ```
 
@@ -58,15 +51,9 @@ That's it! Now this just works:
 Web components are dope.
 
 <script type="module">
-import QrCode from "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/components/qr-code/qr-code.component.js";
-const elementName = "href-qr-code";
-if (
-	!window.customElements.get(
-		elementName,
-	)
-) {
+	import QrCode from "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/components/qr-code/qr-code.component.js";
 	window.customElements.define(
-		elementName,
+		"href-qr-code",
 		class HrefQrCode extends QrCode {
 			connectedCallback() {
 				super.connectedCallback();
@@ -75,5 +62,4 @@ if (
 			}
 		},
 	);
-}
 </script>
