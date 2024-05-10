@@ -24,25 +24,27 @@ Tonight I realized it'd be pretty easy to just extend the
 Shoelace QR Code component to add this behavior in a way
 that already had access to the element.
 
-```ts
-import QrCode from "@shoelace-style/shoelace/dist/components/qr-code/qr-code.component";
-const elementName = "href-qr-code";
-if (
-	!window.customElements.get(
-		elementName,
-	)
-) {
-	window.customElements.define(
-		elementName,
-		class HrefQrCode extends QrCode {
-			connectedCallback() {
-				super.connectedCallback();
-				this.value =
-					window.location.href;
-			}
-		},
-	);
-}
+```html
+<script type="module">
+	import QrCode from "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/components/qr-code/qr-code.component.js";
+	const elementName = "href-qr-code";
+	if (
+		!window.customElements.get(
+			elementName,
+		)
+	) {
+		window.customElements.define(
+			elementName,
+			class HrefQrCode extends QrCode {
+				connectedCallback() {
+					super.connectedCallback();
+					this.value =
+						window.location.href;
+				}
+			},
+		);
+	}
+</script>
 ```
 
 That's it! Now this just works:
