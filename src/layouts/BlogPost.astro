@@ -3,7 +3,6 @@ import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import Body from "../components/Body.astro";
-import Hr from "../components/Hr.astro";
 import Footer from "../components/Footer.astro";
 import FormattedDate from "../components/FormattedDate.astro";
 import Header from "../components/Header.astro";
@@ -30,7 +29,7 @@ const { title, description, published, updatedDate, heroImage, heroAlt } = data;
 		<Main>
 			<ColumnWrapper>
 				<article class="space-y-12">
-					<div class="my-28 space-y-3">
+					<div class="my-20 md:my-28 space-y-3">
 						<H1>
 							{title}
 						</H1>
