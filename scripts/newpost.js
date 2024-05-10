@@ -17,7 +17,7 @@ const rl = readline.createInterface({
 
 rl.question("Enter the title of the post: ", (title) => {
 	rl.question("Enter the description of the post: ", (description) => {
-		const fileName = `${title.replace(/\s+/g, "-").toLowerCase()}.md`;
+		const fileName = `${title.replace(/\s+/g, "-").toLowerCase()}.mdx`;
 		const filePath = `./src/content/blog/-draft-${fileName}`;
 		const fileContent = `---
 {
