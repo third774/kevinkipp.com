@@ -19,14 +19,8 @@ export default defineConfig({
 	],
 	output: "hybrid",
 	adapter: cloudflare({
-		runtime: {
-			mode: "local",
-			type: "pages",
-			bindings: {
-				DB: {
-					type: "d1",
-				},
-			},
+		platformProxy: {
+			enabled: true,
 		},
 	}),
 	markdown: {

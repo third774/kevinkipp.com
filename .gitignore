@@ -24,3 +24,4 @@ pnpm-debug.log*
 
 .wrangler
 .dev.vars
+.drizzle.env
