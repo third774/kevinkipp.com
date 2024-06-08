@@ -1,8 +1,3 @@
-const { FEEDBIN_EMAIL, FEEDBIN_PASSWORD } = import.meta.env;
-const headers = {
-	Authorization: `Basic ${btoa(`${FEEDBIN_EMAIL}:${FEEDBIN_PASSWORD}`)}`,
-};
-
 interface Subscription {
 	id: number;
 	created_at: string;
@@ -12,9 +7,32 @@ interface Subscription {
 	site_url: string;
 }
 
-export async function getSubscriptions() {
+const subscriptionsApiUrl = "https://api.feedbin.com/v2/subscriptions.json";
+const cacheKey = "feedbin:subscriptions";
+
+export async function getSubscriptions({ runtime: { env } }: App.Locals) {
+	const { FEEDBIN_EMAIL, FEEDBIN_PASSWORD, KV_API_CACHE } = env;
+	const cachedSubscriptions = await KV_API_CACHE.get(cacheKey);
+
+	if (cachedSubscriptions) {
+		return JSON.parse(cachedSubscriptions);
+	}
+
+	const headers = {
+		Authorization: `Basic ${btoa(`${FEEDBIN_EMAIL}:${FEEDBIN_PASSWORD}`)}`,
+	};
+
 	// fetch from feedbin api
-	return fetch("https://api.feedbin.com/v2/subscriptions.json", {
+	const response = await fetch(subscriptionsApiUrl, {
 		headers,
-	}).then((response) => response.json() as Promise<Subscription[]>);
+	});
+
+	const subscriptions: Subscription[] = await response.json();
+
+	await KV_API_CACHE.put(cacheKey, JSON.stringify(subscriptions), {
+		// 1 day
+		expirationTtl: 86400,
+	});
+
+	return subscriptions;
 }

@@ -6,6 +6,10 @@ database_name = "kevinkipp.com"
 database_id = "d5c17b3d-78fb-4894-a743-95b19cac53a9"
 preview_database_id = "DB"
 
+[[kv_namespaces]]
+binding = "KV_API_CACHE"
+id = "8f88c02d5415430f8e4a751021268b43"
+
 [env.preview]
 name = "preview"
 [[env.preview.d1_databases]]

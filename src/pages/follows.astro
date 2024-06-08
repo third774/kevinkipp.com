@@ -5,7 +5,9 @@ import { getSubscriptions } from "../api/feedbin";
 import Link from "../components/Link.astro";
 import ColumnWrapper from "../components/ColumnWrapper.astro";
 
-const subscriptions = await getSubscriptions().then((subs) =>
+export const prerender = false;
+
+const subscriptions = await getSubscriptions(Astro.locals).then((subs) =>
 	subs.filter(
 		(sub) =>
 			sub.site_url !== Astro.site?.toString() &&

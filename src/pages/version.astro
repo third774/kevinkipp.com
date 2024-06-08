@@ -1,13 +1,14 @@
 ---
-import { execSync } from "node:child_process";
 import Html from "../layouts/Html.astro";
 import BaseHead from "../components/BaseHead.astro";
 import Body from "../components/Body.astro";
 import CopyButton from "../components/CopyButton.astro";
 import Header from "../components/Header.astro";
 
+export const prerender = true;
+
 // get commit hash
-const commitHash = execSync("git rev-parse --short HEAD").toString().trim();
+const commitHash = import.meta.env.VITE_COMMIT_HASH ?? "development";
 
 //first three characters of commit hash
 const commitHashShort = commitHash.slice(0, 3);
