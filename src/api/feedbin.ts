@@ -8,37 +8,31 @@ interface Subscription {
 }
 
 const subscriptionsApiUrl = "https://api.feedbin.com/v2/subscriptions.json";
+const cacheKey = "feedbin:subscriptions";
 
-export async function getSubscriptions({
-	runtime: { env, caches },
-}: App.Locals) {
-	const cache = await caches.open("feedbin:subscriptions");
-	const { FEEDBIN_EMAIL, FEEDBIN_PASSWORD } = env;
+export async function getSubscriptions({ runtime: { env } }: App.Locals) {
+	const { FEEDBIN_EMAIL, FEEDBIN_PASSWORD, KV_API_CACHE } = env;
+	const cachedSubscriptions = await KV_API_CACHE.get(cacheKey);
+
+	if (cachedSubscriptions) {
+		return JSON.parse(cachedSubscriptions);
+	}
+
 	const headers = {
 		Authorization: `Basic ${btoa(`${FEEDBIN_EMAIL}:${FEEDBIN_PASSWORD}`)}`,
 	};
+
 	// fetch from feedbin api
-	const request = new Request(subscriptionsApiUrl, {
+	const response = await fetch(subscriptionsApiUrl, {
 		headers,
 	});
 
-	const match = await cache.match(subscriptionsApiUrl, {
-		ignoreMethod: true,
-	});
-	const response: Response = (match ??
-		(await fetch(request).then((res) => {
-			console.log("Fetched subscriptions from feedbin");
-			return res;
-		}))) as any;
-
-	if (!match) {
-		const cachedResponse = new Response(await response.clone().text(), {
-			headers: new Headers([...response.headers]),
-		});
-		cachedResponse.headers.set("Cache-Control", "max-age=180, public");
-		await cache.put(subscriptionsApiUrl, cachedResponse as any);
-	}
-
 	const subscriptions: Subscription[] = await response.json();
+
+	await KV_API_CACHE.put(cacheKey, JSON.stringify(subscriptions), {
+		// 1 day
+		expirationTtl: 86400,
+	});
+
 	return subscriptions;
 }
