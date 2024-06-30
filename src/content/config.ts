@@ -13,7 +13,7 @@ const blog = defineCollection({
 					.optional()
 					.or(z.date())
 					.transform((val) => new Date(val ?? 0)),
-				updatedDate: z
+				updated: z
 					.string()
 					.optional()
 					.transform((str) => (str ? new Date(str) : undefined)),

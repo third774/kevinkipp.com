@@ -19,7 +19,7 @@ type Props = {
 
 const { data, slug } = Astro.props.post;
 
-const { title, description, published, updatedDate, heroImage, heroAlt } = data;
+const { title, description, published, updated, heroImage, heroAlt } = data;
 ---
 
 <Html>
@@ -42,17 +42,34 @@ const { title, description, published, updatedDate, heroImage, heroAlt } = data;
 							/> • <span>
 								~{Astro.props.minutesRead}
 							</span>
+
+							{
+								updated && (
+									<>
+										<span> • </span>
+										<sparkly-text style="--sparkly-text-color: oklch(89.12% 0.141 103.76); --sparkly-text-size: 2.5em">
+											Updated
+											<FormattedDate
+												date={updated}
+												year="numeric"
+												month="short"
+												day="numeric"
+											/>
+											<script
+												src="https://www.unpkg.com/@stefanjudis/sparkly-text@1.0.8/sparkly-text.js"
+												type="module"
+												is:inline
+											/>
+										</sparkly-text>
+									</>
+								)
+							}
 						</div>
-						{
-							updatedDate && (
-								<div>
-									Last updated on <FormattedDate date={updatedDate} />
-								</div>
-							)
-						}
+
 						<p class="text-subtle">
 							{description}
 						</p>
+
 						{
 							heroImage && (
 								<div class="hero-image">
