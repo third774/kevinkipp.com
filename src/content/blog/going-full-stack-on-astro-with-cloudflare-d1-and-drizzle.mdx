@@ -85,10 +85,11 @@ database_name = "d1-demo-preview-db"
 database_id = "yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy"
 ```
 
-## Add `.wrangler` to `.gitignore`
+## Update `.gitignore`
 
 ```
 echo .wrangler >> .gitignore
+echo .drizzle.env >> .gitignore
 ```
 
 ## Update `astro.config.ts`
@@ -105,14 +106,8 @@ import cloudflare from "@astrojs/cloudflare";
 export default defineConfig({
 	output: "server",
 	adapter: cloudflare({
-		runtime: {
-			mode: "local",
-			type: "pages",
-			bindings: {
-				DB: {
-					type: "d1",
-				},
-			},
+		platformProxy: {
+			enabled: true,
 		},
 	}),
 });
@@ -137,17 +132,13 @@ for now. This is what our `drizzle.config.ts` file will look like:
 // drizzle.config.ts
 import type { Config } from "drizzle-kit";
 
-const {
-	LOCAL_DB_PATH,
-	WRANGLER_CONFIG,
-	DB_NAME = "d1-demo-prod-db",
-} = process.env;
+const { LOCAL_DB_PATH, DB_ID, D1_TOKEN, CF_ACCOUNT_ID } = process.env;
 
 // Use better-sqlite driver for local development
 export default LOCAL_DB_PATH
 	? ({
 			schema: "./src/schema.ts",
-			driver: "better-sqlite",
+			dialect: "sqlite",
 			dbCredentials: {
 				url: LOCAL_DB_PATH,
 			},
@@ -155,16 +146,12 @@ export default LOCAL_DB_PATH
 	: ({
 			schema: "./src/schema.ts",
 			out: "./migrations",
-			driver: "d1",
+			dialect: "sqlite",
+			driver: "d1-http",
 			dbCredentials: {
-				wranglerConfigPath:
-					new URL("wrangler.toml", import.meta.url).pathname +
-					// This is a hack to inject additional cli flags to wrangler
-					// since drizzle-kit doesn't support specifying environments
-					WRANGLER_CONFIG
-						? ` ${WRANGLER_CONFIG}`
-						: "",
-				dbName: DB_NAME,
+				databaseId: DB_ID!,
+				token: D1_TOKEN!,
+				accountId: CF_ACCOUNT_ID!,
 			},
 		} satisfies Config);
 ```
@@ -175,7 +162,6 @@ Let's go ahead and create `src/schema.ts`
 
 ```ts
 // src/schema.ts
-import { drizzle } from "drizzle-orm/d1";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 export const linkShare = sqliteTable("linkShare", {
@@ -205,14 +191,21 @@ export const linkShare = sqliteTable("linkShare", {
 
 Let's add the following npm scripts to our `package.json`'s `scripts`.
 
+_Be sure to update the `DB_ID` values according to your preview and prod ID's generated
+in the previous steps!_
+
 ```json
-"db:generate": "drizzle-kit generate:sqlite",
-"db:migrate:local": "wrangler d1 migrations apply d1-demo-prod-db --local",
-"db:migrate:prod": "wrangler d1 migrations apply d1-demo-prod-db",
-"db:migrate:preview": "wrangler d1 migrations apply --env preview d1-demo-preview-db",
-"db:studio:local": "cross-env LOCAL_DB_PATH=$(find .wrangler/state/v3/d1/miniflare-D1DatabaseObject -type f -name '*.sqlite' -print -quit) drizzle-kit studio",
-"db:studio:preview": "cross-env DB_NAME='d1-demo-preview-db' WRANGLER_CONFIG='--environment=preview' drizzle-kit studio",
-"db:studio:prod": "drizzle-kit studio"
+{
+	"scripts": {
+		"db:generate": "drizzle-kit generate",
+		"db:migrate:local": "wrangler d1 migrations apply d1-demo-prod-db --local",
+		"db:migrate:prod": "wrangler d1 migrations apply d1-demo-prod-db --remote",
+		"db:migrate:preview": "wrangler d1 migrations apply --env preview d1-demo-preview-db --remote",
+		"db:studio:local": "LOCAL_DB_PATH=$(find .wrangler/state/v3/d1/miniflare-D1DatabaseObject -type f -name '*.sqlite' -print -quit) drizzle-kit studio",
+		"db:studio:preview": "source .drizzle.env && DB_ID='yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy' drizzle-kit studio",
+		"db:studio:prod": "source .drizzle.env && DB_ID='xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx' drizzle-kit studio"
+	}
+}
 ```
 
 ## Generate migrations
@@ -245,19 +238,21 @@ Try inserting a row into the `linkShares` table adding only the `url` and `title
 
 ## Add DB to locals
 
-In `env.d.ts`, we need to do this:
+To generate our D1 binding types, we need to run:
+
+```sh
+npx wrangler types
+```
+
+Then update `src/env.d.ts` as follows:
 
 ```ts
-// env.d.ts
-/// <reference types="astro/client" />
+// src/env.d.ts
+
 /// <reference path="../.astro/types.d.ts" />
+/// <reference types="astro/client" />
 
-type D1Database = import("@cloudflare/workers-types/experimental").D1Database;
-type ENV = {
-	DB: D1Database;
-};
-
-type Runtime = import("@astrojs/cloudflare").AdvancedRuntime<ENV>;
+type Runtime = import("@astrojs/cloudflare").Runtime<Env>;
 
 declare namespace App {
 	interface Locals extends Runtime {}
@@ -325,6 +320,16 @@ npm run dev
 ```sh
 npm run db:migrate:preview
 npm run db:migrate:prod
+```
+
+## Create `.drizzle.env`
+
+Since prod and preview are going to use the `d1-http` adapter, we need to provide these tokens
+in the `.drizzle.env` file. You can create this token [here](https://dash.cloudflare.com/profile/api-tokens?permissionGroupKeys=%5B%7B%22key%22%3A%22d1%22%2C%22type%22%3A%22edit%22%7D%5D&name=d1-token&accountId=*&zoneId=all).
+
+```sh
+export D1_TOKEN=aaaaaaaaaaaaaaaaaaaaaaaaaaaa
+export CF_ACCOUNT_ID=bbbbbbbbbbbbbbbbbbbbbbbbbbbb
 ```
 
 ## Add data to preview and prod environments
