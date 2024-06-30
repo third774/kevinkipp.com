@@ -4,10 +4,10 @@
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "wrangler types && astro dev --open",
-		"db:generate": "drizzle-kit generate:sqlite",
+		"db:generate": "drizzle-kit generate",
 		"db:migrate:local": "wrangler d1 migrations apply kevinkipp.com --local",
-		"db:migrate:prod": "wrangler d1 migrations apply kevinkipp.com",
-		"db:migrate:preview": "wrangler d1 migrations apply --env preview kevinkipp.com_preview",
+		"db:migrate:prod": "wrangler d1 migrations apply kevinkipp.com --remote",
+		"db:migrate:preview": "wrangler d1 migrations apply --env preview kevinkipp.com_preview --remote",
 		"db:studio:local": "LOCAL_DB_PATH=$(find .wrangler/state/v3/d1/miniflare-D1DatabaseObject -type f -name '*.sqlite' -print -quit) drizzle-kit studio",
 		"db:studio:preview": "source .drizzle.env && DB_ID='167258f1-9e95-4b98-80fd-df0f4e81112b' drizzle-kit studio",
 		"db:studio:prod": "source .drizzle.env && DB_ID='d5c17b3d-78fb-4894-a743-95b19cac53a9' drizzle-kit studio",
