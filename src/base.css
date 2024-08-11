@@ -96,6 +96,15 @@ blockquote {
 	text-wrap: pretty;
 }
 
+:where(ul[role="list"], ol[role="list"]) {
+	list-style: none;
+}
+
+ul:not([role="list"]) {
+	list-style: circle;
+	padding-inline-start: 2rem;
+}
+
 @media (prefers-reduced-motion: no-preference) {
 	:where(html:focus-within) {
 		scroll-behavior: smooth;
