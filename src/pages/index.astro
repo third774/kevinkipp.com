@@ -50,7 +50,7 @@ const posts = await getPublishedBlogPosts().then(
 
 				<section class="space-y-2xl">
 					<h2 class="text-2xl font-extrabold">Recent Posts</h2>
-					<ul class="grid gap-l-xl">
+					<ul role="list" class="grid gap-l-xl">
 						{
 							posts.map((post) => (
 								<li>
