@@ -22,6 +22,11 @@
 	--scrollbar-foreground: theme(colors.teal.700);
 }
 
+:where(html) {
+	font-size: 1em;
+	font: -apple-system-body;
+}
+
 html.dark {
 	--color-subtle: theme(colors.gray.400);
 	--color-emphasized: theme(colors.teal.800);
