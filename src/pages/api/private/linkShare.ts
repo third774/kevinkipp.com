@@ -1,14 +1,14 @@
 import type { APIRoute, AstroCookies } from "astro";
+import { z } from "astro/zod";
 import { API_TOKEN } from "astro:env/server";
-import { object, optional, safeParse, string } from "valibot";
 import { getDb, linkShare } from "../../../schema";
 
 export const prerender = false;
 
-const apiSchema = object({
-	url: string(),
-	title: string(),
-	remark: optional(string()),
+const apiSchema = z.object({
+	url: z.string(),
+	title: z.string(),
+	remark: z.string().optional(),
 });
 
 const hasEditPermission = ({
@@ -35,10 +35,10 @@ export const POST: APIRoute = async (Astro) => {
 		return new Response(null, { status: 401 });
 	}
 
-	const result = safeParse(apiSchema, await Astro.request.json());
+	const result = await apiSchema.safeParseAsync(Astro.request.json());
 
-	if (result.success) {
-		await getDb(Astro.locals).insert(linkShare).values(result.output);
+	if (result.data) {
+		await getDb(Astro.locals).insert(linkShare).values(result.data);
 		return new Response(null, {
 			status: 200,
 		});
