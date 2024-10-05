@@ -1,4 +1,5 @@
 ---
+import { API_TOKEN } from "astro:env/server";
 import * as jose from "jose";
 
 export interface Props {
@@ -16,9 +17,7 @@ if (!image) {
 	})
 		.setProtectedHeader({ alg: "HS256" })
 		.setIssuedAt()
-		.sign(
-			new TextEncoder().encode(import.meta.env.API_TOKEN ?? "og-images-secret"),
-		);
+		.sign(new TextEncoder().encode(API_TOKEN ?? "og-images-secret"));
 	image = "https://og-images.kevinkipp.com/" + jwt;
 }
 ---
