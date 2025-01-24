@@ -39,12 +39,6 @@ let { title, description, image } = Astro.props;
 
 	<OgImage title={title} description={description} image={image} />
 
-	<!-- Twitter -->
-
-	<meta property="twitter:url" content={Astro.url} />
-	<meta property="twitter:title" content={title} />
-	{description && <meta property="twitter:description" content={description} />}
-
 	<link
 		rel="alternate"
 		type="application/rss+xml"
