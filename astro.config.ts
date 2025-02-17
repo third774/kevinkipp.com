@@ -1,7 +1,7 @@
 import cloudflare from "@astrojs/cloudflare";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import robotsTxt from "astro-robots-txt";
 import { defineConfig, envField } from "astro/config";
 import { remarkReadingTime } from "./remark-reading-time.mjs";
@@ -9,6 +9,9 @@ import { remarkReadingTime } from "./remark-reading-time.mjs";
 // https://astro.build/config
 export default defineConfig({
 	site: "https://kevinkipp.com",
+	vite: {
+		plugins: [tailwindcss()],
+	},
 	experimental: {
 		env: {
 			schema: {
@@ -31,14 +34,7 @@ export default defineConfig({
 			},
 		},
 	},
-	integrations: [
-		mdx(),
-		sitemap(),
-		tailwind({
-			applyBaseStyles: false,
-		}),
-		robotsTxt(),
-	],
+	integrations: [mdx(), sitemap(), robotsTxt()],
 	output: "hybrid",
 	adapter: cloudflare({
 		platformProxy: {
