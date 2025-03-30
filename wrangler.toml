@@ -1,4 +1,5 @@
-node_compat = true
+compatibility_date = "2025-03-30"
+compatibility_flags = ["nodejs_compat"]
 
 [[d1_databases]]
 binding = "DB"                                       # i.e. available in your Worker on env.DB

@@ -1,6 +1,5 @@
-import type { APIRoute, AstroCookies } from "astro";
+import type { APIContext, APIRoute } from "astro";
 import { z } from "astro/zod";
-import { API_TOKEN } from "astro:env/server";
 import { getDb, linkShare } from "../../../schema";
 
 export const prerender = false;
@@ -14,10 +13,11 @@ const apiSchema = z.object({
 const hasEditPermission = ({
 	cookies,
 	request,
-}: {
-	request: Request;
-	cookies: AstroCookies;
-}) => {
+	locals: {
+		runtime: { env },
+	},
+}: APIContext<Record<string, any>, Record<string, string | undefined>>) => {
+	const { API_TOKEN } = env;
 	if (cookies.get("api_token")?.value === API_TOKEN) {
 		return true;
 	}

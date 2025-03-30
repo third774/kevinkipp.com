@@ -1,5 +1,4 @@
 ---
-import { API_TOKEN } from "astro:env/server";
 import * as jose from "jose";
 
 export interface Props {
@@ -9,6 +8,7 @@ export interface Props {
 }
 
 let { title, description, image } = Astro.props;
+const { API_TOKEN } = Astro.locals.runtime.env;
 
 if (!image) {
 	const jwt = await new jose.SignJWT({

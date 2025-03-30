@@ -1,5 +1,3 @@
-import { FEEDBIN_EMAIL, FEEDBIN_PASSWORD } from "astro:env/server";
-
 interface Subscription {
 	id: number;
 	created_at: string;
@@ -15,7 +13,7 @@ const cacheKey = "feedbin:subscriptions";
 export async function getSubscriptions({
 	runtime: { env },
 }: App.Locals): Promise<Subscription[]> {
-	const { KV_API_CACHE } = env;
+	const { KV_API_CACHE, FEEDBIN_EMAIL, FEEDBIN_PASSWORD } = env;
 	const cachedSubscriptions = await KV_API_CACHE.get(cacheKey);
 
 	if (cachedSubscriptions) {
