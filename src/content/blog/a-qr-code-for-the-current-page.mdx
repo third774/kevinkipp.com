@@ -1,8 +1,8 @@
 ---
 {
-	"title": "A QR Code for the current page",,
-	"description": "Extending Shoelace's QR Code component to show a QR Code for the current URL.",
-	"published": "2024-05-10T05:38:35.456Z",
+  "title": "A QR Code for the current page",
+  "description": "Extending Shoelace's QR Code component to show a QR Code for the current URL.",
+  "published": "2024-05-10T05:38:35.456Z",
 }
 ---
 
@@ -32,8 +32,7 @@ that already had access to the element.
 		class HrefQrCode extends QrCode {
 			connectedCallback() {
 				super.connectedCallback();
-				this.value =
-					window.location.href;
+				this.value = window.location.href;
 			}
 		},
 	);
@@ -50,7 +49,8 @@ That's it! Now this just works:
 
 Web components are dope.
 
-<script type="module">{`
+<script type="module">
+	{`
 	import QrCode from "https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/components/qr-code/qr-code.component.js";
 	window.customElements.define(
 		"href-qr-code",
