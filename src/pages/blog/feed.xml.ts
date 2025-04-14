@@ -1,5 +1,5 @@
 import rss from "@astrojs/rss";
-import type { AstroUserConfig } from "astro/config";
+import type { AstroUserConfig } from "astro";
 import { marked } from "marked";
 import sanitizeHtml from "sanitize-html";
 import invariant from "tiny-invariant";
