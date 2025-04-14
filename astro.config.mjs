@@ -1,3 +1,4 @@
+// @ts-check
 import cloudflare from "@astrojs/cloudflare";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
@@ -17,7 +18,7 @@ export default defineConfig({
 		}),
 		robotsTxt(),
 	],
-	output: "hybrid",
+	output: "static",
 	adapter: cloudflare({
 		platformProxy: {
 			enabled: true,
