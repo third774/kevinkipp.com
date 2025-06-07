@@ -627,7 +627,7 @@ declare class Event {
      */
     stopPropagation(): void;
     /**
-     * Returns the invocation target objects of event's path (objects on which listeners will be invoked), except for any nodes in shadow trees of which the shadow root's mode is "closed" that are not reachable from event's currentTarget.
+     * Returns the invocation target objects of event's path (objects on which listeners will be invoked), except for any nodes in shadow-sm trees of which the shadow-sm root's mode is "closed" that are not reachable from event's currentTarget.
      *
      * [MDN Reference](https://developer.mozilla.org/docs/Web/API/Event/composedPath)
      */

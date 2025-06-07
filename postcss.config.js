@@ -1,7 +1,6 @@
 export default {
 	plugins: {
-		tailwindcss: {},
+		"@tailwindcss/postcss": {},
 		"@csstools/postcss-oklab-function": { preserve: true },
-		autoprefixer: {},
 	},
 };
