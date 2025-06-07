@@ -1,6 +1,204 @@
 @import "tailwindcss";
 
-@config '../tailwind.config.cjs';
+@theme inline {
+	--font-sans: "Recursive", "Recursive-fallback", "sans-serif";
+	--font-mono: "Recursive", "Recursive-fallback", "sans-serif";
+	--font-weight-blackest: 1000;
+
+	/* @link https://utopia.fyi/type/calculator?c=320,16,1.125,1240,18,1.2,10,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+	--text-xs: clamp(0.7813rem, 0.7932rem + -0.0154vi, 0.7901rem);
+	--text-sm: clamp(0.8889rem, 0.872rem + 0.0845vi, 0.9375rem);
+	--text-base: clamp(1rem, 0.9565rem + 0.2174vi, 1.125rem);
+	--text-lg: clamp(1.125rem, 1.0467rem + 0.3913vi, 1.35rem);
+	--text-xl: clamp(1.2656rem, 1.1424rem + 0.6163vi, 1.62rem);
+	--text-2xl: clamp(1.4238rem, 1.2429rem + 0.9046vi, 1.944rem);
+	--text-3xl: clamp(1.6018rem, 1.3475rem + 1.2713vi, 2.3328rem);
+	--text-4xl: clamp(1.802rem, 1.4551rem + 1.7345vi, 2.7994rem);
+	--text-5xl: clamp(2.0273rem, 1.564rem + 2.3164vi, 3.3592rem);
+	--text-6xl: clamp(2.2807rem, 1.6719rem + 3.0441vi, 4.0311rem);
+	--text-7xl: clamp(2.5658rem, 1.7757rem + 3.9505vi, 4.8373rem);
+	--text-8xl: clamp(2.8865rem, 1.8715rem + 5.0752vi, 5.8048rem);
+	--text-9xl: clamp(3.2473rem, 1.954rem + 6.4668vi, 6.9657rem);
+
+	/* @link https://utopia.fyi/space/calculator?c=320,16,1.125,1240,18,1.2,10,2,&s=0.75|0.5|0.25,1.5|2|3|4|6|8|12|16|24|32|40|48,s-l&g=s,l,xl,12 */
+	--spacing-3xs: clamp(0.25rem, 0.2283rem + 0.1087cqi, 0.3125rem);
+	--spacing-2xs: clamp(0.5rem, 0.4783rem + 0.1087cqi, 0.5625rem);
+	--spacing-xs: clamp(0.75rem, 0.7065rem + 0.2174cqi, 0.875rem);
+	--spacing-s: clamp(1rem, 0.9565rem + 0.2174cqi, 1.125rem);
+	--spacing-m: clamp(1.5rem, 1.4348rem + 0.3261cqi, 1.6875rem);
+	--spacing-l: clamp(2rem, 1.913rem + 0.4348cqi, 2.25rem);
+	--spacing-xl: clamp(3rem, 2.8696rem + 0.6522cqi, 3.375rem);
+	--spacing-2xl: clamp(4rem, 3.8261rem + 0.8696cqi, 4.5rem);
+	--spacing-3xl: clamp(6rem, 5.7391rem + 1.3043cqi, 6.75rem);
+	--spacing-4xl: clamp(8rem, 7.6522rem + 1.7391cqi, 9rem);
+	--spacing-5xl: clamp(12rem, 11.4783rem + 2.6087cqi, 13.5rem);
+	--spacing-6xl: clamp(16rem, 15.3043rem + 3.4783cqi, 18rem);
+	--spacing-7xl: clamp(24rem, 22.9565rem + 5.2174cqi, 27rem);
+	--spacing-8xl: clamp(32rem, 30.6087rem + 6.9565cqi, 36rem);
+	--spacing-9xl: clamp(40rem, 38.2609rem + 8.6957cqi, 45rem);
+	--spacing-10xl: clamp(48rem, 45.913rem + 10.4348cqi, 54rem);
+
+	/* One-up pairs */
+	--spacing-3xs-2xs: clamp(0.25rem, 0.1413rem + 0.5435cqi, 0.5625rem);
+	--spacing-2xs-xs: clamp(0.5rem, 0.3696rem + 0.6522cqi, 0.875rem);
+	--spacing-xs-s: clamp(0.75rem, 0.6196rem + 0.6522cqi, 1.125rem);
+	--spacing-s-m: clamp(1rem, 0.7609rem + 1.1957cqi, 1.6875rem);
+	--spacing-m-l: clamp(1.5rem, 1.2391rem + 1.3043cqi, 2.25rem);
+	--spacing-l-xl: clamp(2rem, 1.5217rem + 2.3913cqi, 3.375rem);
+	--spacing-xl-2xl: clamp(3rem, 2.4783rem + 2.6087cqi, 4.5rem);
+	--spacing-2xl-3xl: clamp(4rem, 3.0435rem + 4.7826cqi, 6.75rem);
+	--spacing-3xl-4xl: clamp(6rem, 4.9565rem + 5.2174cqi, 9rem);
+	--spacing-4xl-5xl: clamp(8rem, 6.087rem + 9.5652cqi, 13.5rem);
+	--spacing-5xl-6xl: clamp(12rem, 9.913rem + 10.4348cqi, 18rem);
+	--spacing-6xl-7xl: clamp(16rem, 12.1739rem + 19.1304cqi, 27rem);
+	--spacing-7xl-8xl: clamp(24rem, 19.8261rem + 20.8696cqi, 36rem);
+	--spacing-8xl-9xl: clamp(32rem, 27.4783rem + 22.6087cqi, 45rem);
+	--spacing-9xl-10xl: clamp(40rem, 35.1304rem + 24.3478cqi, 54rem);
+
+	/* https://zellwk.com/blog/media-query-units/ */
+	--breakpoint-sm: 40em;
+	--breakpoint-md: 48em;
+	--breakpoint-lg: 64em;
+	--breakpoint-xl: 80em;
+	--breakpoint-2xl: 96em;
+
+	/* Disable default colors to prevent their use; feel free to re-enable as needed. */
+	--color-amber-*: initial;
+	--color-lime-*: initial;
+	--color-emerald-*: initial;
+	--color-teal-*: initial;
+	--color-sky-*: initial;
+	--color-indigo-*: initial;
+	--color-violet-*: initial;
+	--color-fuchsia-*: initial;
+	--color-magenta-*: initial;
+	--color-rose-*: initial;
+	--color-slate-*: initial;
+	--color-zinc-*: initial;
+	--color-neutral-*: initial;
+	--color-stone-*: initial;
+
+	/* Specify new default colors. */
+	--color-black: #100f0f;
+	--color-paper: #fffcf0;
+	--color-base-50: #f2f0e5;
+	--color-base-100: #e6e4d9;
+	--color-base-150: #dad8ce;
+	--color-base-200: #cecdc3;
+	--color-base-300: #b7b5ac;
+	--color-base-400: #9f9d96;
+	--color-base-500: #878580;
+	--color-base-600: #6f6e69;
+	--color-base-700: #575653;
+	--color-base-800: #403e3c;
+	--color-base-850: #343331;
+	--color-base-900: #282726;
+	--color-base-950: #1c1b1a;
+	--color-red-50: #ffe1d5;
+	--color-red-100: #ffcabb;
+	--color-red-150: #fdb2a2;
+	--color-red-200: #f89a8a;
+	--color-red-300: #e8705f;
+	--color-red-400: #d14d41;
+	--color-red-500: #c03e35;
+	--color-red-600: #af3029;
+	--color-red-700: #942822;
+	--color-red-800: #6c201c;
+	--color-red-850: #551b18;
+	--color-red-900: #3e1715;
+	--color-red-950: #261312;
+	--color-orange-50: #ffe7ce;
+	--color-orange-100: #fed3af;
+	--color-orange-150: #fcc192;
+	--color-orange-200: #f9ae77;
+	--color-orange-300: #ec8b49;
+	--color-orange-400: #da702c;
+	--color-orange-500: #cb6120;
+	--color-orange-600: #bc5215;
+	--color-orange-700: #9d4310;
+	--color-orange-800: #71320d;
+	--color-orange-850: #59290d;
+	--color-orange-900: #40200d;
+	--color-orange-950: #27180e;
+	--color-yellow-50: #faeec6;
+	--color-yellow-100: #f6e2a0;
+	--color-yellow-150: #f1d67e;
+	--color-yellow-200: #eccb60;
+	--color-yellow-300: #dfb431;
+	--color-yellow-400: #d0a215;
+	--color-yellow-500: #be9207;
+	--color-yellow-600: #ad8301;
+	--color-yellow-700: #8e6b01;
+	--color-yellow-800: #664d01;
+	--color-yellow-850: #503d02;
+	--color-yellow-900: #3a2d04;
+	--color-yellow-950: #241e08;
+	--color-green-50: #edeecf;
+	--color-green-100: #dde2b2;
+	--color-green-150: #cdd597;
+	--color-green-200: #bec97e;
+	--color-green-300: #a0af54;
+	--color-green-400: #879a39;
+	--color-green-500: #768d21;
+	--color-green-600: #66800b;
+	--color-green-700: #536907;
+	--color-green-800: #3d4c07;
+	--color-green-850: #313d07;
+	--color-green-900: #252d09;
+	--color-green-950: #1a1e0c;
+	--color-cyan-50: #ddf1e4;
+	--color-cyan-100: #bfe8d9;
+	--color-cyan-150: #a2dece;
+	--color-cyan-200: #87d3c3;
+	--color-cyan-300: #5abdac;
+	--color-cyan-400: #3aa99f;
+	--color-cyan-500: #2f968d;
+	--color-cyan-600: #24837b;
+	--color-cyan-700: #1c6c66;
+	--color-cyan-800: #164f4a;
+	--color-cyan-850: #143f3c;
+	--color-cyan-900: #122f2c;
+	--color-cyan-950: #101f1d;
+	--color-blue-50: #e1eceb;
+	--color-blue-100: #c6dde8;
+	--color-blue-150: #abcfe2;
+	--color-blue-200: #92bfdb;
+	--color-blue-300: #66a0c8;
+	--color-blue-400: #4385be;
+	--color-blue-500: #3171b2;
+	--color-blue-600: #205ea6;
+	--color-blue-700: #1a4f8c;
+	--color-blue-800: #163b66;
+	--color-blue-850: #133051;
+	--color-blue-900: #12253b;
+	--color-blue-950: #101a24;
+	--color-purple-50: #f0eaec;
+	--color-purple-100: #e2d9e9;
+	--color-purple-150: #d3cae6;
+	--color-purple-200: #c4b9e0;
+	--color-purple-300: #a699d0;
+	--color-purple-400: #8b7ec8;
+	--color-purple-500: #735eb5;
+	--color-purple-600: #5e409d;
+	--color-purple-700: #4f3685;
+	--color-purple-800: #3c2a62;
+	--color-purple-850: #31234e;
+	--color-purple-900: #261c39;
+	--color-purple-950: #1a1623;
+	--color-magenta-50: #fee4e5;
+	--color-magenta-100: #fccfda;
+	--color-magenta-150: #f9b9cf;
+	--color-magenta-200: #f4a4c2;
+	--color-magenta-300: #e47da8;
+	--color-magenta-400: #ce5d97;
+	--color-magenta-500: #b74583;
+	--color-magenta-600: #a02f6f;
+	--color-magenta-700: #87285e;
+	--color-magenta-800: #641f46;
+	--color-magenta-850: #4f1b39;
+	--color-magenta-900: #39172b;
+	--color-magenta-950: #24131d;
+}
 
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
@@ -33,11 +231,6 @@
 	--recursive-slnt: "slnt" 0;
 	/* Cursive: 0 always roman, 0.5 auto substitution, or 1 always cursive */
 	--recursive-crsv: "CRSV" 0.5;
-
-	--color-subtle: var(--color-gray-700);
-	--color-emphasized: var(--color-teal-300);
-	--scrollbar-background: var(--color-gray-400);
-	--scrollbar-foreground: var(--color-teal-700);
 }
 
 :where(html) {
@@ -45,11 +238,36 @@
 	font: -apple-system-body;
 }
 
-html.dark {
-	--color-subtle: var(--color-gray-400);
-	--color-emphasized: var(--color-teal-800);
-	--scrollbar-background: var(--color-gray-700);
-	--scrollbar-foreground: var(--color-teal-400);
+@layer components {
+	.text-subtle {
+		color: var(--color-gray-600);
+	}
+	html.dark .text-subtle {
+		color: var(--color-gray-400);
+	}
+
+	em,
+	.italic {
+		background: var(--color-cyan-300);
+		--recursive-casl: "CASL" 1;
+		--recursive-crsv: "CRSV" 1;
+		--recursive-slnt: "slnt" -15;
+	}
+
+	html.dark em,
+	html.dark .italic {
+		background: var(--color-cyan-800);
+	}
+
+	html {
+		--scrollbar-background: var(--color-gray-400);
+		--scrollbar-foreground: var(--color-cyan-700);
+	}
+
+	html.dark {
+		--scrollbar-background: var(--color-gray-700);
+		--scrollbar-foreground: var(--color-cyan-400);
+	}
 }
 
 * {
@@ -91,14 +309,6 @@ h6 {
 	--recursive-crsv: "CRSV" 1;
 	--recursive-casl: "CASL" 1;
 	text-wrap: balance;
-}
-
-em,
-.italic {
-	background: var(--color-emphasized);
-	--recursive-casl: "CASL" 1;
-	--recursive-crsv: "CRSV" 1;
-	--recursive-slnt: "slnt" -15;
 }
 
 blockquote {
