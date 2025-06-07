@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme inline {
-	--font-sans: "Recursive", "Recursive-fallback", "sans-serif";
-	--font-mono: "Recursive", "Recursive-fallback", "sans-serif";
-	--default-font-family: "Recursive", "Recursive-fallback", "sans-serif";
+	--font-sans: "Recursive", "Recursive-fallback", sans-serif;
+	--font-mono: "Recursive", "Recursive-fallback", sans-serif;
+	--default-font-family: "Recursive", "Recursive-fallback", sans-serif;
 	--font-weight-blackest: 1000;
 
 	/* @link https://utopia.fyi/type/calculator?c=320,16,1.125,1240,18,1.2,10,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
