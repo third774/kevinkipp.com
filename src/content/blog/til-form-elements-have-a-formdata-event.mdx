@@ -12,16 +12,10 @@ You don't need to construct an instance of `FormData` if instead of listening fo
 
 ```js
 // modified from MDN docs for brevity
-formElem.addEventListener(
-	"formdata",
-	(e) => {
-		const formData = e.formData;
-		console.log(
-			"formdata fired",
-			formData,
-		);
-	},
-);
+formElem.addEventListener("formdata", (e) => {
+	const formData = e.formData;
+	console.log("formdata fired", formData);
+});
 ```
 
 It even has [great browser support](https://caniuse.com/mdn-api_formdataevent)!

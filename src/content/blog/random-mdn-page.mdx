@@ -45,21 +45,14 @@ export default {
 			"https://developer.mozilla.org/sitemaps/en-us/sitemap.xml.gz",
 		);
 		// parse xml sitemap
-		const sitemapString =
-			await mdnSitemap.text();
-		const parsed =
-			await (xml2js.parseStringPromise(
-				sitemapString,
-			) as Promise<Sitemap>);
+		const sitemapString = await mdnSitemap.text();
+		const parsed = await (xml2js.parseStringPromise(
+			sitemapString,
+		) as Promise<Sitemap>);
 
 		// pick a random url
-		const randomIndex = Math.floor(
-			Math.random() *
-				parsed.urlset.url.length,
-		);
-		const randomUrl =
-			parsed.urlset.url[randomIndex]
-				.loc[0];
+		const randomIndex = Math.floor(Math.random() * parsed.urlset.url.length);
+		const randomUrl = parsed.urlset.url[randomIndex].loc[0];
 
 		// redirect to random url
 		return new Response(null, {

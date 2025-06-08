@@ -13,7 +13,6 @@ const db = getDb(Astro.locals);
 const data = await db.select().from(linkShare).orderBy(desc(linkShare.created));
 
 Astro.response.headers.set("Cache-Control", "public, max-age=60, s-maxage=60");
-
 ---
 
 <Page
@@ -31,29 +30,31 @@ Astro.response.headers.set("Cache-Control", "public, max-age=60, s-maxage=60");
 				</p>
 			</div>
 			<div class="space-y-12">
+				<style>
+					.share-link {
+						display: block;
+						text-wrap: balance;
+					}
+				</style>
 				<ul role="list" class="space-y-8">
 					{
 						data.map((link) => (
 							<li>
-								<style>
-									.share-link {
-										display: block;
-										text-wrap: balance;
-									}
-									</style>
-								<Link class="text-lg font-extrabold share-link w-fit" href={link.url}>
+								<Link
+									class="text-lg font-extrabold share-link w-fit"
+									href={link.url}
+								>
 									{link.title}
 								</Link>
 								<div class="text-xs text-subtle">
-									Shared 
+									Shared
 									<FormattedDate
 										date={link.created}
 										year="numeric"
 										month="short"
 										day="numeric"
 									/>
-									•
-									{new URL(link.url).hostname}
+									•{new URL(link.url).hostname}
 								</div>
 								{link.remark && <p>{link.remark}</p>}
 							</li>

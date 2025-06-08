@@ -33,10 +33,10 @@ interface Props extends Omit<astroHTML.JSX.ButtonHTMLAttributes, "id"> {}
 	themeToggle.innerHTML =
 		theme === "dark"
 			? // moon
-			  "🌙"
+				"🌙"
 			: theme === "light"
-			  ? "🌞"
-			  : "◑";
+				? "🌞"
+				: "◑";
 
 	themeToggle.addEventListener("click", () => {
 		const theme = localStorage.getItem("theme") || "auto";
@@ -51,9 +51,9 @@ interface Props extends Omit<astroHTML.JSX.ButtonHTMLAttributes, "id"> {}
 		themeToggle.innerHTML =
 			nextTheme === "dark"
 				? // moon
-				  "🌙"
+					"🌙"
 				: nextTheme === "light"
-				  ? "🌞"
-				  : "◑";
+					? "🌞"
+					: "◑";
 	});
 </script>

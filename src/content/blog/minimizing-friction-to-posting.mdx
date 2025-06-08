@@ -33,25 +33,14 @@ Here's the script:
 
 import "@johnlindquist/kit";
 
-const title = await arg(
-	"What's the title of the post?",
-);
-const description = await arg(
-	"What's the description of the post?",
-);
-const slug = title
-	.toLowerCase()
-	.split(" ")
-	.join("-");
-const blogCollectionPath = await env(
-	"ASTRO_BLOG_COLLECTION_PATH",
-);
+const title = await arg("What's the title of the post?");
+const description = await arg("What's the description of the post?");
+const slug = title.toLowerCase().split(" ").join("-");
+const blogCollectionPath = await env("ASTRO_BLOG_COLLECTION_PATH");
 const content = `---
 {
   "title": "${title}",${
-		description
-			? `\n  "description": "${description}",`
-			: ""
+		description ? `\n  "description": "${description}",` : ""
 	}
   "published": "${new Date().toISOString()}"
 }
@@ -59,15 +48,9 @@ const content = `---
 
 `;
 const filePath = `${blogCollectionPath}/${slug}.md`;
-const editedContent =
-	await editor(content);
-await writeFile(
-	filePath,
-	editedContent,
-);
-await exec(
-	`/opt/homebrew/bin/code ${filePath}`,
-);
+const editedContent = await editor(content);
+await writeFile(filePath, editedContent);
+await exec(`/opt/homebrew/bin/code ${filePath}`);
 ```
 
 This is _delightful_. Starting a blog post is a breeze.

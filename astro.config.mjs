@@ -10,21 +10,21 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://kevinkipp.com",
-  integrations: [mdx(), sitemap(), robotsTxt()],
-  output: "static",
+	site: "https://kevinkipp.com",
+	integrations: [mdx(), sitemap(), robotsTxt()],
+	output: "static",
 
-  adapter: cloudflare({
-      platformProxy: {
-          enabled: true,
-      },
+	adapter: cloudflare({
+		platformProxy: {
+			enabled: true,
+		},
 	}),
 
-  markdown: {
-      remarkPlugins: [remarkReadingTime],
+	markdown: {
+		remarkPlugins: [remarkReadingTime],
 	},
 
-  vite: {
-    plugins: [tailwindcss()],
-  },
+	vite: {
+		plugins: [tailwindcss()],
+	},
 });
