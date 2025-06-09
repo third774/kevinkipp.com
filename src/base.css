@@ -369,7 +369,7 @@ ul:not([role="list"]) {
 }
 
 .profile {
-	border-radius: 35% 65% 60% 25% / 35% 20% 60% 65%;
+	border-radius: 28px 100px 20px 15px / 150px 30px 205px 225px;
 }
 
 .flow > * + * {
