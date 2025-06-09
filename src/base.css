@@ -215,7 +215,7 @@
 	::before,
 	::backdrop,
 	::file-selector-button {
-		border-color: var(--color-gray-200, currentcolor);
+		border-color: var(--color-base-200, currentcolor);
 	}
 }
 
@@ -241,10 +241,10 @@
 
 @layer components {
 	.text-subtle {
-		color: var(--color-gray-600);
+		color: var(--color-base-600);
 	}
 	html.dark .text-subtle {
-		color: var(--color-gray-400);
+		color: var(--color-base-400);
 	}
 
 	em,
@@ -261,12 +261,12 @@
 	}
 
 	html {
-		--scrollbar-background: var(--color-gray-400);
+		--scrollbar-background: var(--color-base-400);
 		--scrollbar-foreground: var(--color-cyan-700);
 	}
 
 	html.dark {
-		--scrollbar-background: var(--color-gray-700);
+		--scrollbar-background: var(--color-base-700);
 		--scrollbar-foreground: var(--color-cyan-400);
 	}
 }

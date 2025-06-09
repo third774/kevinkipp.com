@@ -49,7 +49,7 @@ const randomizedOrderWishes = wishes.sort(() => Math.random() - 0.5);
 					{
 						randomizedOrderWishes.map(({ data }) => (
 							<a class="block group" href={data.url}>
-								<div class="p-4 space-y-3 group-hover:bg-gray-200 dark:group-hover:bg-gray-800">
+								<div class="p-4 space-y-3 group-hover:bg-base-200 dark:group-hover:bg-base-800">
 									<img
 										class="object-contain bg-white aspect-square"
 										src={data.image}
