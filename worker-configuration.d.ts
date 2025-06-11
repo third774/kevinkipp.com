@@ -5,6 +5,9 @@ declare namespace Cloudflare {
 	interface Env {
 		KV_API_CACHE: KVNamespace;
 		DB: D1Database;
+		FEEDBIN_EMAIL: string;
+		FEEDBIN_PASSWORD: string;
+		API_TOKEN: string;
 	}
 }
 interface Env extends Cloudflare.Env {}
