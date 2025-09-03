@@ -1,0 +1,39 @@
+---
+{
+  "title": "QR Codes for calling and texting",
+  "published": "2025-09-03T20:50:17.429Z",
+}
+---
+
+I'm obsessed with QR codes. I don't know why I'm like this. I just love the fact that they can
+be printed on paper to encode information in a way that doesn't require any power and can be
+read by any phone.
+
+I was talking to a co-worker today about them, and had the idea of using a `tel:` link in a QR
+code for someone to be able to call you, and it turns out that works!
+
+```js
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace.js"
+></script>
+<sl-qr-code
+  value="tel:+17192662837"
+  label="Scan to call Callin' Oates, your emergency Hall & Oates helpline"
+></sl-qr-code>
+```
+
+<script
+	type="module"
+	src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace.js"
+></script>
+
+<a style="display: block" href="tel:+17192662837">
+	<sl-qr-code
+		value="tel:+17192662837"
+		label="Scan this code to listen to Emergency Hall & Oates"
+	></sl-qr-code>
+</a>
+
+This also got me wondering if it could similarly be done for texting instead of calling, and it
+CAN! Just swap `tel:` for `sms:`!
