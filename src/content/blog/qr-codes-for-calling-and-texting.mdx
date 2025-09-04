@@ -2,6 +2,7 @@
 {
   "title": "QR Codes for calling and texting",
   "published": "2025-09-03T20:50:17.429Z",
+  "updated": "2025-09-04T15:34:37-05:00",
 }
 ---
 
@@ -36,4 +37,28 @@ code for someone to be able to call you, and it turns out that works!
 </a>
 
 This also got me wondering if it could similarly be done for texting instead of calling, and it
-CAN! Just swap `tel:` for `sms:`!
+CAN! Just swap `tel:` for `sms:`! You can even add a `?body` parameter to pre-populate the message.
+From my super cursory testing, this seems to work on both iOS and Android!
+
+```js
+<script
+  type="module"
+  src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace.js"
+></script>
+<sl-qr-code
+  value="sms:+15550001111?body=Hello%20there!"
+  label="Scan to text 'Hello there!' to +1 (555) 000-1111"
+></sl-qr-code>
+```
+
+<script
+	type="module"
+	src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.20.1/cdn/shoelace.js"
+></script>
+
+<a style="display: block" href="sms:+15550001111?body=Hello%20there!">
+	<sl-qr-code
+		value="sms:+15550001111?body=Hello%20there!"
+		label="Scan to text 'Hello there!' to +1 (555) 000-1111"
+	></sl-qr-code>
+</a>
