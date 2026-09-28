@@ -12,9 +12,9 @@ const cacheKey = "feedbin:subscriptions";
 
 export async function getSubscriptions({
 	runtime: { env },
-}: App.Locals): Promise<Subscription[]> {
+	}: App.Locals): Promise<Subscription[]> {
 	const { KV_API_CACHE, FEEDBIN_EMAIL, FEEDBIN_PASSWORD } = env;
-	const cachedSubscriptions = await KV_API_CACHE.get(cacheKey);
+	const cachedSubscriptions = await KV_API_CACHE?.get(cacheKey);
 
 	if (cachedSubscriptions) {
 		return JSON.parse(cachedSubscriptions);
@@ -31,7 +31,7 @@ export async function getSubscriptions({
 
 	const subscriptions: Subscription[] = await response.json();
 
-	await KV_API_CACHE.put(cacheKey, JSON.stringify(subscriptions), {
+	await KV_API_CACHE?.put(cacheKey, JSON.stringify(subscriptions), {
 		// 1 day
 		expirationTtl: 86400,
 	});
