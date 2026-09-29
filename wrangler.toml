@@ -1,5 +1,10 @@
+name = "kevinkipp-com"
 compatibility_date = "2025-03-30"
 compatibility_flags = ["nodejs_compat"]
+main = "./dist/_worker.js/index.js"
+
+[assets]
+directory = "./dist"
 
 [[d1_databases]]
 binding = "DB"                                       # i.e. available in your Worker on env.DB

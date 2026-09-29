@@ -14,7 +14,7 @@
 		"start": "wrangler types && astro dev",
 		"build": "wrangler types && VITE_COMMIT_HASH=\"$(git rev-parse --short HEAD)\" astro build",
 		"newpost": "node ./scripts/newpost.js",
-		"preview": "wrangler types && wrangler pages dev ./dist",
+		"preview": "wrangler types && wrangler dev",
 		"astro": "astro",
 		"prettier": "prettier --write .",
 		"upgrade": "npm-run-all upgrade:*",
