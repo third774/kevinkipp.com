@@ -1,0 +1,19 @@
+worker-configuration.d.ts
+  s_16863f36bf2c10::t_1122acff7dadfb 2,9-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "05bf27ef685f4e74c0d7bc40a575651444a6b54a",
+  "prompts": {},
+  "sessions": {
+    "s_16863f36bf2c10": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_f1502fc77ffeQQpqYfHQFMr36T",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "Kevin Kipp <kkipp@cloudflare.com>"
+    }
+  }
+}
