@@ -15,13 +15,14 @@
 		"build": "wrangler types && VITE_COMMIT_HASH=\"$(git rev-parse --short HEAD)\" astro build",
 		"newpost": "node ./scripts/newpost.js",
 		"preview": "wrangler types && wrangler dev",
+		"prepare": "astro sync",
 		"astro": "astro",
 		"prettier": "prettier --write .",
 		"upgrade": "npm-run-all upgrade:*",
 		"upgrade:astro": "npx @astrojs/upgrade",
 		"upgrade:others": "npx npm-upgrade",
 		"types": "wrangler types",
-		"typecheck": "tsc --noEmit",
+		"typecheck": "astro sync && tsc --noEmit",
 		"typecheck:watch": "tsc --noEmit --watch"
 	},
 	"dependencies": {
