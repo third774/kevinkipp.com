@@ -21,7 +21,7 @@
 		"upgrade:astro": "npx @astrojs/upgrade",
 		"upgrade:others": "npx npm-upgrade",
 		"types": "wrangler types",
-		"typecheck": "tsc --noEmit",
+		"typecheck": "astro sync && tsc --noEmit",
 		"typecheck:watch": "tsc --noEmit --watch"
 	},
 	"dependencies": {
