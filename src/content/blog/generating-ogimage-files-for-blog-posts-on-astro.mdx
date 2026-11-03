@@ -93,11 +93,11 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content, remarkPluginFrontmatter } = await post.render();
+const { Content } = await post.render();
 await generateBlogPostOgImage(post);
 ---
 
-<BlogPost minutesRead={remarkPluginFrontmatter.minutesRead} post={post}>
+<BlogPost post={post}>
 	<Content />
 </BlogPost>
 ```

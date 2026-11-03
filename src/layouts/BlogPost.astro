@@ -14,7 +14,6 @@ import H1 from "../components/H1.astro";
 
 type Props = {
 	post: CollectionEntry<"blog">;
-	minutesRead: number;
 };
 
 const { data, id } = Astro.props.post;
@@ -39,9 +38,7 @@ const { title, description, published, updated, heroImage, heroAlt } = data;
 								year="numeric"
 								month="short"
 								day="numeric"
-							/> • <span>
-								~{Astro.props.minutesRead}
-							</span>
+							/>
 
 							{
 								updated && (
