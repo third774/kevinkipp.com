@@ -1,11 +1,11 @@
 # Agent Guidelines for kevinkipp.com
 
 ## Build/Test Commands
-- `npm run dev` - Start development server with Wrangler types
-- `npm run build` - Build for production with commit hash
-- `npm run typecheck` - Type check without emitting files
-- `npm run prettier` - Format all files with Prettier
-- `npm run preview` - Preview build with Wrangler Pages
+- `pnpm run dev` - Start development server with Wrangler types
+- `pnpm run build` - Build for production with commit hash
+- `pnpm run typecheck` - Type check without emitting files
+- `pnpm run prettier` - Format all files with Prettier
+- `pnpm run preview` - Preview build with Wrangler Pages
 
 ## Code Style
 - **Formatting**: Use tabs for indentation, trailing commas everywhere
@@ -25,5 +25,5 @@
 
 ## Database
 - Use Drizzle ORM with D1 database
-- `npm run db:generate` - Generate migrations
-- `npm run db:migrate:local` - Apply migrations locally
+- `pnpm run db:generate` - Generate migrations
+- `pnpm run db:migrate:local` - Apply migrations locally

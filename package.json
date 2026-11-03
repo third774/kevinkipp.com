@@ -19,8 +19,8 @@
     "astro": "astro",
     "prettier": "prettier --write .",
     "upgrade": "npm-run-all upgrade:*",
-    "upgrade:astro": "npx @astrojs/upgrade",
-    "upgrade:others": "npx npm-upgrade",
+    "upgrade:astro": "pnpm dlx @astrojs/upgrade",
+    "upgrade:others": "pnpm dlx npm-upgrade",
     "types": "wrangler types",
     "typecheck": "astro sync && tsc --noEmit",
     "typecheck:watch": "tsc --noEmit --watch"
@@ -34,7 +34,7 @@
     "@evilmartians/harmony": "^1.4.0",
     "@tailwindcss/postcss": "^4.1.8",
     "@tailwindcss/vite": "^4.1.8",
-    "@types/node": "^22.15.30",
+    "@types/node": "^26.6.6",
     "@types/sanitize-html": "^2.16.0",
     "astro": "^5.10.0",
     "astro-robots-txt": "^1.0.0",
@@ -50,6 +50,7 @@
     "tiny-invariant": "^1.3.3"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261101.1",
     "@csstools/postcss-oklab-function": "^4.0.10",
     "better-sqlite3": "^11.10.0",
     "cross-env": "^7.0.3",
@@ -60,5 +61,5 @@
     "prettier-plugin-organize-imports": "^4.1.0",
     "wrangler": "^4.143.0"
   },
-  "packageManager": "npm@12.2.1"
+  "packageManager": "pnpm@12.16.1"
 }
