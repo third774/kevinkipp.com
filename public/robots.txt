@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kevinkipp.com/sitemap-index.xml
