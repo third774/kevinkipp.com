@@ -1,3 +1,5 @@
+import { env } from "cloudflare:workers";
+
 interface Subscription {
 	id: number;
 	created_at: string;
@@ -10,9 +12,7 @@ interface Subscription {
 const subscriptionsApiUrl = "https://api.feedbin.com/v2/subscriptions.json";
 const cacheKey = "feedbin:subscriptions";
 
-export async function getSubscriptions({
-	runtime: { env },
-	}: App.Locals): Promise<Subscription[]> {
+export async function getSubscriptions(): Promise<Subscription[]> {
 	const { KV_API_CACHE, FEEDBIN_EMAIL, FEEDBIN_PASSWORD } = env;
 	const cachedSubscriptions = await KV_API_CACHE?.get(cacheKey);
 

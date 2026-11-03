@@ -1,5 +1,6 @@
 // @ts-check
 import cloudflare from "@astrojs/cloudflare";
+import { unified } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import robotsTxt from "astro-robots-txt";
@@ -11,20 +12,21 @@ import tailwindcss from "@tailwindcss/vite";
 // https://astro.build/config
 export default defineConfig({
 	site: "https://kevinkipp.com",
-	integrations: [mdx(), sitemap(), robotsTxt()],
+	integrations: [
+		mdx({ remarkPlugins: [remarkReadingTime] }),
+		sitemap(),
+		robotsTxt(),
+	],
 	output: "static",
 
 	adapter: cloudflare({
-		platformProxy: {
-			enabled: true,
-		},
-		workerEntryPoint: {
-			path: 'src/worker.ts'
-		}
+		imageService: "compile",
 	}),
 
 	markdown: {
-		remarkPlugins: [remarkReadingTime],
+		processor: unified({
+			remarkPlugins: [remarkReadingTime],
+		}),
 	},
 
 	vite: {

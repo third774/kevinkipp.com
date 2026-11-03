@@ -17,15 +17,18 @@ export async function GET(context: AstroUserConfig) {
 		stylesheet: "../pretty-feed-v3.xsl",
 		site: context.site,
 		items: await Promise.all(
-			blog.map(async (post) => ({
-				title: post.data.title,
-				pubDate: post.data.published,
-				description: post.data.description,
-				// Compute RSS link from post `slug`
-				// This example assumes all posts are rendered as `/blog/[slug]` routes
-				link: `/blog/${post.slug}/?utm_source=rss&utm_medium=feed`,
-				content: sanitizeHtml(await marked.parse(post.body)),
-			})),
+			blog.map(async (post) => {
+				invariant(post.body, `Blog post ${post.id} has no body`);
+				return {
+					title: post.data.title,
+					pubDate: post.data.published,
+					description: post.data.description,
+					// Compute RSS link from post `id`
+					// This example assumes all posts are rendered as `/blog/[slug]` routes
+					link: `/blog/${post.id}/?utm_source=rss&utm_medium=feed`,
+					content: sanitizeHtml(await marked.parse(post.body)),
+				};
+			}),
 		),
 	});
 }

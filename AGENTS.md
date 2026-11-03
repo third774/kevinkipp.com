@@ -5,7 +5,7 @@
 - `pnpm run build` - Build for production with commit hash
 - `pnpm run typecheck` - Type check without emitting files
 - `pnpm run prettier` - Format all files with Prettier
-- `pnpm run preview` - Preview build with Wrangler Pages
+- `pnpm run preview` - Preview the production build with Astro and workerd
 
 ## Code Style
 - **Formatting**: Use tabs for indentation, trailing commas everywhere

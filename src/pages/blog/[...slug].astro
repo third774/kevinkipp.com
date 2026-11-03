@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry } from "astro:content";
+import { render, type CollectionEntry } from "astro:content";
 import { getPublishedBlogPosts } from "../../content/blog/_getPublishedBlogPosts";
 import BlogPost from "../../layouts/BlogPost.astro";
 import { components } from "../../utils/components.astro";
@@ -11,13 +11,13 @@ interface Props {
 export async function getStaticPaths() {
 	const posts = await getPublishedBlogPosts();
 	return posts.map((post) => ({
-		params: { slug: post.slug },
+		params: { slug: post.id },
 		props: { post },
 	}));
 }
 
 const { post } = Astro.props;
-const { Content, remarkPluginFrontmatter } = await post.render();
+const { Content, remarkPluginFrontmatter } = await render(post);
 ---
 
 <BlogPost minutesRead={remarkPluginFrontmatter.minutesRead} post={post}>

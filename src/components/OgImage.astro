@@ -1,4 +1,5 @@
 ---
+import { env } from "cloudflare:workers";
 import * as jose from "jose";
 
 export interface Props {
@@ -8,7 +9,7 @@ export interface Props {
 }
 
 let { title, description, image } = Astro.props;
-const { API_TOKEN } = Astro.locals.runtime.env;
+const { API_TOKEN } = env;
 
 if (!image) {
 	const jwt = await new jose.SignJWT({

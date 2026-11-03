@@ -11,7 +11,7 @@ export const GET: APIRoute = async (context) => {
 		context.site,
 		"RSS feed requires 'site' metadata in astro.config.mjs",
 	);
-	const data = await getDb(context.locals)
+	const data = await getDb()
 		.select()
 		.from(linkShare)
 		.orderBy(desc(linkShare.created))

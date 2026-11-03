@@ -7,7 +7,7 @@ import ColumnWrapper from "../components/ColumnWrapper.astro";
 
 export const prerender = false;
 
-const subscriptions = await getSubscriptions(Astro.locals).then((subs) =>
+const subscriptions = await getSubscriptions().then((subs) =>
 	subs.filter(
 		(sub) =>
 			sub.site_url !== Astro.site?.toString() &&

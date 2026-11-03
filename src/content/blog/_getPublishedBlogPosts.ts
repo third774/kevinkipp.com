@@ -11,7 +11,7 @@ export const getPublishedBlogPosts = async () => {
 				if (!isProd) return true;
 				return (
 					// file name doesn't start with -draft
-					!blogPost.slug.startsWith("-draft") &&
+					!blogPost.id.startsWith("-draft") &&
 					// and published date is in the past
 					blogPost.data.published <= new Date()
 				);

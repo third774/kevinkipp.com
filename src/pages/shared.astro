@@ -9,7 +9,7 @@ import ColumnWrapper from "../components/ColumnWrapper.astro";
 
 export const prerender = false;
 
-const db = getDb(Astro.locals);
+const db = getDb();
 const data = await db.select().from(linkShare).orderBy(desc(linkShare.created));
 
 Astro.response.headers.set("Cache-Control", "public, max-age=60, s-maxage=60");

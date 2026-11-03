@@ -17,7 +17,7 @@ type Props = {
 	minutesRead: number;
 };
 
-const { data, slug } = Astro.props.post;
+const { data, id } = Astro.props.post;
 
 const { title, description, published, updated, heroImage, heroAlt } = data;
 ---
@@ -89,10 +89,7 @@ const { title, description, published, updated, heroImage, heroAlt } = data;
 					</div>
 					{
 						Astro.site && (
-							<Share
-								title={title}
-								url={`${Astro.site.toString()}blog/${slug}`}
-							/>
+							<Share title={title} url={`${Astro.site.toString()}blog/${id}`} />
 						)
 					}
 				</article>

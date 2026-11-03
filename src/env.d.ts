@@ -1,8 +1,10 @@
 /// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
 
-type Runtime = import("@astrojs/cloudflare").Runtime<Env>;
-
-declare namespace App {
-	interface Locals extends Runtime {}
+declare namespace Cloudflare {
+	interface Env {
+		API_TOKEN?: string;
+		FEEDBIN_EMAIL?: string;
+		FEEDBIN_PASSWORD?: string;
+	}
 }
