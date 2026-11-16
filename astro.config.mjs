@@ -12,6 +12,10 @@ export default defineConfig({
 	integrations: [mdx(), sitemap()],
 	output: "static",
 
+	// We don't use Astro sessions. Left on, the Cloudflare adapter adds a
+	// SESSION KV binding without an id, which fails deployments.
+	session: false,
+
 	adapter: cloudflare({
 		imageService: "compile",
 	}),

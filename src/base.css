@@ -1,10 +1,12 @@
 @import "tailwindcss";
 
 @theme inline {
-	--font-sans: "Recursive", "Recursive-fallback", sans-serif;
-	--font-mono: "Recursive", "Recursive-fallback", sans-serif;
-	--default-font-family: "Recursive", "Recursive-fallback", sans-serif;
-	--font-weight-blackest: 1000;
+	--font-sans: "Allo", "Allo-fallback", sans-serif;
+	--font-mono:
+		ui-monospace, "SF Mono", "Cascadia Code", "Source Code Pro", Menlo,
+		Consolas, "Liberation Mono", monospace;
+	--default-font-family: "Allo", "Allo-fallback", sans-serif;
+	--font-weight-blackest: 900;
 
 	/* @link https://utopia.fyi/type/calculator?c=320,16,1.125,1240,18,1.2,10,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
 	--text-xs: clamp(0.7813rem, 0.7932rem + -0.0154vi, 0.7901rem);
@@ -223,15 +225,9 @@
 	tab-size: 2;
 	scrollbar-gutter: stable both-edges;
 
-	/* Recursive font variation settings defaults https://www.recursive.design/ */
-	/* Monospace: Sans (natural-width) or Mono (fixed-width) */
-	--recursive-mono: "MONO" 0;
-	/* Casual: Linear to Casual */
-	--recursive-casl: "CASL" 0;
-	/* Slant: 0 to -15 degrees, auto cursive at -14 */
-	--recursive-slnt: "slnt" 0;
-	/* Cursive: 0 always roman, 0.5 auto substitution, or 1 always cursive */
-	--recursive-crsv: "CRSV" 0.5;
+	/* Allo font variation settings defaults https://allo.joshpuckett.me/ */
+	/* Roundness: 0 (sharp) to 100 (round), 50 is the friendly default */
+	--allo-rond: "ROND" 50;
 }
 
 :where(html) {
@@ -250,9 +246,8 @@
 	em,
 	.italic {
 		background: var(--color-cyan-300);
-		--recursive-casl: "CASL" 1;
-		--recursive-crsv: "CRSV" 1;
-		--recursive-slnt: "slnt" -15;
+		font-style: italic;
+		--allo-rond: "ROND" 100;
 	}
 
 	html.dark em,
@@ -272,33 +267,24 @@
 }
 
 * {
-	font-variation-settings:
-		var(--recursive-mono), var(--recursive-casl), var(--recursive-slnt),
-		var(--recursive-crsv);
+	font-variation-settings: var(--allo-rond);
 }
 
 @font-face {
-	font-family: "Recursive";
-	font-style: oblique 0deg 15deg;
-	font-weight: 300 1000;
+	font-family: "Allo";
+	font-style: normal;
+	font-weight: 100 900;
 	font-display: fallback;
-	src: url("/fonts/recursive.woff2") format("woff2");
-	unicode-range:
-		U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
-		U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
-		U+2212, U+2215, U+FEFF, U+FFFD;
+	src: url("/fonts/AlloVariable.woff2") format("woff2");
 }
 
 @font-face {
-	font-family: "Recursive-fallback";
-	size-adjust: 114.62%;
-	ascent-override: 110%;
+	font-family: "Allo-fallback";
+	size-adjust: 107.7%;
+	ascent-override: 89.95%;
+	descent-override: 22.4%;
+	line-gap-override: 0%;
 	src: local("Arial");
-}
-
-.font-mono,
-code {
-	--recursive-mono: "MONO" 1;
 }
 
 h1,
@@ -307,15 +293,13 @@ h3,
 h4,
 h5,
 h6 {
-	--recursive-crsv: "CRSV" 1;
-	--recursive-casl: "CASL" 1;
+	--allo-rond: "ROND" 100;
 	text-wrap: balance;
 }
 
 blockquote {
-	--recursive-casl: "CASL" 1;
-	--recursive-slnt: "slnt" -15;
-	--recursive-crsv: "CRSV" 1;
+	--allo-rond: "ROND" 100;
+	font-style: italic;
 }
 
 :where(body) {
