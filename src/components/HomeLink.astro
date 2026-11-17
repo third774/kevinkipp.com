@@ -1,0 +1,161 @@
+---
+const name = "Kevin Kipp";
+const letters = [...name];
+---
+
+<a
+	href="/"
+	aria-label={name}
+	data-home-link
+	class="relative inline-block font-blackest tracking-tight"
+>
+	<span aria-hidden="true">
+		{
+			letters.map((letter) => (
+				<span
+					data-letter
+					class:list={[
+						"inline-block bg-clip-text text-transparent bg-no-repeat bg-linear-to-r",
+						"from-cyan-600 via-yellow-500 to-magenta-600",
+						"dark:from-cyan-400 dark:via-yellow-400 dark:to-pink-400",
+					]}
+				>
+					{letter === " " ? "\u00A0" : letter}
+				</span>
+			))
+		}
+	</span>
+</a>
+
+<style>
+	[data-letter] {
+		will-change: transform;
+		transform-origin: 50% 85%;
+		transform: translate3d(0, calc(var(--lift, 0) * -0.32em), 0)
+			rotate(calc(var(--shear, 0) * 26deg))
+			scale(calc(1 + var(--lift, 0) * 0.18));
+		font-variation-settings: "ROND" var(--rond, 50);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		[data-letter] {
+			transform: none;
+			will-change: auto;
+		}
+	}
+</style>
+
+<script is:inline>
+	(() => {
+		const link = document.querySelector("[data-home-link]");
+		if (!link || link.dataset.enhanced) return;
+		link.dataset.enhanced = "true";
+
+		const letters = Array.from(link.querySelectorAll("[data-letter]"));
+		if (letters.length === 0) return;
+
+		// Each letter paints its own slice of one shared gradient. Sizing the
+		// background to the full link and offsetting it by the letter's
+		// position makes the slices line up seamlessly at rest.
+		const alignGradient = () => {
+			const width = link.offsetWidth;
+			for (const letter of letters) {
+				letter.style.backgroundSize = width + "px 100%";
+				letter.style.backgroundPosition = -letter.offsetLeft + "px 0";
+			}
+		};
+		alignGradient();
+
+		if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+		const stiffness = 170;
+		const damping = 0.0016;
+		const lifts = letters.map(() => ({ value: 0, velocity: 0 }));
+		const shears = letters.map(() => ({ value: 0, velocity: 0 }));
+
+		let centers = [];
+		let width = 0;
+		let pointerX = null;
+		let frame = 0;
+		let lastTime = 0;
+
+		const syncLayout = () => {
+			alignGradient();
+			width = link.offsetWidth;
+			centers = letters.map(
+				(letter) => letter.offsetLeft + letter.offsetWidth / 2,
+			);
+		};
+		syncLayout();
+
+		const step = (spring, target, dt) => {
+			spring.velocity += (target - spring.value) * stiffness * dt;
+			spring.velocity *= Math.pow(damping, dt);
+			spring.value += spring.velocity * dt;
+		};
+
+		const tick = (time) => {
+			const dt = Math.min(Math.max((time - lastTime) / 1000, 1 / 240), 1 / 30);
+			lastTime = time;
+			let moving = false;
+			const sigma = Math.max(width * 0.22, 26);
+
+			letters.forEach((letter, index) => {
+				let targetLift = 0;
+				let targetShear = 0;
+
+				if (pointerX !== null) {
+					const distance = centers[index] - pointerX;
+					const bump = Math.exp(-(distance * distance) / (2 * sigma * sigma));
+					targetLift = bump;
+					targetShear = (distance / sigma) * bump * bump;
+				}
+
+				const lift = lifts[index];
+				const shear = shears[index];
+				step(lift, targetLift, dt);
+				step(shear, targetShear, dt);
+
+				const liftValue = Math.min(1.2, lift.value);
+				letter.style.setProperty("--lift", liftValue.toFixed(4));
+				letter.style.setProperty("--shear", shear.value.toFixed(4));
+				letter.style.setProperty(
+					"--rond",
+					Math.min(100, Math.max(0, 50 + liftValue * 55)).toFixed(2),
+				);
+
+				if (
+					Math.abs(targetLift - lift.value) > 0.002 ||
+					Math.abs(lift.velocity) > 0.004 ||
+					Math.abs(targetShear - shear.value) > 0.004 ||
+					Math.abs(shear.velocity) > 0.004
+				) {
+					moving = true;
+				}
+			});
+
+			frame = moving ? requestAnimationFrame(tick) : 0;
+		};
+
+		const start = () => {
+			if (frame === 0) {
+				lastTime = performance.now();
+				frame = requestAnimationFrame(tick);
+			}
+		};
+
+		link.addEventListener("pointerenter", start);
+		link.addEventListener("pointermove", (event) => {
+			pointerX = event.clientX - link.getBoundingClientRect().left;
+			start();
+		});
+		link.addEventListener("pointerleave", () => {
+			pointerX = null;
+			start();
+		});
+
+		new ResizeObserver(syncLayout).observe(link);
+		window.addEventListener("load", syncLayout);
+		if (document.fonts) document.fonts.ready.then(syncLayout);
+	})();
+</script>
